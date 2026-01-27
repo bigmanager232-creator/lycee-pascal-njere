@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lycée Pascal Njèrè IV - Emploi du Temps</title>
+    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Emploi du Temps</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -399,44 +399,44 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">
-            <div class="logo-icon">�YZ"</div>
-            <div class="logo-text">Lycée Pascal Njèrè IV</div>
+            <div class="logo-icon">ðŸŽ“</div>
+            <div class="logo-text">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
         </div>
         
         <ul class="nav-menu">
             <li class="nav-item">
                 <a href="/" class="nav-link">
-                    <span>�Y"S</span> Dashboard
+                    <span>ðŸ“Š</span> Dashboard
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/personnel.html" class="nav-link">
-                    <span>�Y'�</span> Personnel
+                    <span>ðŸ‘¥</span> Personnel
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/eleves.html" class="nav-link">
-                    <span>�YZ"</span> �?lèves
+                    <span>ðŸŽ“</span> Ã‰lÃ¨ves
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/emploi-temps.html" class="nav-link active">
-                    <span>�Y".</span> Emploi du Temps
+                    <span>ðŸ“…</span> Emploi du Temps
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/absences.html" class="nav-link">
-                    <span>�Y"<</span> Absences
+                    <span>ðŸ“‹</span> Absences
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/finance.html" class="nav-link">
-                    <span>�Y'�</span> Finance (APEE)
+                    <span>ðŸ’°</span> Finance (APEE)
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/bulletins.html" class="nav-link">
-                    <span>�Y""</span> Bulletins
+                    <span>ðŸ“„</span> Bulletins
                 </a>
             </li>
         </ul>
@@ -446,21 +446,21 @@
     <div class="main-content">
         <div class="header">
             <div class="header-left">
-                <h1>�Y". Emploi du Temps</h1>
+                <h1>ðŸ“… Emploi du Temps</h1>
                 <p>Consulter et modifier les emplois du temps des classes</p>
             </div>
             <button class="btn btn-primary" onclick="window.print()">
-                �Y-�️ Imprimer
+                ðŸ–¨ï¸ Imprimer
             </button>
         </div>
 
         <div class="class-selector">
-            <label>�YO� Section:</label>
+            <label>ðŸŒ Section:</label>
             <select id="sectionSelect">
                 <option value="Francophone">Francophone</option>
                 <option value="Anglophone">Anglophone</option>
             </select>
-            <label>�Y"s Classe:</label>
+            <label>ðŸ“š Classe:</label>
             <input type="text" id="classSelect" list="classesList" placeholder="6e1, 2nde, F3...">
             <datalist id="classesList">
                 <option value="6e"></option>
@@ -470,7 +470,7 @@
                 <option value="4e"></option>
                 <option value="3e"></option>
                 <option value="2nde"></option>
-                <option value="1ère"></option>
+                <option value="1Ã¨re"></option>
                 <option value="Tle"></option>
                 <option value="F1"></option>
                 <option value="F2"></option>
@@ -482,8 +482,8 @@
                 <option value="LSS"></option>
                 <option value="UPSS"></option>
             </datalist>
-            <button class="btn btn-secondary" onclick="generateSchedule()">Générer emploi du temps</button>
-            <button class="btn btn-secondary" onclick="generateEvaluations()">Générer évaluations harmonisées</button>
+            <button class="btn btn-secondary" onclick="generateSchedule()">GÃ©nÃ©rer emploi du temps</button>
+            <button class="btn btn-secondary" onclick="generateEvaluations()">GÃ©nÃ©rer Ã©valuations harmonisÃ©es</button>
         </div>
 
         <div class="timetable-container">
@@ -505,15 +505,15 @@
             <div class="legend">
                 <div class="legend-item">
                     <div class="legend-box" style="background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);"></div>
-                    <span>Cours programmé</span>
+                    <span>Cours programmÃ©</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-box" style="background: #fef3c7;"></div>
-                    <span>Pause / Récréation</span>
+                    <span>Pause / RÃ©crÃ©ation</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-box" style="background: #f9fafb; border: 1px solid #e5e7eb;"></div>
-                    <span>Créneau libre</span>
+                    <span>CrÃ©neau libre</span>
                 </div>
             </div>
         </div>
@@ -523,8 +523,8 @@
     <div class="modal" id="slotModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="slotModalTitle">Ajouter un créneau</h2>
-                <button class="close-modal" onclick="closeSlotModal()">�o.</button>
+                <h2 id="slotModalTitle">Ajouter un crÃ©neau</h2>
+                <button class="close-modal" onclick="closeSlotModal()">âœ•</button>
             </div>
             <form id="slotForm">
                 <div class="form-grid">
@@ -545,7 +545,7 @@
                             <option value="4e">4e</option>
                             <option value="3e">3e</option>
                             <option value="2nde">2nde</option>
-                            <option value="1ère">1ère</option>
+                            <option value="1Ã¨re">1Ã¨re</option>
                             <option value="Tle">Tle</option>
                             <option value="F1">F1</option>
                             <option value="F2">F2</option>
@@ -586,11 +586,11 @@
                         <label>Type *</label>
                         <select id="slotType" required>
                             <option value="cours">Cours</option>
-                            <option value="evaluation">�?valuation harmonisée</option>
+                            <option value="evaluation">Ã‰valuation harmonisÃ©e</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Matière *</label>
+                        <label>MatiÃ¨re *</label>
                         <input type="text" id="slotMatiere" required>
                     </div>
                     <div class="form-group">
@@ -641,7 +641,7 @@
         function openSlotModal(classe, jour, periode) {
             const { section } = getSelection();
             editingSlotId = null;
-            document.getElementById('slotModalTitle').textContent = 'Ajouter un créneau';
+            document.getElementById('slotModalTitle').textContent = 'Ajouter un crÃ©neau';
             document.getElementById('slotForm').reset();
             document.getElementById('slotSection').value = section;
             if (classe) document.getElementById('slotClasse').value = classe;
@@ -678,7 +678,7 @@
                     const cell = document.createElement('td');
                     const isFrancophoneWednesdayShort = section === 'Francophone' && day.key === 'mercredi' && (period.key === 'P7' || period.key === 'P8');
                     if (isFrancophoneWednesdayShort) {
-                        cell.innerHTML = '<div class="break-slot">Fin de journée</div>';
+                        cell.innerHTML = '<div class="break-slot">Fin de journÃ©e</div>';
                     } else {
                         const slot = emplois.find(item =>
                             item.section === section &&
@@ -687,22 +687,22 @@
                             item.periode === period.key
                         );
                         if (slot) {
-                            const typeLabel = slot.type === 'evaluation' ? '�?valuation' : 'Cours';
+                            const typeLabel = slot.type === 'evaluation' ? 'Ã‰valuation' : 'Cours';
                             cell.innerHTML = `
                                 <div class="course-slot">
                                     <div class="course-name">${slot.matiere}</div>
                                     <div class="course-teacher">${slot.professeur}</div>
                                     <div class="course-teacher">${typeLabel}</div>
                                     <div class="slot-actions">
-                                        <button title="Modifier" onclick="editSlot(${slot.id})">�o�️</button>
-                                        <button title="Supprimer" onclick="deleteSlot(${slot.id})">�Y-'️</button>
+                                        <button title="Modifier" onclick="editSlot(${slot.id})">âœï¸</button>
+                                        <button title="Supprimer" onclick="deleteSlot(${slot.id})">ðŸ—‘ï¸</button>
                                     </div>
                                 </div>
                             `;
                         } else {
                             cell.innerHTML = `
                                 <div class="empty-slot" onclick="openSlotModal('${classe}', '${day.key}', '${period.key}')">
-                                    �z. Ajouter
+                                    âž• Ajouter
                                 </div>
                             `;
                         }
@@ -724,13 +724,13 @@
             document.getElementById('slotType').value = slot.type || 'cours';
             document.getElementById('slotMatiere').value = slot.matiere;
             document.getElementById('slotProfesseur').value = slot.professeur;
-            document.getElementById('slotModalTitle').textContent = 'Modifier un créneau';
+            document.getElementById('slotModalTitle').textContent = 'Modifier un crÃ©neau';
             document.getElementById('slotModal').classList.add('active');
         }
 
         async function deleteSlot(slotId) {
             if (!slotId) return;
-            if (confirm('Supprimer ce créneau ?')) {
+            if (confirm('Supprimer ce crÃ©neau ?')) {
                 try {
                     const response = await fetch(`/api/emplois/${slotId}`, { method: 'DELETE' });
                     if (response.ok) {
@@ -779,8 +779,8 @@
                             jour: day.key,
                             periode: period.key,
                             type: 'cours',
-                            matiere: '�? définir',
-                            professeur: '�? définir'
+                            matiere: 'Ã€ dÃ©finir',
+                            professeur: 'Ã€ dÃ©finir'
                         };
                         requests.push(fetch('/api/emplois', {
                             method: 'POST',
@@ -820,8 +820,8 @@
                             jour: day.key,
                             periode: period.key,
                             type: 'evaluation',
-                            matiere: '�?valuation harmonisée',
-                            professeur: 'Comité pédagogique'
+                            matiere: 'Ã‰valuation harmonisÃ©e',
+                            professeur: 'ComitÃ© pÃ©dagogique'
                         };
                         requests.push(fetch('/api/emplois', {
                             method: 'POST',
