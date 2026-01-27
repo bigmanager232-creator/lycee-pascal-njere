@@ -9,20 +9,25 @@ const PORT = 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
-// Data directory
+// Data directories
 const DATA_DIR = path.join(__dirname, 'data');
+const PUBLIC_DATA_DIR = path.join(__dirname, 'public');
 
 // Helper functions
 function readData(filename) {
-    const filepath = path.join(DATA_DIR, filename);
+    const filepath = filename === 'eleves.json'
+        ? path.join(PUBLIC_DATA_DIR, filename)
+        : path.join(DATA_DIR, filename);
     const data = fs.readFileSync(filepath, 'utf8');
     return JSON.parse(data);
 }
 
 function writeData(filename, data) {
-    const filepath = path.join(DATA_DIR, filename);
+    const filepath = filename === 'eleves.json'
+        ? path.join(PUBLIC_DATA_DIR, filename)
+        : path.join(DATA_DIR, filename);
     fs.writeFileSync(filepath, JSON.stringify(data, null, 2));
 }
 
@@ -159,9 +164,9 @@ app.get('/api/stats', (req, res) => {
     }
 });
 
-// Serve index.html for all routes
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+// Serve HTML files
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Start server
