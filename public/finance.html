@@ -1,169 +1,111 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Finance (APEE)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <title>Lycée Pascal Njèrè IV - Finance (APEE)</title>
     <style>
         :root {
             --bg: #f6f7fb;
             --card: #ffffff;
-            --text: #101828;
-            --muted: #667085;
-            --border: #e4e7ec;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e5e7eb;
             --primary: #10b981;
             --primary-soft: #d1fae5;
-            --warning: #f59e0b;
-            --danger: #ef4444;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); }
-
+        body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
         .layout { display: flex; min-height: 100vh; }
-        .sidebar {
-            width: 260px;
-            background: var(--card);
-            border-right: 1px solid var(--border);
-            padding: 24px 18px;
-        }
-        .logo { display: flex; gap: 12px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-        .logo-icon { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #6366f1, #4338ca); color: #fff; display: grid; place-items: center; font-size: 20px; }
-        .logo-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; }
-        .logo-subtitle { font-size: 12px; color: var(--muted); }
-        .nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 6px; text-decoration: none; color: var(--muted); border-radius: 10px; font-weight: 500; transition: 0.2s; }
-        .nav-link:hover, .nav-link.active { background: var(--primary-soft); color: #047857; }
-
-        .content { flex: 1; padding: 32px 40px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .header h1 { font-family: 'Sora', sans-serif; font-size: 26px; }
-        .header p { color: var(--muted); margin-top: 4px; }
-
-        .btn {
-            padding: 10px 16px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--primary);
-            color: #fff;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
-        .stat-title { font-size: 12px; color: var(--muted); }
-        .stat-value { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; margin-top: 4px; }
-
-        .filters {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 14px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .filters label { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: block; }
-        .filters input, .filters select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            font-family: inherit;
-        }
-
-        table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
-        thead { background: #f9fafb; }
-        th, td { text-align: left; padding: 14px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
-        th { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+        .sidebar { width: 240px; background: var(--card); border-right: 1px solid var(--border); padding: 20px; }
+        .brand h1 { font-size: 18px; margin-bottom: 4px; }
+        .brand p { color: var(--muted); font-size: 13px; }
+        .nav a { display: block; padding: 10px 12px; border-radius: 8px; text-decoration: none; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
+        .nav a.active, .nav a:hover { background: var(--primary-soft); color: #047857; }
+        .content { flex: 1; padding: 28px 36px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
+        .header h2 { font-size: 24px; }
+        .header p { color: var(--muted); margin-top: 6px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+        .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+        .stat-card .label { font-size: 12px; color: var(--muted); }
+        .stat-card .value { font-size: 20px; font-weight: 700; margin-top: 6px; }
+        .filters { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+        .filters label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; }
+        .filters input, .filters select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        th, td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; font-size: 14px; }
+        th { background: #f9fafb; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3px; font-size: 12px; }
         tr:last-child td { border-bottom: none; }
-
-        .badge { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; display: inline-flex; }
+        .badge { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
         .badge-ok { background: #d1fae5; color: #065f46; }
         .badge-warn { background: #fef3c7; color: #92400e; }
         .badge-bad { background: #fee2e2; color: #991b1b; }
-
-        .progress { width: 100px; height: 8px; background: #f2f4f7; border-radius: 999px; overflow: hidden; }
+        .progress { width: 100px; height: 8px; background: #f3f4f6; border-radius: 999px; overflow: hidden; }
         .progress span { display: block; height: 100%; background: var(--primary); }
-
-        @media (max-width: 900px) {
-            .layout { flex-direction: column; }
-            .sidebar { width: 100%; }
-        }
+        @media (max-width: 900px) { .layout { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
 <body>
     <div class="layout">
         <aside class="sidebar">
-            <div class="logo">
-                <div class="logo-icon">ðŸŽ“</div>
-                <div>
-                    <div class="logo-title">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
-                    <div class="logo-subtitle">SystÃ¨me de gestion</div>
-                </div>
+            <div class="brand">
+                <h1>Lycée Pascal Njèrè IV</h1>
+                <p>Système de gestion</p>
             </div>
-            <a class="nav-link" href="/">ðŸ“Š Dashboard</a>
-            <a class="nav-link" href="/personnel.html">ðŸ‘¥ Personnel</a>
-            <a class="nav-link" href="/eleves.html">ðŸŽ“ Ã‰lÃ¨ves</a>
-            <a class="nav-link" href="/emploi-temps.html">ðŸ“… Emploi du temps</a>
-            <a class="nav-link" href="/absences.html">ðŸ“‹ Absences</a>
-            <a class="nav-link active" href="/finance.html">ðŸ’° Finance (APEE)</a>
-            <a class="nav-link" href="/bulletins.html">ðŸ“„ Bulletins</a>
+            <nav class="nav">
+                <a href="/">Tableau de bord</a>
+                <a href="/personnel.html">Personnel</a>
+                <a href="/eleves.html">Élèves</a>
+                <a href="/emploi-temps.html">Emploi du temps</a>
+                <a href="/absences.html">Absences</a>
+                <a class="active" href="/finance.html">Finance (APEE)</a>
+                <a href="/bulletins.html">Bulletins</a>
+            </nav>
         </aside>
 
         <main class="content">
             <div class="header">
                 <div>
-                    <h1>Finance (APEE)</h1>
-                    <p>Suivi des paiements et relances.</p>
+                    <h2>Finance (APEE)</h2>
+                    <p>Suivi des paiements et des relances.</p>
                 </div>
-                <button class="btn" onclick="alert('Enregistrement Ã  venir')">âž• Enregistrer un paiement</button>
             </div>
 
             <div class="stats">
                 <div class="stat-card">
-                    <div class="stat-title">Total perÃ§u</div>
-                    <div class="stat-value">485 000 FCFA</div>
+                    <div class="label">Total perçu</div>
+                    <div class="value">485 000 FCFA</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-title">En attente</div>
-                    <div class="stat-value">125 000 FCFA</div>
+                    <div class="label">En attente</div>
+                    <div class="value">125 000 FCFA</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-title">ImpayÃ©s critiques</div>
-                    <div class="stat-value">67 000 FCFA</div>
+                    <div class="label">Impayés critiques</div>
+                    <div class="value">67 000 FCFA</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-title">Taux de recouvrement</div>
-                    <div class="stat-value">79,6 %</div>
+                    <div class="label">Taux de recouvrement</div>
+                    <div class="value">79,6 %</div>
                 </div>
             </div>
 
             <div class="filters">
                 <div>
                     <label>Recherche</label>
-                    <input type="text" placeholder="Nom de l'Ã©lÃ¨ve">
+                    <input type="text" placeholder="Nom de l'élève">
                 </div>
                 <div>
                     <label>Classe</label>
                     <select>
                         <option value="">Toutes</option>
-                        <option>6Ã¨me</option>
-                        <option>5Ã¨me</option>
-                        <option>4Ã¨me</option>
-                        <option>3Ã¨me</option>
+                        <option>6e</option>
+                        <option>5e</option>
+                        <option>4e</option>
+                        <option>3e</option>
                         <option>2nde</option>
-                        <option>1Ã¨re</option>
+                        <option>1re</option>
                         <option>Terminale</option>
                     </select>
                 </div>
@@ -171,9 +113,9 @@
                     <label>Statut</label>
                     <select>
                         <option value="">Tous</option>
-                        <option>PayÃ©</option>
+                        <option>Payé</option>
                         <option>Partiel</option>
-                        <option>ImpayÃ©</option>
+                        <option>Impayé</option>
                     </select>
                 </div>
             </div>
@@ -181,10 +123,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Ã‰lÃ¨ve</th>
+                        <th>Élève</th>
                         <th>Classe</th>
-                        <th>Montant dÃ»</th>
-                        <th>PayÃ©</th>
+                        <th>Montant dû</th>
+                        <th>Payé</th>
                         <th>Reste</th>
                         <th>Progression</th>
                         <th>Statut</th>
@@ -193,12 +135,12 @@
                 <tbody>
                     <tr>
                         <td>Aissatou Ndongo</td>
-                        <td>1Ã¨re</td>
+                        <td>1re</td>
                         <td>25 000 FCFA</td>
                         <td>25 000 FCFA</td>
                         <td>0 FCFA</td>
                         <td><div class="progress"><span style="width: 100%;"></span></div></td>
-                        <td><span class="badge badge-ok">PayÃ©</span></td>
+                        <td><span class="badge badge-ok">Payé</span></td>
                     </tr>
                     <tr>
                         <td>Grace Mbarga</td>
@@ -211,12 +153,12 @@
                     </tr>
                     <tr>
                         <td>Larissa Tankoua</td>
-                        <td>4Ã¨me</td>
+                        <td>4e</td>
                         <td>20 000 FCFA</td>
                         <td>0 FCFA</td>
                         <td>20 000 FCFA</td>
                         <td><div class="progress"><span style="width: 0%;"></span></div></td>
-                        <td><span class="badge badge-bad">ImpayÃ©</span></td>
+                        <td><span class="badge badge-bad">Impayé</span></td>
                     </tr>
                 </tbody>
             </table>

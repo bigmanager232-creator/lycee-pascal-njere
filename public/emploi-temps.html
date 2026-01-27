@@ -1,132 +1,82 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Emploi du temps</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <title>Lycée Pascal Njèrè IV - Emploi du temps</title>
     <style>
         :root {
             --bg: #f6f7fb;
             --card: #ffffff;
-            --text: #101828;
-            --muted: #667085;
-            --border: #e4e7ec;
-            --primary: #8b5cf6;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --primary: #7c3aed;
             --primary-soft: #ede9fe;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); }
-
+        body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
         .layout { display: flex; min-height: 100vh; }
-        .sidebar {
-            width: 260px;
-            background: var(--card);
-            border-right: 1px solid var(--border);
-            padding: 24px 18px;
-        }
-        .logo { display: flex; gap: 12px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-        .logo-icon { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #6366f1, #4338ca); color: #fff; display: grid; place-items: center; font-size: 20px; }
-        .logo-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; }
-        .logo-subtitle { font-size: 12px; color: var(--muted); }
-        .nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 6px; text-decoration: none; color: var(--muted); border-radius: 10px; font-weight: 500; transition: 0.2s; }
-        .nav-link:hover, .nav-link.active { background: var(--primary-soft); color: #6d28d9; }
-
-        .content { flex: 1; padding: 32px 40px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .header h1 { font-family: 'Sora', sans-serif; font-size: 26px; }
-        .header p { color: var(--muted); margin-top: 4px; }
-
-        .btn {
-            padding: 10px 16px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--primary);
-            color: #fff;
-        }
-
-        .selector {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 14px;
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        .selector label { font-size: 13px; color: var(--muted); }
-        .selector select {
-            padding: 10px 12px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            font-family: inherit;
-        }
-
-        .table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; min-width: 900px; }
-        th, td { border: 1px solid var(--border); padding: 12px; text-align: center; font-size: 13px; }
-        th { background: var(--primary-soft); color: #6d28d9; font-weight: 700; }
+        .sidebar { width: 240px; background: var(--card); border-right: 1px solid var(--border); padding: 20px; }
+        .brand h1 { font-size: 18px; margin-bottom: 4px; }
+        .brand p { color: var(--muted); font-size: 13px; }
+        .nav a { display: block; padding: 10px 12px; border-radius: 8px; text-decoration: none; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
+        .nav a.active, .nav a:hover { background: var(--primary-soft); color: var(--primary); }
+        .content { flex: 1; padding: 28px 36px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
+        .header h2 { font-size: 24px; }
+        .header p { color: var(--muted); margin-top: 6px; }
+        .btn { padding: 10px 16px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; background: var(--primary); color: white; }
+        .selector { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; gap: 12px; align-items: center; margin-bottom: 16px; }
+        .selector label { color: var(--muted); font-size: 13px; }
+        .selector select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; }
+        .table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 820px; }
+        th, td { border: 1px solid var(--border); padding: 10px; text-align: center; font-size: 13px; }
+        th { background: var(--primary-soft); color: var(--primary); }
         .time { background: #f9fafb; color: var(--muted); font-weight: 600; }
-        .course {
-            background: linear-gradient(135deg, #8b5cf6, #a78bfa);
-            color: #fff;
-            border-radius: 8px;
-            padding: 6px;
-            font-size: 12px;
-        }
-        .break { background: #fef3c7; font-weight: 600; color: #92400e; }
-
-        @media (max-width: 900px) {
-            .layout { flex-direction: column; }
-            .sidebar { width: 100%; }
-        }
+        .course { background: #7c3aed; color: white; border-radius: 6px; padding: 6px; font-size: 12px; }
+        .break { background: #fef3c7; color: #92400e; font-weight: 600; }
+        @media (max-width: 900px) { .layout { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
 <body>
     <div class="layout">
         <aside class="sidebar">
-            <div class="logo">
-                <div class="logo-icon">ðŸŽ“</div>
-                <div>
-                    <div class="logo-title">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
-                    <div class="logo-subtitle">SystÃ¨me de gestion</div>
-                </div>
+            <div class="brand">
+                <h1>Lycée Pascal Njèrè IV</h1>
+                <p>Système de gestion</p>
             </div>
-            <a class="nav-link" href="/">ðŸ“Š Dashboard</a>
-            <a class="nav-link" href="/personnel.html">ðŸ‘¥ Personnel</a>
-            <a class="nav-link" href="/eleves.html">ðŸŽ“ Ã‰lÃ¨ves</a>
-            <a class="nav-link active" href="/emploi-temps.html">ðŸ“… Emploi du temps</a>
-            <a class="nav-link" href="/absences.html">ðŸ“‹ Absences</a>
-            <a class="nav-link" href="/finance.html">ðŸ’° Finance (APEE)</a>
-            <a class="nav-link" href="/bulletins.html">ðŸ“„ Bulletins</a>
+            <nav class="nav">
+                <a href="/">Tableau de bord</a>
+                <a href="/personnel.html">Personnel</a>
+                <a href="/eleves.html">Élèves</a>
+                <a class="active" href="/emploi-temps.html">Emploi du temps</a>
+                <a href="/absences.html">Absences</a>
+                <a href="/finance.html">Finance (APEE)</a>
+                <a href="/bulletins.html">Bulletins</a>
+            </nav>
         </aside>
 
         <main class="content">
             <div class="header">
                 <div>
-                    <h1>Emploi du temps</h1>
+                    <h2>Emploi du temps</h2>
                     <p>Planification hebdomadaire par classe.</p>
                 </div>
-                <button class="btn" onclick="alert('Impression en dÃ©veloppement')">ðŸ–¨ï¸ Imprimer</button>
+                <button class="btn" onclick="window.print()">Imprimer</button>
             </div>
 
             <div class="selector">
                 <label for="classSelect">Classe</label>
                 <select id="classSelect" onchange="loadSchedule()">
-                    <option value="1ere">1Ã¨re Scientifique</option>
+                    <option value="1re">1re Scientifique</option>
                     <option value="tle">Terminale Scientifique</option>
                     <option value="2nde">2nde</option>
-                    <option value="3eme">3Ã¨me</option>
-                    <option value="4eme">4Ã¨me</option>
-                    <option value="5eme">5Ã¨me</option>
-                    <option value="6eme">6Ã¨me</option>
+                    <option value="3e">3e</option>
+                    <option value="4e">4e</option>
+                    <option value="5e">5e</option>
+                    <option value="6e">6e</option>
                 </select>
             </div>
 
@@ -146,55 +96,55 @@
                     <tbody>
                         <tr>
                             <td class="time">07:30 - 09:00</td>
-                            <td><div class="course">MathÃ©matiques<br>A. Diallo</div></td>
-                            <td><div class="course">Physique<br>F. Bah</div></td>
-                            <td><div class="course">FranÃ§ais<br>M. Kouassi</div></td>
-                            <td><div class="course">Anglais<br>I. TourÃ©</div></td>
-                            <td><div class="course">MathÃ©matiques<br>A. Diallo</div></td>
+                            <td><div class="course">Mathématiques<br>F. Diallo</div></td>
+                            <td><div class="course">Physique<br>M. Bah</div></td>
+                            <td><div class="course">Français<br>A. Kouassi</div></td>
+                            <td><div class="course">Anglais<br>I. Touré</div></td>
+                            <td><div class="course">Mathématiques<br>F. Diallo</div></td>
                             <td><div class="course">Sport<br>Coach</div></td>
                         </tr>
                         <tr>
                             <td class="time">09:15 - 10:45</td>
-                            <td><div class="course">Histoire-GÃ©o<br>J.-P. Nkolo</div></td>
-                            <td><div class="course">MathÃ©matiques<br>A. Diallo</div></td>
-                            <td><div class="course">Anglais<br>I. TourÃ©</div></td>
-                            <td><div class="course">Physique<br>F. Bah</div></td>
-                            <td><div class="course">FranÃ§ais<br>M. Kouassi</div></td>
-                            <td>â€”</td>
+                            <td><div class="course">Histoire-Géo<br>J.-P. Nkolo</div></td>
+                            <td><div class="course">Mathématiques<br>F. Diallo</div></td>
+                            <td><div class="course">Anglais<br>I. Touré</div></td>
+                            <td><div class="course">Physique<br>M. Bah</div></td>
+                            <td><div class="course">Français<br>A. Kouassi</div></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td class="time break">10:45 - 11:00</td>
-                            <td class="break" colspan="6">RÃ©crÃ©ation</td>
+                            <td class="break" colspan="6">Récréation</td>
                         </tr>
                         <tr>
                             <td class="time">11:00 - 12:30</td>
-                            <td><div class="course">FranÃ§ais<br>M. Kouassi</div></td>
-                            <td><div class="course">Histoire-GÃ©o<br>J.-P. Nkolo</div></td>
-                            <td><div class="course">Chimie<br>F. Bah</div></td>
-                            <td><div class="course">MathÃ©matiques<br>A. Diallo</div></td>
-                            <td><div class="course">Anglais<br>I. TourÃ©</div></td>
-                            <td>â€”</td>
+                            <td><div class="course">Français<br>A. Kouassi</div></td>
+                            <td><div class="course">Histoire-Géo<br>J.-P. Nkolo</div></td>
+                            <td><div class="course">Chimie<br>M. Bah</div></td>
+                            <td><div class="course">Mathématiques<br>F. Diallo</div></td>
+                            <td><div class="course">Anglais<br>I. Touré</div></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td class="time break">12:30 - 14:00</td>
-                            <td class="break" colspan="6">Pause dÃ©jeuner</td>
+                            <td class="break" colspan="6">Pause déjeuner</td>
                         </tr>
                         <tr>
                             <td class="time">14:00 - 15:30</td>
-                            <td><div class="course">Anglais<br>I. TourÃ©</div></td>
-                            <td><div class="course">FranÃ§ais<br>M. Kouassi</div></td>
-                            <td>â€”</td>
-                            <td><div class="course">Histoire-GÃ©o<br>J.-P. Nkolo</div></td>
-                            <td><div class="course">Physique<br>F. Bah</div></td>
+                            <td><div class="course">Anglais<br>I. Touré</div></td>
+                            <td><div class="course">Français<br>A. Kouassi</div></td>
+                            <td></td>
+                            <td><div class="course">Histoire-Géo<br>J.-P. Nkolo</div></td>
+                            <td><div class="course">Physique<br>M. Bah</div></td>
                             <td class="break">Fin des cours</td>
                         </tr>
                         <tr>
                             <td class="time">15:45 - 17:15</td>
-                            <td>â€”</td>
-                            <td><div class="course">Chimie TP<br>F. Bah</div></td>
-                            <td>â€”</td>
-                            <td>â€”</td>
-                            <td>â€”</td>
+                            <td></td>
+                            <td><div class="course">Chimie TP<br>M. Bah</div></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td class="break">Fin des cours</td>
                         </tr>
                     </tbody>
@@ -206,7 +156,7 @@
     <script>
         function loadSchedule() {
             const selectedClass = document.getElementById('classSelect').value;
-            console.log('Chargement emploi du temps:', selectedClass);
+            console.log('Classe sélectionnée:', selectedClass);
         }
     </script>
 </body>

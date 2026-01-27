@@ -1,188 +1,104 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Ã‰lÃ¨ves</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <title>Lycée Pascal Njèrè IV - Élèves</title>
     <style>
         :root {
             --bg: #f6f7fb;
             --card: #ffffff;
-            --text: #101828;
-            --muted: #667085;
-            --border: #e4e7ec;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e5e7eb;
             --primary: #f59e0b;
             --primary-soft: #fef3c7;
-            --success: #10b981;
             --danger: #ef4444;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); }
-
+        body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
         .layout { display: flex; min-height: 100vh; }
-        .sidebar {
-            width: 260px;
-            background: var(--card);
-            border-right: 1px solid var(--border);
-            padding: 24px 18px;
-        }
-        .logo { display: flex; gap: 12px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-        .logo-icon { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #6366f1, #4338ca); color: #fff; display: grid; place-items: center; font-size: 20px; }
-        .logo-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; }
-        .logo-subtitle { font-size: 12px; color: var(--muted); }
-        .nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 6px; text-decoration: none; color: var(--muted); border-radius: 10px; font-weight: 500; transition: 0.2s; }
-        .nav-link:hover, .nav-link.active { background: var(--primary-soft); color: #b45309; }
-
-        .content { flex: 1; padding: 32px 40px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .header h1 { font-family: 'Sora', sans-serif; font-size: 26px; }
-        .header p { color: var(--muted); margin-top: 4px; }
-
-        .btn {
-            padding: 10px 16px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-primary { background: var(--primary); color: #fff; }
-        .btn-secondary { background: #f2f4f7; color: var(--text); }
-
-        .filters {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 14px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .filters label { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: block; }
-        .filters input, .filters select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            font-family: inherit;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-        }
-
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 16px;
-        }
-        .card-header { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
-        .avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: var(--primary);
-            color: #fff;
-            display: grid;
-            place-items: center;
-            font-weight: 700;
-        }
-        .card-title { font-weight: 700; }
-        .card-subtitle { font-size: 12px; color: var(--muted); }
-        .info { display: grid; gap: 6px; font-size: 13px; }
-
-        .badge { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; display: inline-flex; }
+        .sidebar { width: 240px; background: var(--card); border-right: 1px solid var(--border); padding: 20px; }
+        .brand h1 { font-size: 18px; margin-bottom: 4px; }
+        .brand p { color: var(--muted); font-size: 13px; }
+        .nav a { display: block; padding: 10px 12px; border-radius: 8px; text-decoration: none; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
+        .nav a.active, .nav a:hover { background: var(--primary-soft); color: #b45309; }
+        .content { flex: 1; padding: 28px 36px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
+        .header h2 { font-size: 24px; }
+        .header p { color: var(--muted); margin-top: 6px; }
+        .btn { padding: 10px 16px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-secondary { background: #f3f4f6; color: var(--text); }
+        .filters { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+        .filters label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; }
+        .filters input, .filters select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+        .card h3 { font-size: 16px; margin-bottom: 4px; }
+        .card p { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+        .badge { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
         .badge-ok { background: #d1fae5; color: #065f46; }
         .badge-bad { background: #fee2e2; color: #991b1b; }
-
-        .card-actions { display: flex; gap: 8px; margin-top: 12px; }
-        .icon-btn { border: none; background: #f2f4f7; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
+        .card-actions { display: flex; gap: 8px; margin-top: 10px; }
+        .icon-btn { border: none; background: #f3f4f6; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; }
         .icon-btn.edit { background: #fde68a; color: #92400e; }
         .icon-btn.delete { background: #fee2e2; color: #991b1b; }
-
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(15, 23, 42, 0.45);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+        .modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); display: none; align-items: center; justify-content: center; padding: 20px; }
         .modal.active { display: flex; }
-        .modal-content {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 24px;
-            width: min(680px, 95vw);
-        }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .modal-header h2 { font-family: 'Sora', sans-serif; font-size: 20px; }
-        .close-btn { border: none; background: #f2f4f7; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; }
-
+        .modal-content { background: var(--card); border-radius: 12px; padding: 20px; width: min(680px, 95vw); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .close-btn { border: none; background: #f3f4f6; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; }
         .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-        .form-group { margin-bottom: 10px; }
+        .form-group { margin-bottom: 8px; }
         .form-group label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
-        .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; }
-        .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
-
-        @media (max-width: 900px) {
-            .layout { flex-direction: column; }
-            .sidebar { width: 100%; }
-        }
+        .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; }
+        .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px; }
+        @media (max-width: 900px) { .layout { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
 <body>
     <div class="layout">
         <aside class="sidebar">
-            <div class="logo">
-                <div class="logo-icon">ðŸŽ“</div>
-                <div>
-                    <div class="logo-title">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
-                    <div class="logo-subtitle">SystÃ¨me de gestion</div>
-                </div>
+            <div class="brand">
+                <h1>Lycée Pascal Njèrè IV</h1>
+                <p>Système de gestion</p>
             </div>
-            <a class="nav-link" href="/">ðŸ“Š Dashboard</a>
-            <a class="nav-link" href="/personnel.html">ðŸ‘¥ Personnel</a>
-            <a class="nav-link active" href="/eleves.html">ðŸŽ“ Ã‰lÃ¨ves</a>
-            <a class="nav-link" href="/emploi-temps.html">ðŸ“… Emploi du temps</a>
-            <a class="nav-link" href="/absences.html">ðŸ“‹ Absences</a>
-            <a class="nav-link" href="/finance.html">ðŸ’° Finance (APEE)</a>
-            <a class="nav-link" href="/bulletins.html">ðŸ“„ Bulletins</a>
+            <nav class="nav">
+                <a href="/">Tableau de bord</a>
+                <a href="/personnel.html">Personnel</a>
+                <a class="active" href="/eleves.html">Élèves</a>
+                <a href="/emploi-temps.html">Emploi du temps</a>
+                <a href="/absences.html">Absences</a>
+                <a href="/finance.html">Finance (APEE)</a>
+                <a href="/bulletins.html">Bulletins</a>
+            </nav>
         </aside>
 
         <main class="content">
             <div class="header">
                 <div>
-                    <h1>Ã‰lÃ¨ves</h1>
+                    <h2>Élèves</h2>
                     <p>Gestion des dossiers et du suivi scolaire.</p>
                 </div>
-                <button class="btn btn-primary" onclick="openModal()">âž• Inscrire</button>
+                <button class="btn btn-primary" onclick="openModal()">Inscrire</button>
             </div>
 
             <div class="filters">
                 <div>
                     <label>Recherche</label>
-                    <input type="text" id="searchInput" placeholder="Nom, prÃ©nom, matricule" oninput="applyFilters()">
+                    <input type="text" id="searchInput" placeholder="Nom, prénom, matricule" oninput="applyFilters()">
                 </div>
                 <div>
                     <label>Classe</label>
                     <select id="classFilter" onchange="applyFilters()">
                         <option value="">Toutes</option>
-                        <option value="6Ã¨me">6Ã¨me</option>
-                        <option value="5Ã¨me">5Ã¨me</option>
-                        <option value="4Ã¨me">4Ã¨me</option>
-                        <option value="3Ã¨me">3Ã¨me</option>
+                        <option value="6e">6e</option>
+                        <option value="5e">5e</option>
+                        <option value="4e">4e</option>
+                        <option value="3e">3e</option>
                         <option value="2nde">2nde</option>
-                        <option value="1Ã¨re">1Ã¨re</option>
+                        <option value="1re">1re</option>
                         <option value="Tle">Terminale</option>
                     </select>
                 </div>
@@ -203,8 +119,8 @@
     <div class="modal" id="studentModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modalTitle">Inscrire un Ã©lÃ¨ve</h2>
-                <button class="close-btn" onclick="closeModal()">âœ•</button>
+                <h3 id="modalTitle">Inscrire un élève</h3>
+                <button class="close-btn" onclick="closeModal()">-</button>
             </div>
             <form id="studentForm">
                 <div class="form-grid">
@@ -217,7 +133,7 @@
                         <input type="text" id="nom" required>
                     </div>
                     <div class="form-group">
-                        <label>PrÃ©nom</label>
+                        <label>Prénom</label>
                         <input type="text" id="prenom" required>
                     </div>
                     <div class="form-group">
@@ -227,18 +143,18 @@
                     <div class="form-group">
                         <label>Classe</label>
                         <select id="classe" required>
-                            <option value="">SÃ©lectionner</option>
-                            <option value="6Ã¨me">6Ã¨me</option>
-                            <option value="5Ã¨me">5Ã¨me</option>
-                            <option value="4Ã¨me">4Ã¨me</option>
-                            <option value="3Ã¨me">3Ã¨me</option>
+                            <option value="">Sélectionner</option>
+                            <option value="6e">6e</option>
+                            <option value="5e">5e</option>
+                            <option value="4e">4e</option>
+                            <option value="3e">3e</option>
                             <option value="2nde">2nde</option>
-                            <option value="1Ã¨re">1Ã¨re</option>
+                            <option value="1re">1re</option>
                             <option value="Tle">Terminale</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>TÃ©lÃ©phone</label>
+                        <label>Téléphone</label>
                         <input type="tel" id="telephone">
                     </div>
                     <div class="form-group">
@@ -277,7 +193,7 @@
                 applyFilters();
             } catch (error) {
                 console.error(error);
-                alert('Erreur lors du chargement des Ã©lÃ¨ves.');
+                alert('Erreur lors du chargement des élèves.');
             }
         }
 
@@ -286,31 +202,20 @@
             grid.innerHTML = '';
 
             list.forEach(student => {
-                const initials = `${(student.prenom || '').charAt(0)}${(student.nom || '').charAt(0)}`.toUpperCase();
                 const statusClass = student.statut_financier === 'insolvable' ? 'badge-bad' : 'badge-ok';
                 const statusText = student.statut_financier === 'insolvable' ? 'Insolvable' : 'Solvable';
 
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                    <div class="card-header">
-                        <div class="avatar">${initials || 'Ã‰'}</div>
-                        <div>
-                            <div class="card-title">${student.prenom || ''} ${student.nom || ''}</div>
-                            <div class="card-subtitle">Matricule: ${student.matricule || 'â€”'}</div>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div>Classe: <strong>${student.classe || 'â€”'}</strong></div>
-                        <div>TÃ©lÃ©phone: <strong>${student.telephone || 'â€”'}</strong></div>
-                        <div>Email: <strong>${student.email || 'â€”'}</strong></div>
-                    </div>
-                    <div style="margin-top: 10px;">
-                        <span class="badge ${statusClass}">${statusText}</span>
-                    </div>
+                    <h3>${student.prenom || ''} ${student.nom || ''}</h3>
+                    <p>Matricule: ${student.matricule || ''}</p>
+                    <p>Classe: ${student.classe || ''}</p>
+                    <p>Téléphone: ${student.telephone || ''}</p>
+                    <span class="badge ${statusClass}">${statusText}</span>
                     <div class="card-actions">
-                        <button class="icon-btn edit" onclick="editStudent(${student.id})">âœï¸</button>
-                        <button class="icon-btn delete" onclick="deleteStudent(${student.id})">ðŸ—‘ï¸</button>
+                        <button class="icon-btn edit" onclick="editStudent(${student.id})">Edit</button>
+                        <button class="icon-btn delete" onclick="deleteStudent(${student.id})">Suppr</button>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -335,7 +240,7 @@
 
         function openModal() {
             editingId = null;
-            document.getElementById('modalTitle').textContent = 'Inscrire un Ã©lÃ¨ve';
+            document.getElementById('modalTitle').textContent = 'Inscrire un élève';
             document.getElementById('studentForm').reset();
             document.getElementById('matricule').value = '';
             document.getElementById('studentModal').classList.add('active');
@@ -349,7 +254,7 @@
             const student = students.find(s => s.id === id);
             if (!student) return;
             editingId = id;
-            document.getElementById('modalTitle').textContent = 'Modifier un Ã©lÃ¨ve';
+            document.getElementById('modalTitle').textContent = 'Modifier un élève';
             document.getElementById('matricule').value = student.matricule || '';
             document.getElementById('nom').value = student.nom || '';
             document.getElementById('prenom').value = student.prenom || '';
@@ -363,7 +268,7 @@
         }
 
         async function deleteStudent(id) {
-            if (!confirm('Supprimer cet Ã©lÃ¨ve ?')) return;
+            if (!confirm('Supprimer cet élève ?')) return;
             try {
                 const response = await fetch(`/api/eleves/${id}`, { method: 'DELETE' });
                 if (!response.ok) throw new Error('Suppression impossible');

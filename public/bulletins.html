@@ -1,150 +1,99 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Bulletins</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <title>Lycée Pascal Njèrè IV - Bulletins</title>
     <style>
         :root {
             --bg: #f6f7fb;
             --card: #ffffff;
-            --text: #101828;
-            --muted: #667085;
-            --border: #e4e7ec;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e5e7eb;
             --primary: #06b6d4;
             --primary-soft: #cffafe;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); }
-
+        body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
         .layout { display: flex; min-height: 100vh; }
-        .sidebar {
-            width: 260px;
-            background: var(--card);
-            border-right: 1px solid var(--border);
-            padding: 24px 18px;
-        }
-        .logo { display: flex; gap: 12px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-        .logo-icon { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #6366f1, #4338ca); color: #fff; display: grid; place-items: center; font-size: 20px; }
-        .logo-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; }
-        .logo-subtitle { font-size: 12px; color: var(--muted); }
-        .nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 6px; text-decoration: none; color: var(--muted); border-radius: 10px; font-weight: 500; transition: 0.2s; }
-        .nav-link:hover, .nav-link.active { background: var(--primary-soft); color: #0e7490; }
-
-        .content { flex: 1; padding: 32px 40px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .header h1 { font-family: 'Sora', sans-serif; font-size: 26px; }
-        .header p { color: var(--muted); margin-top: 4px; }
-
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
-        }
-
+        .sidebar { width: 240px; background: var(--card); border-right: 1px solid var(--border); padding: 20px; }
+        .brand h1 { font-size: 18px; margin-bottom: 4px; }
+        .brand p { color: var(--muted); font-size: 13px; }
+        .nav a { display: block; padding: 10px 12px; border-radius: 8px; text-decoration: none; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
+        .nav a.active, .nav a:hover { background: var(--primary-soft); color: #0e7490; }
+        .content { flex: 1; padding: 28px 36px; }
+        .header { margin-bottom: 16px; }
+        .header h2 { font-size: 24px; }
+        .header p { color: var(--muted); margin-top: 6px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
         .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
         .form-group label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
-        .form-group select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; }
-
-        .btn {
-            padding: 10px 16px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--primary);
-            color: #fff;
-        }
-        .btn-secondary { background: #f2f4f7; color: var(--text); }
-
-        .bulletin {
-            background: #f9fafb;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .form-group select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; }
+        .btn { padding: 10px 16px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; background: var(--primary); color: white; }
+        .btn-secondary { background: #f3f4f6; color: var(--text); }
+        .bulletin { background: #f9fafb; border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
         .bulletin h3 { font-size: 16px; margin-bottom: 4px; }
         .bulletin-meta { color: var(--muted); font-size: 13px; display: flex; gap: 16px; flex-wrap: wrap; }
         .badge { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--primary-soft); color: #0e7490; }
-
         .actions { display: flex; gap: 8px; }
-        .icon-btn { border: none; background: #e2e8f0; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
-
-        @media (max-width: 900px) {
-            .layout { flex-direction: column; }
-            .sidebar { width: 100%; }
-            .bulletin { flex-direction: column; align-items: flex-start; }
-        }
+        .icon-btn { border: none; background: #e2e8f0; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; }
+        @media (max-width: 900px) { .layout { flex-direction: column; } .sidebar { width: 100%; } .bulletin { flex-direction: column; align-items: flex-start; } }
     </style>
 </head>
 <body>
     <div class="layout">
         <aside class="sidebar">
-            <div class="logo">
-                <div class="logo-icon">ðŸŽ“</div>
-                <div>
-                    <div class="logo-title">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
-                    <div class="logo-subtitle">SystÃ¨me de gestion</div>
-                </div>
+            <div class="brand">
+                <h1>Lycée Pascal Njèrè IV</h1>
+                <p>Système de gestion</p>
             </div>
-            <a class="nav-link" href="/">ðŸ“Š Dashboard</a>
-            <a class="nav-link" href="/personnel.html">ðŸ‘¥ Personnel</a>
-            <a class="nav-link" href="/eleves.html">ðŸŽ“ Ã‰lÃ¨ves</a>
-            <a class="nav-link" href="/emploi-temps.html">ðŸ“… Emploi du temps</a>
-            <a class="nav-link" href="/absences.html">ðŸ“‹ Absences</a>
-            <a class="nav-link" href="/finance.html">ðŸ’° Finance (APEE)</a>
-            <a class="nav-link active" href="/bulletins.html">ðŸ“„ Bulletins</a>
+            <nav class="nav">
+                <a href="/">Tableau de bord</a>
+                <a href="/personnel.html">Personnel</a>
+                <a href="/eleves.html">Élèves</a>
+                <a href="/emploi-temps.html">Emploi du temps</a>
+                <a href="/absences.html">Absences</a>
+                <a href="/finance.html">Finance (APEE)</a>
+                <a class="active" href="/bulletins.html">Bulletins</a>
+            </nav>
         </aside>
 
         <main class="content">
             <div class="header">
-                <div>
-                    <h1>Bulletins</h1>
-                    <p>GÃ©nÃ©ration et impression des rÃ©sultats scolaires.</p>
-                </div>
+                <h2>Bulletins</h2>
+                <p>Génération et impression des résultats scolaires.</p>
             </div>
 
             <div class="card">
-                <h2 style="font-family: 'Sora', sans-serif; font-size: 18px; margin-bottom: 12px;">GÃ©nÃ©rer des bulletins</h2>
+                <h3 style="margin-bottom: 12px;">Générer des bulletins</h3>
                 <form id="bulletinForm">
                     <div class="form-grid">
                         <div class="form-group">
                             <label>Classe</label>
                             <select id="classe" required>
-                                <option value="">SÃ©lectionner</option>
-                                <option value="6eme">6Ã¨me</option>
-                                <option value="5eme">5Ã¨me</option>
-                                <option value="4eme">4Ã¨me</option>
-                                <option value="3eme">3Ã¨me</option>
+                                <option value="">Sélectionner</option>
+                                <option value="6e">6e</option>
+                                <option value="5e">5e</option>
+                                <option value="4e">4e</option>
+                                <option value="3e">3e</option>
                                 <option value="2nde">2nde</option>
-                                <option value="1ere">1Ã¨re</option>
-                                <option value="tle">Terminale</option>
+                                <option value="1re">1re</option>
+                                <option value="Tle">Terminale</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>PÃ©riode</label>
+                            <label>Période</label>
                             <select id="periode" required>
-                                <option value="">SÃ©lectionner</option>
-                                <option value="trim1">1er Trimestre</option>
-                                <option value="trim2">2Ã¨me Trimestre</option>
-                                <option value="trim3">3Ã¨me Trimestre</option>
+                                <option value="">Sélectionner</option>
+                                <option value="trim1">1er trimestre</option>
+                                <option value="trim2">2e trimestre</option>
+                                <option value="trim3">3e trimestre</option>
                                 <option value="annuel">Annuel</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>AnnÃ©e scolaire</label>
+                            <label>Année scolaire</label>
                             <select id="annee" required>
                                 <option value="2025-2026" selected>2025-2026</option>
                                 <option value="2024-2025">2024-2025</option>
@@ -152,27 +101,27 @@
                         </div>
                     </div>
                     <div style="display:flex; gap: 10px; margin-top: 12px;">
-                        <button type="submit" class="btn">ðŸ“„ GÃ©nÃ©rer</button>
-                        <button type="button" class="btn btn-secondary" onclick="alert('AperÃ§u en dÃ©veloppement')">ðŸ‘ï¸ AperÃ§u</button>
+                        <button type="submit" class="btn">Générer</button>
+                        <button type="button" class="btn btn-secondary" onclick="alert('Aperçu en développement')">Aperçu</button>
                     </div>
                 </form>
             </div>
 
             <div class="card">
-                <h2 style="font-family: 'Sora', sans-serif; font-size: 18px; margin-bottom: 12px;">Bulletins gÃ©nÃ©rÃ©s</h2>
+                <h3 style="margin-bottom: 12px;">Bulletins générés</h3>
                 <div class="bulletin" style="margin-bottom: 10px;">
                     <div>
                         <h3>Aissatou Ndongo <span class="badge">Moyenne 16,5/20</span></h3>
                         <div class="bulletin-meta">
-                            <span>Classe: 1Ã¨re Scientifique</span>
-                            <span>PÃ©riode: 2Ã¨me Trimestre</span>
-                            <span>Rang: 2Ã¨me / 32</span>
+                            <span>Classe: 1re Scientifique</span>
+                            <span>Période: 2e trimestre</span>
+                            <span>Rang: 2e / 32</span>
                         </div>
                     </div>
                     <div class="actions">
-                        <button class="icon-btn">ðŸ‘ï¸</button>
-                        <button class="icon-btn">ðŸ’¾</button>
-                        <button class="icon-btn">ðŸ–¨ï¸</button>
+                        <button class="icon-btn" title="Voir">Voir</button>
+                        <button class="icon-btn" title="Télécharger">PDF</button>
+                        <button class="icon-btn" title="Imprimer">Impr.</button>
                     </div>
                 </div>
                 <div class="bulletin">
@@ -180,14 +129,14 @@
                         <h3>Mohamed Kamara <span class="badge">Moyenne 17,2/20</span></h3>
                         <div class="bulletin-meta">
                             <span>Classe: Terminale Scientifique</span>
-                            <span>PÃ©riode: 2Ã¨me Trimestre</span>
+                            <span>Période: 2e trimestre</span>
                             <span>Rang: 1er / 28</span>
                         </div>
                     </div>
                     <div class="actions">
-                        <button class="icon-btn">ðŸ‘ï¸</button>
-                        <button class="icon-btn">ðŸ’¾</button>
-                        <button class="icon-btn">ðŸ–¨ï¸</button>
+                        <button class="icon-btn" title="Voir">Voir</button>
+                        <button class="icon-btn" title="Télécharger">PDF</button>
+                        <button class="icon-btn" title="Imprimer">Impr.</button>
                     </div>
                 </div>
             </div>
@@ -200,7 +149,7 @@
             const classe = document.getElementById('classe').value;
             const periode = document.getElementById('periode').value;
             const annee = document.getElementById('annee').value;
-            alert(`GÃ©nÃ©ration des bulletins\nClasse: ${classe}\nPÃ©riode: ${periode}\nAnnÃ©e: ${annee}`);
+            alert(`Génération des bulletins\nClasse: ${classe}\nPériode: ${periode}\nAnnée: ${annee}`);
         });
     </script>
 </body>

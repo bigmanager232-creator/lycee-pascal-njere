@@ -1,281 +1,149 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <title>Lycée Pascal Njèrè IV - Tableau de bord</title>
     <style>
         :root {
             --bg: #f6f7fb;
             --card: #ffffff;
-            --text: #101828;
-            --muted: #667085;
-            --border: #e4e7ec;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e5e7eb;
             --primary: #4f46e5;
             --primary-soft: #e0e7ff;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-        }
-
-        .layout {
-            display: flex;
-            min-height: 100vh;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+        .layout { display: flex; min-height: 100vh; }
         .sidebar {
-            width: 260px;
+            width: 240px;
             background: var(--card);
             border-right: 1px solid var(--border);
-            padding: 24px 18px;
+            padding: 20px;
         }
-
-        .logo {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 20px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #6366f1, #4338ca);
-            color: #fff;
-            display: grid;
-            place-items: center;
-            font-size: 20px;
-        }
-
-        .logo-title {
-            font-family: 'Sora', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .logo-subtitle {
-            font-size: 12px;
-            color: var(--muted);
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .brand { margin-bottom: 24px; }
+        .brand h1 { font-size: 18px; margin-bottom: 4px; }
+        .brand p { color: var(--muted); font-size: 13px; }
+        .nav a {
+            display: block;
             padding: 10px 12px;
-            margin-bottom: 6px;
+            border-radius: 8px;
             text-decoration: none;
             color: var(--muted);
-            border-radius: 10px;
-            font-weight: 500;
-            transition: 0.2s;
+            margin-bottom: 6px;
+            font-weight: 600;
         }
-
-        .nav-link:hover,
-        .nav-link.active {
-            background: var(--primary-soft);
-            color: var(--primary);
+        .nav a.active, .nav a:hover { background: var(--primary-soft); color: var(--primary); }
+        .content { flex: 1; padding: 28px 36px; }
+        .header { margin-bottom: 20px; }
+        .header h2 { font-size: 26px; }
+        .header p { color: var(--muted); margin-top: 6px; }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin-bottom: 24px;
         }
-
-        .content {
-            flex: 1;
-            padding: 32px 40px;
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
         }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 28px;
-        }
-
-        .header h1 {
-            font-family: 'Sora', sans-serif;
-            font-size: 28px;
-        }
-
-        .header p {
-            color: var(--muted);
-            margin-top: 6px;
-        }
-
-        .stats-grid {
+        .card .label { color: var(--muted); font-size: 12px; }
+        .card .value { font-size: 22px; font-weight: 700; margin-top: 6px; }
+        .modules {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
+            gap: 14px;
         }
-
-        .stat-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 18px;
-        }
-
-        .stat-label {
-            color: var(--muted);
-            font-size: 13px;
-            margin-bottom: 6px;
-        }
-
-        .stat-value {
-            font-family: 'Sora', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-        }
-
         .module {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
+            display: block;
             text-decoration: none;
             color: inherit;
-            transition: 0.2s;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
         }
-
-        .module:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08);
-        }
-
-        .module-title {
-            font-family: 'Sora', sans-serif;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .module-desc {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--primary-soft);
-            color: var(--primary);
-            padding: 4px 10px;
-            border-radius: 999px;
-            font-size: 12px;
-            margin-top: 12px;
-        }
-
+        .module h3 { font-size: 16px; margin-bottom: 6px; }
+        .module p { color: var(--muted); font-size: 13px; }
         @media (max-width: 900px) {
-            .layout {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-            }
+            .layout { flex-direction: column; }
+            .sidebar { width: 100%; }
         }
     </style>
 </head>
 <body>
     <div class="layout">
         <aside class="sidebar">
-            <div class="logo">
-                <div class="logo-icon">ðŸŽ“</div>
-                <div>
-                    <div class="logo-title">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
-                    <div class="logo-subtitle">SystÃ¨me de gestion</div>
-                </div>
+            <div class="brand">
+                <h1>Lycée Pascal Njèrè IV</h1>
+                <p>Système de gestion</p>
             </div>
-            <a class="nav-link active" href="/">ðŸ“Š Dashboard</a>
-            <a class="nav-link" href="/personnel.html">ðŸ‘¥ Personnel</a>
-            <a class="nav-link" href="/eleves.html">ðŸŽ“ Ã‰lÃ¨ves</a>
-            <a class="nav-link" href="/emploi-temps.html">ðŸ“… Emploi du temps</a>
-            <a class="nav-link" href="/absences.html">ðŸ“‹ Absences</a>
-            <a class="nav-link" href="/finance.html">ðŸ’° Finance (APEE)</a>
-            <a class="nav-link" href="/bulletins.html">ðŸ“„ Bulletins</a>
+            <nav class="nav">
+                <a class="active" href="/">Tableau de bord</a>
+                <a href="/personnel.html">Personnel</a>
+                <a href="/eleves.html">Élèves</a>
+                <a href="/emploi-temps.html">Emploi du temps</a>
+                <a href="/absences.html">Absences</a>
+                <a href="/finance.html">Finance (APEE)</a>
+                <a href="/bulletins.html">Bulletins</a>
+            </nav>
         </aside>
 
         <main class="content">
             <div class="header">
-                <div>
-                    <h1>Dashboard</h1>
-                    <p>Vue d'ensemble du lycÃ©e et des indicateurs clÃ©s.</p>
-                </div>
+                <h2>Tableau de bord</h2>
+                <p>Vue d'ensemble des indicateurs clés du lycée.</p>
             </div>
 
-            <section class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-label">Personnel actif</div>
-                    <div class="stat-value" id="statProf">--</div>
+            <section class="stats">
+                <div class="card">
+                    <div class="label">Personnel actif</div>
+                    <div class="value" id="statProf">--</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">Total Ã©lÃ¨ves</div>
-                    <div class="stat-value" id="statEleves">--</div>
+                <div class="card">
+                    <div class="label">Total élèves</div>
+                    <div class="value" id="statEleves">--</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">Ã‰lÃ¨ves insolvables</div>
-                    <div class="stat-value" id="statInsolvables">--</div>
+                <div class="card">
+                    <div class="label">Élèves insolvables</div>
+                    <div class="value" id="statInsolvables">--</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">Total perÃ§u (APEE)</div>
-                    <div class="stat-value" id="statFinances">--</div>
+                <div class="card">
+                    <div class="label">Total perçu (APEE)</div>
+                    <div class="value" id="statFinances">--</div>
                 </div>
             </section>
 
-            <section>
-                <h2 style="font-family: 'Sora', sans-serif; font-size: 20px; margin-bottom: 14px;">Modules</h2>
-                <div class="modules-grid">
-                    <a class="module" href="/personnel.html">
-                        <div class="module-title">Personnel</div>
-                        <div class="module-desc">Gestion des professeurs et du staff pÃ©dagogique.</div>
-                        <div class="pill">ðŸ‘¥ Gestion RH</div>
-                    </a>
-                    <a class="module" href="/eleves.html">
-                        <div class="module-title">Ã‰lÃ¨ves</div>
-                        <div class="module-desc">Inscriptions, suivi et informations scolaires.</div>
-                        <div class="pill">ðŸŽ“ Dossiers Ã©lÃ¨ves</div>
-                    </a>
-                    <a class="module" href="/emploi-temps.html">
-                        <div class="module-title">Emploi du temps</div>
-                        <div class="module-desc">Planification des cours par classe.</div>
-                        <div class="pill">ðŸ“… Planning</div>
-                    </a>
-                    <a class="module" href="/absences.html">
-                        <div class="module-title">Absences</div>
-                        <div class="module-desc">Suivi des absences et justifications.</div>
-                        <div class="pill">ðŸ“‹ Suivi</div>
-                    </a>
-                    <a class="module" href="/finance.html">
-                        <div class="module-title">Finance (APEE)</div>
-                        <div class="module-desc">Paiements, recouvrement et relances.</div>
-                        <div class="pill">ðŸ’° APEE</div>
-                    </a>
-                    <a class="module" href="/bulletins.html">
-                        <div class="module-title">Bulletins</div>
-                        <div class="module-desc">GÃ©nÃ©ration et impression des bulletins.</div>
-                        <div class="pill">ðŸ“„ RÃ©sultats</div>
-                    </a>
-                </div>
+            <section class="modules">
+                <a class="module" href="/personnel.html">
+                    <h3>Personnel</h3>
+                    <p>Gestion des professeurs et du staff pédagogique.</p>
+                </a>
+                <a class="module" href="/eleves.html">
+                    <h3>Élèves</h3>
+                    <p>Inscriptions, suivi et informations scolaires.</p>
+                </a>
+                <a class="module" href="/emploi-temps.html">
+                    <h3>Emploi du temps</h3>
+                    <p>Planification des cours et salles.</p>
+                </a>
+                <a class="module" href="/absences.html">
+                    <h3>Absences</h3>
+                    <p>Suivi et justification des absences.</p>
+                </a>
+                <a class="module" href="/finance.html">
+                    <h3>Finance (APEE)</h3>
+                    <p>Suivi des paiements et relances.</p>
+                </a>
+                <a class="module" href="/bulletins.html">
+                    <h3>Bulletins</h3>
+                    <p>Génération et édition des bulletins.</p>
+                </a>
             </section>
         </main>
     </div>
@@ -291,10 +159,10 @@
                 document.getElementById('statInsolvables').textContent = stats.eleves_insolvables ?? '0';
                 document.getElementById('statFinances').textContent = `${stats.total_percu ?? 0} FCFA`;
             } catch (error) {
-                document.getElementById('statProf').textContent = 'â€”';
-                document.getElementById('statEleves').textContent = 'â€”';
-                document.getElementById('statInsolvables').textContent = 'â€”';
-                document.getElementById('statFinances').textContent = 'â€”';
+                document.getElementById('statProf').textContent = '--';
+                document.getElementById('statEleves').textContent = '--';
+                document.getElementById('statInsolvables').textContent = '--';
+                document.getElementById('statFinances').textContent = '--';
             }
         }
 
