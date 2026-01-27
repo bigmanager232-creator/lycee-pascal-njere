@@ -9,8 +9,7 @@ const PORT = 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-const PUBLIC_DIR = path.join(__dirname, 'public');
-app.use(express.static(PUBLIC_DIR));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Data directory
 const DATA_DIR = path.join(__dirname, 'data');
@@ -160,9 +159,9 @@ app.get('/api/stats', (req, res) => {
     }
 });
 
-// Serve HTML files
-app.get('/', (req, res) => {
-    res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
+// Serve index.html for all routes
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
 // Start server
