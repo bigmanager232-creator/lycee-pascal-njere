@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lycée Pascal Njèrè IV - Emploi du Temps</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f8f9fc;
+            --bg-card: #ffffff;
+            --text-primary: #1a1d29;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --color-primary: #8b5cf6;
+            --color-primary-light: #ede9fe;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            padding: 24px 0;
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 24px 32px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-family: 'Sora', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 4px 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: rgba(99, 102, 241, 0.06);
+            color: #6366f1;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
+            color: #6366f1;
+            border-right: 3px solid #6366f1;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 32px 48px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .header-left h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header-left p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .class-selector {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .class-selector label {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .class-selector select {
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Outfit', sans-serif;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .timetable-container {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            overflow-x: auto;
+        }
+
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        .timetable th {
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            padding: 16px 12px;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .timetable td {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            vertical-align: top;
+            min-height: 80px;
+            height: 100px;
+        }
+
+        .time-column {
+            background: #f9fafb;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .course-slot {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .course-slot:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .course-name {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .course-teacher {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .empty-slot {
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty-slot:hover {
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+        }
+
+        .break-slot {
+            background: #fef3c7;
+            color: #92400e;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
+        }
+
+        .legend {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f9fafb;
+            border-radius: 10px;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">🎓</div>
+            <div class="logo-text">Lycée Pascal Njèrè IV</div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="/" class="nav-link">
+                    <span>📊</span> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/professeurs.html" class="nav-link">
+                    <span>👥</span> Professeurs
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/eleves.html" class="nav-link">
+                    <span>🎓</span> Élèves
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/emploi-temps.html" class="nav-link active">
+                    <span>📅</span> Emploi du Temps
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/absences.html" class="nav-link">
+                    <span>📋</span> Absences
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/finance.html" class="nav-link">
+                    <span>💰</span> Finance (APEE)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/bulletins.html" class="nav-link">
+                    <span>📄</span> Bulletins
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <div class="header-left">
+                <h1>📅 Emploi du Temps</h1>
+                <p>Consulter et modifier les emplois du temps des classes</p>
+            </div>
+            <button class="btn btn-primary" onclick="alert('Impression en développement')">
+                🖨️ Imprimer
+            </button>
+        </div>
+
+        <div class="class-selector">
+            <label>📚 Sélectionner une classe:</label>
+            <select id="classSelect" onchange="loadSchedule()">
+                <option value="1ere">1ère Scientifique</option>
+                <option value="tle">Terminale Scientifique</option>
+                <option value="2nde">2nde</option>
+                <option value="3eme">3ème</option>
+                <option value="4eme">4ème</option>
+                <option value="5eme">5ème</option>
+                <option value="6eme">6ème</option>
+            </select>
+        </div>
+
+        <div class="timetable-container">
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th style="width: 120px;">Horaires</th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                        <th>Samedi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="time-column">07:30 - 09:00</td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Mathématiques</div>
+                                <div class="course-teacher">A. Diallo</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Physique</div>
+                                <div class="course-teacher">F. Bah</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Français</div>
+                                <div class="course-teacher">M. Kouassi</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Anglais</div>
+                                <div class="course-teacher">I. Touré</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Mathématiques</div>
+                                <div class="course-teacher">A. Diallo</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Sport</div>
+                                <div class="course-teacher">Coach</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="time-column">09:15 - 10:45</td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Histoire-Géo</div>
+                                <div class="course-teacher">J.P. Nkolo</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Mathématiques</div>
+                                <div class="course-teacher">A. Diallo</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Anglais</div>
+                                <div class="course-teacher">I. Touré</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Physique</div>
+                                <div class="course-teacher">F. Bah</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Français</div>
+                                <div class="course-teacher">M. Kouassi</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="empty-slot">
+                                ➕ Ajouter
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="time-column break-slot">10:45 - 11:00</td>
+                        <td colspan="6" class="break-slot">☕ RÉCRÉATION</td>
+                    </tr>
+                    <tr>
+                        <td class="time-column">11:00 - 12:30</td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Français</div>
+                                <div class="course-teacher">M. Kouassi</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Histoire-Géo</div>
+                                <div class="course-teacher">J.P. Nkolo</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Chimie</div>
+                                <div class="course-teacher">F. Bah</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Mathématiques</div>
+                                <div class="course-teacher">A. Diallo</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Anglais</div>
+                                <div class="course-teacher">I. Touré</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="empty-slot">
+                                ➕ Ajouter
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="time-column break-slot">12:30 - 14:00</td>
+                        <td colspan="6" class="break-slot">🍽️ PAUSE DÉJEUNER</td>
+                    </tr>
+                    <tr>
+                        <td class="time-column">14:00 - 15:30</td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Anglais</div>
+                                <div class="course-teacher">I. Touré</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Français</div>
+                                <div class="course-teacher">M. Kouassi</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="empty-slot">
+                                ➕ Ajouter
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Histoire-Géo</div>
+                                <div class="course-teacher">J.P. Nkolo</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Physique</div>
+                                <div class="course-teacher">F. Bah</div>
+                            </div>
+                        </td>
+                        <td colspan="1" class="break-slot">Fin des cours</td>
+                    </tr>
+                    <tr>
+                        <td class="time-column">15:45 - 17:15</td>
+                        <td>
+                            <div class="empty-slot">
+                                ➕ Ajouter
+                            </div>
+                        </td>
+                        <td>
+                            <div class="course-slot">
+                                <div class="course-name">Chimie TP</div>
+                                <div class="course-teacher">F. Bah</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="empty-slot">
+                                ➕ Ajouter
+                            </div>
+                        </td>
+                        <td>
+                            <div class="empty-slot">
+                                ➕ Ajouter
+                            </div>
+                        </td>
+                        <td>
+                            <div class="empty-slot">
+                                ➕ Ajouter
+                            </div>
+                        </td>
+                        <td colspan="1" class="break-slot">Fin des cours</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-box" style="background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);"></div>
+                    <span>Cours programmé</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #fef3c7;"></div>
+                    <span>Pause / Récréation</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #f9fafb; border: 1px solid #e5e7eb;"></div>
+                    <span>Créneau libre</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadSchedule() {
+            const selectedClass = document.getElementById('classSelect').value;
+            console.log('Chargement de l\'emploi du temps pour:', selectedClass);
+            // Ici vous pourrez charger différents emplois du temps selon la classe
+        }
+    </script>
+</body>
+</html>
