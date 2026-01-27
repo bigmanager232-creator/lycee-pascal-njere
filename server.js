@@ -14,20 +14,37 @@ app.use(express.static('public'));
 // Data directories
 const DATA_DIR = path.join(__dirname, 'data');
 const PUBLIC_DATA_DIR = path.join(__dirname, 'public');
+const DATA_PATHS = {
+    'eleves.json': PUBLIC_DATA_DIR,
+    'professeurs.json': DATA_DIR,
+    'absences.json': DATA_DIR,
+    'finances.json': DATA_DIR,
+    'emplois.json': DATA_DIR,
+    'bulletins.json': DATA_DIR
+};
+
+function resolveDataPath(filename) {
+    const baseDir = DATA_PATHS[filename] || DATA_DIR;
+    return path.join(baseDir, filename);
+}
 
 // Helper functions
+function ensureDataFile(filepath) {
+    if (!fs.existsSync(filepath)) {
+        fs.writeFileSync(filepath, '[]');
+    }
+}
+
 function readData(filename) {
-    const filepath = filename === 'eleves.json'
-        ? path.join(PUBLIC_DATA_DIR, filename)
-        : path.join(DATA_DIR, filename);
+    const filepath = resolveDataPath(filename);
+    ensureDataFile(filepath);
     const data = fs.readFileSync(filepath, 'utf8');
     return JSON.parse(data);
 }
 
 function writeData(filename, data) {
-    const filepath = filename === 'eleves.json'
-        ? path.join(PUBLIC_DATA_DIR, filename)
-        : path.join(DATA_DIR, filename);
+    const filepath = resolveDataPath(filename);
+    ensureDataFile(filepath);
     fs.writeFileSync(filepath, JSON.stringify(data, null, 2));
 }
 
@@ -144,18 +161,236 @@ app.delete('/api/eleves/:id', (req, res) => {
     }
 });
 
+// ==================== ROUTES ABSENCES ====================
+app.get('/api/absences', (req, res) => {
+    try {
+        const absences = readData('absences.json');
+        res.json(absences);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/api/absences', (req, res) => {
+    try {
+        const absences = readData('absences.json');
+        const newAbsence = {
+            id: getNextId(absences),
+            ...req.body,
+            created_at: new Date().toISOString()
+        };
+        absences.push(newAbsence);
+        writeData('absences.json', absences);
+        res.json({ message: 'Absence ajoutée avec succès', data: newAbsence });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.put('/api/absences/:id', (req, res) => {
+    try {
+        const absences = readData('absences.json');
+        const index = absences.findIndex(a => a.id === parseInt(req.params.id));
+        if (index !== -1) {
+            absences[index] = { ...absences[index], ...req.body };
+            writeData('absences.json', absences);
+            res.json({ message: 'Absence mise à jour', data: absences[index] });
+        } else {
+            res.status(404).json({ error: 'Absence non trouvée' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.delete('/api/absences/:id', (req, res) => {
+    try {
+        let absences = readData('absences.json');
+        absences = absences.filter(a => a.id !== parseInt(req.params.id));
+        writeData('absences.json', absences);
+        res.json({ message: 'Absence supprimée' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ==================== ROUTES FINANCES ====================
+app.get('/api/finances', (req, res) => {
+    try {
+        const finances = readData('finances.json');
+        res.json(finances);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/api/finances', (req, res) => {
+    try {
+        const finances = readData('finances.json');
+        const newFinance = {
+            id: getNextId(finances),
+            ...req.body,
+            created_at: new Date().toISOString()
+        };
+        finances.push(newFinance);
+        writeData('finances.json', finances);
+        res.json({ message: 'Paiement enregistré', data: newFinance });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.put('/api/finances/:id', (req, res) => {
+    try {
+        const finances = readData('finances.json');
+        const index = finances.findIndex(f => f.id === parseInt(req.params.id));
+        if (index !== -1) {
+            finances[index] = { ...finances[index], ...req.body };
+            writeData('finances.json', finances);
+            res.json({ message: 'Paiement mis à jour', data: finances[index] });
+        } else {
+            res.status(404).json({ error: 'Paiement non trouvé' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.delete('/api/finances/:id', (req, res) => {
+    try {
+        let finances = readData('finances.json');
+        finances = finances.filter(f => f.id !== parseInt(req.params.id));
+        writeData('finances.json', finances);
+        res.json({ message: 'Paiement supprimé' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ==================== ROUTES EMPLOI DU TEMPS ====================
+app.get('/api/emplois', (req, res) => {
+    try {
+        const emplois = readData('emplois.json');
+        res.json(emplois);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/api/emplois', (req, res) => {
+    try {
+        const emplois = readData('emplois.json');
+        const newSlot = {
+            id: getNextId(emplois),
+            ...req.body,
+            created_at: new Date().toISOString()
+        };
+        emplois.push(newSlot);
+        writeData('emplois.json', emplois);
+        res.json({ message: 'Créneau ajouté', data: newSlot });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.put('/api/emplois/:id', (req, res) => {
+    try {
+        const emplois = readData('emplois.json');
+        const index = emplois.findIndex(e => e.id === parseInt(req.params.id));
+        if (index !== -1) {
+            emplois[index] = { ...emplois[index], ...req.body };
+            writeData('emplois.json', emplois);
+            res.json({ message: 'Créneau mis à jour', data: emplois[index] });
+        } else {
+            res.status(404).json({ error: 'Créneau non trouvé' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.delete('/api/emplois/:id', (req, res) => {
+    try {
+        let emplois = readData('emplois.json');
+        emplois = emplois.filter(e => e.id !== parseInt(req.params.id));
+        writeData('emplois.json', emplois);
+        res.json({ message: 'Créneau supprimé' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ==================== ROUTES BULLETINS ====================
+app.get('/api/bulletins', (req, res) => {
+    try {
+        const bulletins = readData('bulletins.json');
+        res.json(bulletins);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/api/bulletins', (req, res) => {
+    try {
+        const bulletins = readData('bulletins.json');
+        const newBulletin = {
+            id: getNextId(bulletins),
+            ...req.body,
+            created_at: new Date().toISOString()
+        };
+        bulletins.push(newBulletin);
+        writeData('bulletins.json', bulletins);
+        res.json({ message: 'Bulletin généré', data: newBulletin });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.put('/api/bulletins/:id', (req, res) => {
+    try {
+        const bulletins = readData('bulletins.json');
+        const index = bulletins.findIndex(b => b.id === parseInt(req.params.id));
+        if (index !== -1) {
+            bulletins[index] = { ...bulletins[index], ...req.body };
+            writeData('bulletins.json', bulletins);
+            res.json({ message: 'Bulletin mis à jour', data: bulletins[index] });
+        } else {
+            res.status(404).json({ error: 'Bulletin non trouvé' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.delete('/api/bulletins/:id', (req, res) => {
+    try {
+        let bulletins = readData('bulletins.json');
+        bulletins = bulletins.filter(b => b.id !== parseInt(req.params.id));
+        writeData('bulletins.json', bulletins);
+        res.json({ message: 'Bulletin supprimé' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // ==================== ROUTES STATISTIQUES ====================
 app.get('/api/stats', (req, res) => {
     try {
         const professeurs = readData('professeurs.json');
         const eleves = readData('eleves.json');
+        const finances = readData('finances.json');
+
+        const totalPercu = finances.reduce((sum, item) => {
+            const montant = Number(item.montant_paye || item.montantPaye || 0);
+            return sum + (Number.isNaN(montant) ? 0 : montant);
+        }, 0);
         
         const stats = {
             professeurs_presents: professeurs.filter(p => p.statut === 'actif').length,
             total_professeurs: professeurs.length,
             total_eleves: eleves.length,
             eleves_insolvables: eleves.filter(e => e.statut_financier === 'insolvable').length,
-            total_percu: 485000
+            total_percu: totalPercu
         };
         
         res.json(stats);

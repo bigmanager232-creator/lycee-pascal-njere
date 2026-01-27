@@ -288,6 +288,101 @@
             height: 20px;
             border-radius: 4px;
         }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 560px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .close-modal {
+            border: none;
+            background: transparent;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: var(--text-primary);
+        }
+
+        .slot-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .slot-actions button {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -344,14 +439,14 @@
                 <h1>📅 Emploi du Temps</h1>
                 <p>Consulter et modifier les emplois du temps des classes</p>
             </div>
-            <button class="btn btn-primary" onclick="alert('Impression en développement')">
+            <button class="btn btn-primary" onclick="window.print()">
                 🖨️ Imprimer
             </button>
         </div>
 
         <div class="class-selector">
             <label>📚 Sélectionner une classe:</label>
-            <select id="classSelect" onchange="loadSchedule()">
+            <select id="classSelect">
                 <option value="1ere">1ère Scientifique</option>
                 <option value="tle">Terminale Scientifique</option>
                 <option value="2nde">2nde</option>
@@ -375,194 +470,7 @@
                         <th>Samedi</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="time-column">07:30 - 09:00</td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Mathématiques</div>
-                                <div class="course-teacher">A. Diallo</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Physique</div>
-                                <div class="course-teacher">F. Bah</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Français</div>
-                                <div class="course-teacher">M. Kouassi</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Anglais</div>
-                                <div class="course-teacher">I. Touré</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Mathématiques</div>
-                                <div class="course-teacher">A. Diallo</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Sport</div>
-                                <div class="course-teacher">Coach</div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="time-column">09:15 - 10:45</td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Histoire-Géo</div>
-                                <div class="course-teacher">J.P. Nkolo</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Mathématiques</div>
-                                <div class="course-teacher">A. Diallo</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Anglais</div>
-                                <div class="course-teacher">I. Touré</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Physique</div>
-                                <div class="course-teacher">F. Bah</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Français</div>
-                                <div class="course-teacher">M. Kouassi</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="empty-slot">
-                                ➕ Ajouter
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="time-column break-slot">10:45 - 11:00</td>
-                        <td colspan="6" class="break-slot">☕ RÉCRÉATION</td>
-                    </tr>
-                    <tr>
-                        <td class="time-column">11:00 - 12:30</td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Français</div>
-                                <div class="course-teacher">M. Kouassi</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Histoire-Géo</div>
-                                <div class="course-teacher">J.P. Nkolo</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Chimie</div>
-                                <div class="course-teacher">F. Bah</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Mathématiques</div>
-                                <div class="course-teacher">A. Diallo</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Anglais</div>
-                                <div class="course-teacher">I. Touré</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="empty-slot">
-                                ➕ Ajouter
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="time-column break-slot">12:30 - 14:00</td>
-                        <td colspan="6" class="break-slot">🍽️ PAUSE DÉJEUNER</td>
-                    </tr>
-                    <tr>
-                        <td class="time-column">14:00 - 15:30</td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Anglais</div>
-                                <div class="course-teacher">I. Touré</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Français</div>
-                                <div class="course-teacher">M. Kouassi</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="empty-slot">
-                                ➕ Ajouter
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Histoire-Géo</div>
-                                <div class="course-teacher">J.P. Nkolo</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Physique</div>
-                                <div class="course-teacher">F. Bah</div>
-                            </div>
-                        </td>
-                        <td colspan="1" class="break-slot">Fin des cours</td>
-                    </tr>
-                    <tr>
-                        <td class="time-column">15:45 - 17:15</td>
-                        <td>
-                            <div class="empty-slot">
-                                ➕ Ajouter
-                            </div>
-                        </td>
-                        <td>
-                            <div class="course-slot">
-                                <div class="course-name">Chimie TP</div>
-                                <div class="course-teacher">F. Bah</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="empty-slot">
-                                ➕ Ajouter
-                            </div>
-                        </td>
-                        <td>
-                            <div class="empty-slot">
-                                ➕ Ajouter
-                            </div>
-                        </td>
-                        <td>
-                            <div class="empty-slot">
-                                ➕ Ajouter
-                            </div>
-                        </td>
-                        <td colspan="1" class="break-slot">Fin des cours</td>
-                    </tr>
-                </tbody>
+                <tbody id="timetableBody"></tbody>
             </table>
 
             <div class="legend">
@@ -582,12 +490,205 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal" id="slotModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="slotModalTitle">Ajouter un créneau</h2>
+                <button class="close-modal" onclick="closeSlotModal()">✕</button>
+            </div>
+            <form id="slotForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Classe *</label>
+                        <select id="slotClasse" required>
+                            <option value="1ere">1ère Scientifique</option>
+                            <option value="tle">Terminale Scientifique</option>
+                            <option value="2nde">2nde</option>
+                            <option value="3eme">3ème</option>
+                            <option value="4eme">4ème</option>
+                            <option value="5eme">5ème</option>
+                            <option value="6eme">6ème</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Jour *</label>
+                        <select id="slotJour" required>
+                            <option value="lundi">Lundi</option>
+                            <option value="mardi">Mardi</option>
+                            <option value="mercredi">Mercredi</option>
+                            <option value="jeudi">Jeudi</option>
+                            <option value="vendredi">Vendredi</option>
+                            <option value="samedi">Samedi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Horaire *</label>
+                        <select id="slotHoraire" required>
+                            <option value="07:30 - 09:00">07:30 - 09:00</option>
+                            <option value="09:15 - 10:45">09:15 - 10:45</option>
+                            <option value="11:00 - 12:30">11:00 - 12:30</option>
+                            <option value="14:00 - 15:30">14:00 - 15:30</option>
+                            <option value="15:45 - 17:15">15:45 - 17:15</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Matière *</label>
+                        <input type="text" id="slotMatiere" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Professeur *</label>
+                        <input type="text" id="slotProfesseur" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeSlotModal()">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
-        function loadSchedule() {
-            const selectedClass = document.getElementById('classSelect').value;
-            console.log('Chargement de l\'emploi du temps pour:', selectedClass);
-            // Ici vous pourrez charger différents emplois du temps selon la classe
+        const days = [
+            { key: 'lundi', label: 'Lundi' },
+            { key: 'mardi', label: 'Mardi' },
+            { key: 'mercredi', label: 'Mercredi' },
+            { key: 'jeudi', label: 'Jeudi' },
+            { key: 'vendredi', label: 'Vendredi' },
+            { key: 'samedi', label: 'Samedi' }
+        ];
+        const times = ['07:30 - 09:00', '09:15 - 10:45', '11:00 - 12:30', '14:00 - 15:30', '15:45 - 17:15'];
+        let emplois = [];
+        let editingSlotId = null;
+
+        function openSlotModal(classe, jour, horaire) {
+            editingSlotId = null;
+            document.getElementById('slotModalTitle').textContent = 'Ajouter un créneau';
+            document.getElementById('slotForm').reset();
+            if (classe) document.getElementById('slotClasse').value = classe;
+            if (jour) document.getElementById('slotJour').value = jour;
+            if (horaire) document.getElementById('slotHoraire').value = horaire;
+            document.getElementById('slotModal').classList.add('active');
         }
+
+        function closeSlotModal() {
+            document.getElementById('slotModal').classList.remove('active');
+        }
+
+        function renderSchedule() {
+            const selectedClass = document.getElementById('classSelect').value;
+            const tbody = document.getElementById('timetableBody');
+            tbody.innerHTML = '';
+
+            times.forEach(time => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td class="time-column">${time}</td>`;
+                days.forEach(day => {
+                    const slot = emplois.find(item => item.classe === selectedClass && item.jour === day.key && item.horaire === time);
+                    const cell = document.createElement('td');
+                    if (slot) {
+                        cell.innerHTML = `
+                            <div class="course-slot">
+                                <div class="course-name">${slot.matiere}</div>
+                                <div class="course-teacher">${slot.professeur}</div>
+                                <div class="slot-actions">
+                                    <button title="Modifier" onclick="editSlot(${slot.id})">✏️</button>
+                                    <button title="Supprimer" onclick="deleteSlot(${slot.id})">🗑️</button>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        cell.innerHTML = `
+                            <div class="empty-slot" onclick="openSlotModal('${selectedClass}', '${day.key}', '${time}')">
+                                ➕ Ajouter
+                            </div>
+                        `;
+                    }
+                    row.appendChild(cell);
+                });
+                tbody.appendChild(row);
+            });
+        }
+
+        function editSlot(slotId) {
+            const slot = emplois.find(item => item.id === slotId);
+            if (!slot) return;
+            editingSlotId = slot.id;
+            document.getElementById('slotClasse').value = slot.classe;
+            document.getElementById('slotJour').value = slot.jour;
+            document.getElementById('slotHoraire').value = slot.horaire;
+            document.getElementById('slotMatiere').value = slot.matiere;
+            document.getElementById('slotProfesseur').value = slot.professeur;
+            document.getElementById('slotModalTitle').textContent = 'Modifier un créneau';
+            document.getElementById('slotModal').classList.add('active');
+        }
+
+        async function deleteSlot(slotId) {
+            if (!slotId) return;
+            if (confirm('Supprimer ce créneau ?')) {
+                try {
+                    const response = await fetch(`/api/emplois/${slotId}`, { method: 'DELETE' });
+                    if (response.ok) {
+                        await loadSchedule();
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors de la suppression');
+                }
+            }
+        }
+
+        async function loadSchedule() {
+            try {
+                const response = await fetch('/api/emplois');
+                emplois = await response.json();
+                renderSchedule();
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors du chargement de l\'emploi du temps');
+            }
+        }
+
+        document.getElementById('classSelect').addEventListener('change', renderSchedule);
+
+        document.getElementById('slotForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const payload = {
+                classe: document.getElementById('slotClasse').value,
+                jour: document.getElementById('slotJour').value,
+                horaire: document.getElementById('slotHoraire').value,
+                matiere: document.getElementById('slotMatiere').value,
+                professeur: document.getElementById('slotProfesseur').value
+            };
+
+            try {
+                let response;
+                if (editingSlotId) {
+                    response = await fetch(`/api/emplois/${editingSlotId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                } else {
+                    response = await fetch('/api/emplois', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                }
+
+                if (response.ok) {
+                    await loadSchedule();
+                    closeSlotModal();
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors de l\'enregistrement');
+            }
+        });
+
+        loadSchedule();
     </script>
 </body>
 </html>

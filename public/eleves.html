@@ -574,66 +574,20 @@
     </div>
 
     <script>
-        let students = [
-            {
-                id: 'MAT001',
-                nom: 'Ndongo',
-                prenom: 'Aissatou',
-                classe: '1ère',
-                telephone: '+237 690 123 456',
-                statutFinancier: 'solvable'
-            },
-            {
-                id: 'MAT002',
-                nom: 'Kamara',
-                prenom: 'Mohamed',
-                classe: 'Tle',
-                telephone: '+237 677 234 567',
-                statutFinancier: 'solvable'
-            },
-            {
-                id: 'MAT003',
-                nom: 'Mbarga',
-                prenom: 'Grace',
-                classe: '2nde',
-                telephone: '+237 655 345 678',
-                statutFinancier: 'insolvable'
-            },
-            {
-                id: 'MAT004',
-                nom: 'Diop',
-                prenom: 'Ousmane',
-                classe: '3ème',
-                telephone: '+237 698 456 789',
-                statutFinancier: 'solvable'
-            },
-            {
-                id: 'MAT005',
-                nom: 'Tankoua',
-                prenom: 'Larissa',
-                classe: '4ème',
-                telephone: '+237 670 567 890',
-                statutFinancier: 'insolvable'
-            },
-            {
-                id: 'MAT006',
-                nom: 'Fofana',
-                prenom: 'Ibrahim',
-                classe: '1ère',
-                telephone: '+237 691 234 567',
-                statutFinancier: 'solvable'
-            }
-        ];
+        let students = [];
+        let editingStudentId = null;
 
         function renderStudents(studentsToRender = students) {
             const grid = document.getElementById('studentsGrid');
             grid.innerHTML = '';
-            
+
             studentsToRender.forEach((student, index) => {
                 const initials = student.prenom.charAt(0) + student.nom.charAt(0);
-                const statusClass = student.statutFinancier === 'solvable' ? 'status-solvable' : 'status-insolvable';
-                const statusText = student.statutFinancier === 'solvable' ? 'Solvable' : 'Insolvable';
-                
+                const statutFinancier = student.statut_financier || student.statutFinancier || 'solvable';
+                const statusClass = statutFinancier === 'solvable' ? 'status-solvable' : 'status-insolvable';
+                const statusText = statutFinancier === 'solvable' ? 'Solvable' : 'Insolvable';
+                const matricule = student.matricule || student.id;
+
                 const card = document.createElement('div');
                 card.className = 'student-card';
                 card.innerHTML = `
@@ -642,7 +596,7 @@
                         <div class="student-info">
                             <div class="student-name">${student.prenom} ${student.nom}</div>
                             <div class="student-class">Classe: ${student.classe}</div>
-                            <div class="student-id">Matricule: ${student.id}</div>
+                            <div class="student-id">Matricule: ${matricule}</div>
                         </div>
                     </div>
                     <div class="student-details">
@@ -669,17 +623,19 @@
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const classFilter = document.getElementById('classFilter').value;
             const statusFilter = document.getElementById('statusFilter').value;
-            
+
             const filtered = students.filter(student => {
-                const matchesSearch = student.nom.toLowerCase().includes(searchTerm) || 
+                const matricule = String(student.matricule || student.id || '');
+                const statutFinancier = student.statut_financier || student.statutFinancier || 'solvable';
+                const matchesSearch = student.nom.toLowerCase().includes(searchTerm) ||
                                     student.prenom.toLowerCase().includes(searchTerm) ||
-                                    student.id.toLowerCase().includes(searchTerm);
+                                    matricule.toLowerCase().includes(searchTerm);
                 const matchesClass = !classFilter || student.classe === classFilter;
-                const matchesStatus = !statusFilter || student.statutFinancier === statusFilter;
-                
+                const matchesStatus = !statusFilter || statutFinancier === statusFilter;
+
                 return matchesSearch && matchesClass && matchesStatus;
             });
-            
+
             renderStudents(filtered);
         }
 
@@ -687,6 +643,7 @@
             document.getElementById('studentModal').classList.add('active');
             document.getElementById('modalTitle').textContent = 'Inscrire un élève';
             document.getElementById('studentForm').reset();
+            editingStudentId = null;
         }
 
         function closeModal() {
@@ -695,39 +652,92 @@
 
         function viewStudent(index) {
             const student = students[index];
-            alert(`Détails de l'élève:\n\nNom: ${student.prenom} ${student.nom}\nMatricule: ${student.id}\nClasse: ${student.classe}\nTéléphone: ${student.telephone}\nStatut: ${student.statutFinancier}`);
+            const matricule = student.matricule || student.id;
+            const statutFinancier = student.statut_financier || student.statutFinancier || 'solvable';
+            alert(`Détails de l'élève:\n\nNom: ${student.prenom} ${student.nom}\nMatricule: ${matricule}\nClasse: ${student.classe}\nTéléphone: ${student.telephone}\nStatut: ${statutFinancier}`);
         }
 
         function editStudent(index) {
-            alert('Fonctionnalité de modification en développement');
+            const student = students[index];
+            if (!student) return;
+            editingStudentId = student.id;
+            document.getElementById('nom').value = student.nom;
+            document.getElementById('prenom').value = student.prenom;
+            document.getElementById('classe').value = student.classe;
+            document.getElementById('telephone').value = student.telephone;
+            document.getElementById('statutFinancier').value = student.statut_financier || student.statutFinancier || 'solvable';
+            document.getElementById('modalTitle').textContent = 'Modifier un élève';
+            document.getElementById('studentModal').classList.add('active');
         }
 
-        function deleteStudent(index) {
+        async function deleteStudent(index) {
+            const student = students[index];
+            if (!student) return;
             if (confirm('Êtes-vous sûr de vouloir supprimer cet élève ?')) {
-                students.splice(index, 1);
-                renderStudents();
+                try {
+                    const response = await fetch(`/api/eleves/${student.id}`, {
+                        method: 'DELETE'
+                    });
+                    if (response.ok) {
+                        await loadStudents();
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors de la suppression');
+                }
             }
         }
 
-        document.getElementById('studentForm').addEventListener('submit', function(e) {
+        async function loadStudents() {
+            try {
+                const response = await fetch('/api/eleves');
+                students = await response.json();
+                renderStudents();
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors du chargement des élèves');
+            }
+        }
+
+        document.getElementById('studentForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const newStudent = {
-                id: 'MAT' + String(students.length + 1).padStart(3, '0'),
                 nom: document.getElementById('nom').value,
                 prenom: document.getElementById('prenom').value,
                 classe: document.getElementById('classe').value,
                 telephone: document.getElementById('telephone').value,
-                statutFinancier: document.getElementById('statutFinancier').value
+                statut_financier: document.getElementById('statutFinancier').value
             };
-            
-            students.push(newStudent);
-            renderStudents();
-            closeModal();
+
+            try {
+                let response;
+                if (editingStudentId) {
+                    response = await fetch(`/api/eleves/${editingStudentId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(newStudent)
+                    });
+                } else {
+                    response = await fetch('/api/eleves', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(newStudent)
+                    });
+                }
+
+                if (response.ok) {
+                    await loadStudents();
+                    closeModal();
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors de l\'enregistrement');
+            }
         });
 
         // Initial render
-        renderStudents();
+        loadStudents();
     </script>
 </body>
 </html>

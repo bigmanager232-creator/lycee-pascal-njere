@@ -375,6 +375,88 @@
             background: var(--color-primary);
             transition: width 0.3s;
         }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 560px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .close-modal {
+            border: none;
+            background: transparent;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: var(--text-primary);
+        }
     </style>
 </head>
 <body>
@@ -431,7 +513,7 @@
                 <h1>💰 Finance (APEE)</h1>
                 <p>Gestion des paiements et relances</p>
             </div>
-            <button class="btn btn-primary" onclick="alert('Enregistrer un paiement')">
+            <button class="btn btn-primary" onclick="openPaymentModal()">
                 ➕ Enregistrer un paiement
             </button>
         </div>
@@ -439,22 +521,22 @@
         <div class="stats-row">
             <div class="stat-card success">
                 <div class="stat-icon" style="background: #d1fae5; color: #10b981;">💰</div>
-                <div class="stat-value">485 000 FCFA</div>
+                <div class="stat-value" id="statTotalPercu">0 FCFA</div>
                 <div class="stat-label">Total perçu</div>
             </div>
             <div class="stat-card warning">
                 <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">⏳</div>
-                <div class="stat-value">125 000 FCFA</div>
+                <div class="stat-value" id="statEnAttente">0 FCFA</div>
                 <div class="stat-label">En attente</div>
             </div>
             <div class="stat-card danger">
                 <div class="stat-icon" style="background: #fee2e2; color: #ef4444;">⚠️</div>
-                <div class="stat-value">67 000 FCFA</div>
+                <div class="stat-value" id="statImpayes">0 FCFA</div>
                 <div class="stat-label">Impayés critiques</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon" style="background: #e0e7ff; color: #4f46e5;">📊</div>
-                <div class="stat-value">79.6%</div>
+                <div class="stat-value" id="statRecouvrement">0%</div>
                 <div class="stat-label">Taux de recouvrement</div>
             </div>
         </div>
@@ -462,11 +544,11 @@
         <div class="filters">
             <div class="filter-group">
                 <label>🔍 Rechercher</label>
-                <input type="text" placeholder="Nom de l'élève...">
+                <input type="text" id="searchInput" placeholder="Nom de l'élève..." onkeyup="filterPayments()">
             </div>
             <div class="filter-group">
                 <label>📚 Classe</label>
-                <select>
+                <select id="classFilter" onchange="filterPayments()">
                     <option value="">Toutes les classes</option>
                     <option value="6eme">6ème</option>
                     <option value="5eme">5ème</option>
@@ -479,7 +561,7 @@
             </div>
             <div class="filter-group">
                 <label>🏷️ Statut</label>
-                <select>
+                <select id="statusFilter" onchange="filterPayments()">
                     <option value="">Tous les statuts</option>
                     <option value="paye">Payé</option>
                     <option value="partiel">Paiement partiel</option>
@@ -502,124 +584,234 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Aissatou Ndongo</td>
-                        <td>1ère</td>
-                        <td class="amount">25 000 FCFA</td>
-                        <td class="amount paid">25 000 FCFA</td>
-                        <td class="amount">0 FCFA</td>
-                        <td>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 100%;"></div>
-                            </div>
-                        </td>
-                        <td><span class="status-badge status-paye">Payé</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn-icon btn-view" title="Voir détails">👁️</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mohamed Kamara</td>
-                        <td>Tle</td>
-                        <td class="amount">30 000 FCFA</td>
-                        <td class="amount paid">30 000 FCFA</td>
-                        <td class="amount">0 FCFA</td>
-                        <td>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 100%;"></div>
-                            </div>
-                        </td>
-                        <td><span class="status-badge status-paye">Payé</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn-icon btn-view" title="Voir détails">👁️</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Grace Mbarga</td>
-                        <td>2nde</td>
-                        <td class="amount">25 000 FCFA</td>
-                        <td class="amount paid">10 000 FCFA</td>
-                        <td class="amount unpaid">15 000 FCFA</td>
-                        <td>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 40%;"></div>
-                            </div>
-                        </td>
-                        <td><span class="status-badge status-partiel">Partiel</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn-icon btn-view" title="Voir détails">👁️</button>
-                                <button class="btn-icon btn-pay" title="Enregistrer paiement">💳</button>
-                                <button class="btn-icon btn-remind" title="Envoyer relance">📧</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ousmane Diop</td>
-                        <td>3ème</td>
-                        <td class="amount">20 000 FCFA</td>
-                        <td class="amount paid">20 000 FCFA</td>
-                        <td class="amount">0 FCFA</td>
-                        <td>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 100%;"></div>
-                            </div>
-                        </td>
-                        <td><span class="status-badge status-paye">Payé</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn-icon btn-view" title="Voir détails">👁️</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Larissa Tankoua</td>
-                        <td>4ème</td>
-                        <td class="amount">20 000 FCFA</td>
-                        <td class="amount paid">0 FCFA</td>
-                        <td class="amount unpaid">20 000 FCFA</td>
-                        <td>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 0%;"></div>
-                            </div>
-                        </td>
-                        <td><span class="status-badge status-impaye">Impayé</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn-icon btn-view" title="Voir détails">👁️</button>
-                                <button class="btn-icon btn-pay" title="Enregistrer paiement">💳</button>
-                                <button class="btn-icon btn-remind" title="Envoyer relance">📧</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ibrahim Fofana</td>
-                        <td>1ère</td>
-                        <td class="amount">25 000 FCFA</td>
-                        <td class="amount paid">15 000 FCFA</td>
-                        <td class="amount unpaid">10 000 FCFA</td>
-                        <td>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 60%;"></div>
-                            </div>
-                        </td>
-                        <td><span class="status-badge status-partiel">Partiel</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn-icon btn-view" title="Voir détails">👁️</button>
-                                <button class="btn-icon btn-pay" title="Enregistrer paiement">💳</button>
-                                <button class="btn-icon btn-remind" title="Envoyer relance">📧</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody id="paymentsBody"></tbody>
             </table>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="paymentModalTitle">Enregistrer un paiement</h2>
+                <button class="close-modal" onclick="closePaymentModal()">✕</button>
+            </div>
+            <form id="paymentForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Élève *</label>
+                        <input type="text" id="paymentEleve" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Classe *</label>
+                        <select id="paymentClasse" required>
+                            <option value="">Sélectionner</option>
+                            <option value="6eme">6ème</option>
+                            <option value="5eme">5ème</option>
+                            <option value="4eme">4ème</option>
+                            <option value="3eme">3ème</option>
+                            <option value="2nde">2nde</option>
+                            <option value="1ere">1ère</option>
+                            <option value="tle">Terminale</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Montant dû (FCFA) *</label>
+                        <input type="number" id="paymentTotal" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Montant payé (FCFA) *</label>
+                        <input type="number" id="paymentPaid" min="0" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closePaymentModal()">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let payments = [];
+        let editingPaymentId = null;
+
+        function formatCurrency(amount) {
+            return `${Number(amount || 0).toLocaleString('fr-FR')} FCFA`;
+        }
+
+        function computeStatus(total, paid) {
+            if (paid >= total && total > 0) return 'paye';
+            if (paid > 0) return 'partiel';
+            return 'impaye';
+        }
+
+        function statusLabel(status) {
+            if (status === 'paye') return { text: 'Payé', className: 'status-paye' };
+            if (status === 'partiel') return { text: 'Partiel', className: 'status-partiel' };
+            return { text: 'Impayé', className: 'status-impaye' };
+        }
+
+        function updateStats() {
+            const totalDu = payments.reduce((sum, p) => sum + Number(p.montant_total || p.montantTotal || 0), 0);
+            const totalPaye = payments.reduce((sum, p) => sum + Number(p.montant_paye || p.montantPaye || 0), 0);
+            const totalReste = Math.max(0, totalDu - totalPaye);
+            const impayesCritiques = payments
+                .filter(p => Number(p.montant_paye || p.montantPaye || 0) === 0)
+                .reduce((sum, p) => sum + Number(p.montant_total || p.montantTotal || 0), 0);
+            const taux = totalDu > 0 ? Math.round((totalPaye / totalDu) * 100) : 0;
+
+            document.getElementById('statTotalPercu').textContent = formatCurrency(totalPaye);
+            document.getElementById('statEnAttente').textContent = formatCurrency(totalReste);
+            document.getElementById('statImpayes').textContent = formatCurrency(impayesCritiques);
+            document.getElementById('statRecouvrement').textContent = `${taux}%`;
+        }
+
+        function renderPayments(list = payments) {
+            const tbody = document.getElementById('paymentsBody');
+            tbody.innerHTML = '';
+
+            list.forEach((payment, index) => {
+                const total = Number(payment.montant_total || payment.montantTotal || 0);
+                const paid = Number(payment.montant_paye || payment.montantPaye || 0);
+                const restant = Math.max(0, total - paid);
+                const progress = total > 0 ? Math.min(100, Math.round((paid / total) * 100)) : 0;
+                const status = statusLabel(computeStatus(total, paid));
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${payment.eleve}</td>
+                    <td>${payment.classe}</td>
+                    <td class="amount">${formatCurrency(total)}</td>
+                    <td class="amount paid">${formatCurrency(paid)}</td>
+                    <td class="amount ${restant > 0 ? 'unpaid' : ''}">${formatCurrency(restant)}</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progress}%;"></div>
+                        </div>
+                    </td>
+                    <td><span class="status-badge ${status.className}">${status.text}</span></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-icon btn-view" title="Voir détails" onclick="viewPayment(${index})">👁️</button>
+                            <button class="btn-icon btn-pay" title="Modifier" onclick="editPayment(${index})">✏️</button>
+                            <button class="btn-icon btn-remind" title="Supprimer" onclick="deletePayment(${index})">🗑️</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+            updateStats();
+        }
+
+        function filterPayments() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const classFilter = document.getElementById('classFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+
+            const filtered = payments.filter(payment => {
+                const total = Number(payment.montant_total || payment.montantTotal || 0);
+                const paid = Number(payment.montant_paye || payment.montantPaye || 0);
+                const status = computeStatus(total, paid);
+                const matchesSearch = payment.eleve.toLowerCase().includes(searchTerm);
+                const matchesClass = !classFilter || payment.classe === classFilter;
+                const matchesStatus = !statusFilter || status === statusFilter;
+                return matchesSearch && matchesClass && matchesStatus;
+            });
+
+            renderPayments(filtered);
+        }
+
+        function openPaymentModal() {
+            editingPaymentId = null;
+            document.getElementById('paymentModalTitle').textContent = 'Enregistrer un paiement';
+            document.getElementById('paymentForm').reset();
+            document.getElementById('paymentModal').classList.add('active');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+        }
+
+        function viewPayment(index) {
+            const payment = payments[index];
+            alert(`Paiement:\n\nÉlève: ${payment.eleve}\nClasse: ${payment.classe}\nMontant dû: ${formatCurrency(payment.montant_total || payment.montantTotal)}\nMontant payé: ${formatCurrency(payment.montant_paye || payment.montantPaye)}`);
+        }
+
+        function editPayment(index) {
+            const payment = payments[index];
+            editingPaymentId = payment.id;
+            document.getElementById('paymentEleve').value = payment.eleve;
+            document.getElementById('paymentClasse').value = payment.classe;
+            document.getElementById('paymentTotal').value = payment.montant_total || payment.montantTotal || 0;
+            document.getElementById('paymentPaid').value = payment.montant_paye || payment.montantPaye || 0;
+            document.getElementById('paymentModalTitle').textContent = 'Modifier un paiement';
+            document.getElementById('paymentModal').classList.add('active');
+        }
+
+        async function deletePayment(index) {
+            const payment = payments[index];
+            if (!payment) return;
+            if (confirm('Supprimer ce paiement ?')) {
+                try {
+                    const response = await fetch(`/api/finances/${payment.id}`, { method: 'DELETE' });
+                    if (response.ok) {
+                        await loadPayments();
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors de la suppression');
+                }
+            }
+        }
+
+        async function loadPayments() {
+            try {
+                const response = await fetch('/api/finances');
+                payments = await response.json();
+                renderPayments();
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors du chargement des paiements');
+            }
+        }
+
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const payload = {
+                eleve: document.getElementById('paymentEleve').value,
+                classe: document.getElementById('paymentClasse').value,
+                montant_total: Number(document.getElementById('paymentTotal').value),
+                montant_paye: Number(document.getElementById('paymentPaid').value)
+            };
+
+            try {
+                let response;
+                if (editingPaymentId) {
+                    response = await fetch(`/api/finances/${editingPaymentId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                } else {
+                    response = await fetch('/api/finances', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                }
+
+                if (response.ok) {
+                    await loadPayments();
+                    closePaymentModal();
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors de l\'enregistrement');
+            }
+        });
+
+        loadPayments();
+    </script>
 </body>
 </html>

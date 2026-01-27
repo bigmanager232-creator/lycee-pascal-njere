@@ -428,11 +428,25 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>👤 Élève *</label>
+                        <input type="text" id="eleve" required>
+                    </div>
+                    <div class="form-group">
+                        <label>📊 Moyenne (/20) *</label>
+                        <input type="number" id="moyenne" min="0" max="20" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>🏆 Rang *</label>
+                        <input type="text" id="rang" placeholder="2ème/32" required>
+                    </div>
+                </div>
                 <div class="btn-group">
                     <button type="submit" class="btn btn-primary">
                         📄 Générer les bulletins
                     </button>
-                    <button type="button" class="btn" style="background: #f3f4f6; color: var(--text-primary);" onclick="alert('Aperçu en développement')">
+                    <button type="button" class="btn" style="background: #f3f4f6; color: var(--text-primary);" onclick="previewBulletin()">
                         👁️ Aperçu
                     </button>
                 </div>
@@ -441,189 +455,171 @@
 
         <div class="bulletins-list">
             <h2 class="list-title">📚 Bulletins générés</h2>
-            
-            <div class="bulletin-card">
-                <div class="bulletin-info">
-                    <div class="bulletin-name">
-                        Aissatou Ndongo
-                        <span class="moyenne-badge moyenne-excellent">Moyenne: 16.5/20</span>
-                    </div>
-                    <div class="bulletin-details">
-                        <div class="detail-item">
-                            <span>📚</span>
-                            <span>1ère Scientifique</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>📅</span>
-                            <span>2ème Trimestre 2025-2026</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>🏆</span>
-                            <span>Rang: 2ème/32</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bulletin-actions">
-                    <button class="btn-icon btn-view" title="Voir">👁️</button>
-                    <button class="btn-icon btn-download" title="Télécharger">💾</button>
-                    <button class="btn-icon btn-print" title="Imprimer">🖨️</button>
-                </div>
-            </div>
-
-            <div class="bulletin-card">
-                <div class="bulletin-info">
-                    <div class="bulletin-name">
-                        Mohamed Kamara
-                        <span class="moyenne-badge moyenne-excellent">Moyenne: 17.2/20</span>
-                    </div>
-                    <div class="bulletin-details">
-                        <div class="detail-item">
-                            <span>📚</span>
-                            <span>Terminale Scientifique</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>📅</span>
-                            <span>2ème Trimestre 2025-2026</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>🏆</span>
-                            <span>Rang: 1er/28</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bulletin-actions">
-                    <button class="btn-icon btn-view" title="Voir">👁️</button>
-                    <button class="btn-icon btn-download" title="Télécharger">💾</button>
-                    <button class="btn-icon btn-print" title="Imprimer">🖨️</button>
-                </div>
-            </div>
-
-            <div class="bulletin-card">
-                <div class="bulletin-info">
-                    <div class="bulletin-name">
-                        Grace Mbarga
-                        <span class="moyenne-badge moyenne-bien">Moyenne: 13.8/20</span>
-                    </div>
-                    <div class="bulletin-details">
-                        <div class="detail-item">
-                            <span>📚</span>
-                            <span>2nde</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>📅</span>
-                            <span>2ème Trimestre 2025-2026</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>🏆</span>
-                            <span>Rang: 8ème/35</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bulletin-actions">
-                    <button class="btn-icon btn-view" title="Voir">👁️</button>
-                    <button class="btn-icon btn-download" title="Télécharger">💾</button>
-                    <button class="btn-icon btn-print" title="Imprimer">🖨️</button>
-                </div>
-            </div>
-
-            <div class="bulletin-card">
-                <div class="bulletin-info">
-                    <div class="bulletin-name">
-                        Ousmane Diop
-                        <span class="moyenne-badge moyenne-passable">Moyenne: 11.5/20</span>
-                    </div>
-                    <div class="bulletin-details">
-                        <div class="detail-item">
-                            <span>📚</span>
-                            <span>3ème</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>📅</span>
-                            <span>2ème Trimestre 2025-2026</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>🏆</span>
-                            <span>Rang: 15ème/30</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bulletin-actions">
-                    <button class="btn-icon btn-view" title="Voir">👁️</button>
-                    <button class="btn-icon btn-download" title="Télécharger">💾</button>
-                    <button class="btn-icon btn-print" title="Imprimer">🖨️</button>
-                </div>
-            </div>
-
-            <div class="bulletin-card">
-                <div class="bulletin-info">
-                    <div class="bulletin-name">
-                        Larissa Tankoua
-                        <span class="moyenne-badge moyenne-faible">Moyenne: 9.2/20</span>
-                    </div>
-                    <div class="bulletin-details">
-                        <div class="detail-item">
-                            <span>📚</span>
-                            <span>4ème</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>📅</span>
-                            <span>2ème Trimestre 2025-2026</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>🏆</span>
-                            <span>Rang: 22ème/28</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bulletin-actions">
-                    <button class="btn-icon btn-view" title="Voir">👁️</button>
-                    <button class="btn-icon btn-download" title="Télécharger">💾</button>
-                    <button class="btn-icon btn-print" title="Imprimer">🖨️</button>
-                </div>
-            </div>
-
-            <div class="bulletin-card">
-                <div class="bulletin-info">
-                    <div class="bulletin-name">
-                        Ibrahim Fofana
-                        <span class="moyenne-badge moyenne-bien">Moyenne: 14.7/20</span>
-                    </div>
-                    <div class="bulletin-details">
-                        <div class="detail-item">
-                            <span>📚</span>
-                            <span>1ère Scientifique</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>📅</span>
-                            <span>2ème Trimestre 2025-2026</span>
-                        </div>
-                        <div class="detail-item">
-                            <span>🏆</span>
-                            <span>Rang: 5ème/32</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bulletin-actions">
-                    <button class="btn-icon btn-view" title="Voir">👁️</button>
-                    <button class="btn-icon btn-download" title="Télécharger">💾</button>
-                    <button class="btn-icon btn-print" title="Imprimer">🖨️</button>
-                </div>
-            </div>
+            <div id="bulletinsList"></div>
         </div>
     </div>
 
     <script>
-        document.getElementById('bulletinForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
+        let bulletins = [];
+        let editingBulletinId = null;
+
+        function formatPeriode(value) {
+            const map = {
+                trim1: '1er Trimestre',
+                trim2: '2ème Trimestre',
+                trim3: '3ème Trimestre',
+                annuel: 'Annuel'
+            };
+            return map[value] || value;
+        }
+
+        function moyenneClass(value) {
+            const moyenne = Number(value);
+            if (moyenne >= 16) return 'moyenne-excellent';
+            if (moyenne >= 14) return 'moyenne-bien';
+            if (moyenne >= 10) return 'moyenne-passable';
+            return 'moyenne-faible';
+        }
+
+        function renderBulletins() {
+            const container = document.getElementById('bulletinsList');
+            container.innerHTML = '';
+
+            bulletins.forEach((bulletin, index) => {
+                const moyenneBadge = moyenneClass(bulletin.moyenne);
+                const card = document.createElement('div');
+                card.className = 'bulletin-card';
+                card.innerHTML = `
+                    <div class="bulletin-info">
+                        <div class="bulletin-name">
+                            ${bulletin.eleve}
+                            <span class="moyenne-badge ${moyenneBadge}">Moyenne: ${bulletin.moyenne}/20</span>
+                        </div>
+                        <div class="bulletin-details">
+                            <div class="detail-item">
+                                <span>📚</span>
+                                <span>${bulletin.classe}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>📅</span>
+                                <span>${formatPeriode(bulletin.periode)} ${bulletin.annee}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>🏆</span>
+                                <span>Rang: ${bulletin.rang}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bulletin-actions">
+                        <button class="btn-icon btn-view" title="Voir" onclick="viewBulletin(${index})">👁️</button>
+                        <button class="btn-icon btn-download" title="Modifier" onclick="editBulletin(${index})">✏️</button>
+                        <button class="btn-icon btn-print" title="Supprimer" onclick="deleteBulletin(${index})">🗑️</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        async function loadBulletins() {
+            try {
+                const response = await fetch('/api/bulletins');
+                bulletins = await response.json();
+                renderBulletins();
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors du chargement des bulletins');
+            }
+        }
+
+        function previewBulletin() {
             const classe = document.getElementById('classe').value;
             const periode = document.getElementById('periode').value;
             const annee = document.getElementById('annee').value;
-            
-            if (classe && periode && annee) {
-                alert(`Génération des bulletins pour:\nClasse: ${classe}\nPériode: ${periode}\nAnnée: ${annee}\n\nLes bulletins sont en cours de génération...`);
+            const eleve = document.getElementById('eleve').value;
+            const moyenne = document.getElementById('moyenne').value;
+            const rang = document.getElementById('rang').value;
+
+            if (!classe || !periode || !annee || !eleve || !moyenne || !rang) {
+                alert('Veuillez renseigner tous les champs pour l\'aperçu.');
+                return;
+            }
+
+            alert(`Aperçu du bulletin:\n\nÉlève: ${eleve}\nClasse: ${classe}\nPériode: ${formatPeriode(periode)}\nAnnée: ${annee}\nMoyenne: ${moyenne}/20\nRang: ${rang}`);
+        }
+
+        function viewBulletin(index) {
+            const bulletin = bulletins[index];
+            alert(`Bulletin:\n\nÉlève: ${bulletin.eleve}\nClasse: ${bulletin.classe}\nPériode: ${formatPeriode(bulletin.periode)}\nAnnée: ${bulletin.annee}\nMoyenne: ${bulletin.moyenne}/20\nRang: ${bulletin.rang}`);
+        }
+
+        function editBulletin(index) {
+            const bulletin = bulletins[index];
+            editingBulletinId = bulletin.id;
+            document.getElementById('classe').value = bulletin.classe;
+            document.getElementById('periode').value = bulletin.periode;
+            document.getElementById('annee').value = bulletin.annee;
+            document.getElementById('eleve').value = bulletin.eleve;
+            document.getElementById('moyenne').value = bulletin.moyenne;
+            document.getElementById('rang').value = bulletin.rang;
+            document.getElementById('eleve').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        async function deleteBulletin(index) {
+            const bulletin = bulletins[index];
+            if (!bulletin) return;
+            if (confirm('Supprimer ce bulletin ?')) {
+                try {
+                    const response = await fetch(`/api/bulletins/${bulletin.id}`, { method: 'DELETE' });
+                    if (response.ok) {
+                        await loadBulletins();
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors de la suppression');
+                }
+            }
+        }
+
+        document.getElementById('bulletinForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const payload = {
+                classe: document.getElementById('classe').value,
+                periode: document.getElementById('periode').value,
+                annee: document.getElementById('annee').value,
+                eleve: document.getElementById('eleve').value,
+                moyenne: Number(document.getElementById('moyenne').value),
+                rang: document.getElementById('rang').value
+            };
+
+            try {
+                let response;
+                if (editingBulletinId) {
+                    response = await fetch(`/api/bulletins/${editingBulletinId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                } else {
+                    response = await fetch('/api/bulletins', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                }
+
+                if (response.ok) {
+                    editingBulletinId = null;
+                    document.getElementById('bulletinForm').reset();
+                    await loadBulletins();
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors de l\'enregistrement');
             }
         });
+
+        loadBulletins();
     </script>
 </body>
 </html>
