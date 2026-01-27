@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -6,580 +6,178 @@
     <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Finance (APEE)</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
-            --bg-primary: #f8f9fc;
-            --bg-card: #ffffff;
-            --text-primary: #1a1d29;
-            --text-secondary: #6b7280;
-            --border-color: #e5e7eb;
-            --color-primary: #10b981;
-            --color-primary-light: #d1fae5;
-            --color-danger: #ef4444;
-            --color-warning: #f59e0b;
+            --bg: #f6f7fb;
+            --card: #ffffff;
+            --text: #101828;
+            --muted: #667085;
+            --border: #e4e7ec;
+            --primary: #10b981;
+            --primary-soft: #d1fae5;
+            --warning: #f59e0b;
+            --danger: #ef4444;
         }
 
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            display: flex;
-            min-height: 100vh;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); }
 
+        .layout { display: flex; min-height: 100vh; }
         .sidebar {
             width: 260px;
-            background: var(--bg-card);
-            border-right: 1px solid var(--border-color);
-            padding: 24px 0;
-            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.03);
+            background: var(--card);
+            border-right: 1px solid var(--border);
+            padding: 24px 18px;
         }
+        .logo { display: flex; gap: 12px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+        .logo-icon { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #6366f1, #4338ca); color: #fff; display: grid; place-items: center; font-size: 20px; }
+        .logo-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; }
+        .logo-subtitle { font-size: 12px; color: var(--muted); }
+        .nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 6px; text-decoration: none; color: var(--muted); border-radius: 10px; font-weight: 500; transition: 0.2s; }
+        .nav-link:hover, .nav-link.active { background: var(--primary-soft); color: #047857; }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0 24px 32px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 24px;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 20px;
-        }
-
-        .logo-text {
-            font-family: 'Sora', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .nav-menu {
-            list-style: none;
-        }
-
-        .nav-item {
-            margin: 4px 0;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 24px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .nav-link:hover {
-            background: rgba(99, 102, 241, 0.06);
-            color: #6366f1;
-        }
-
-        .nav-link.active {
-            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
-            color: #6366f1;
-            border-right: 3px solid #6366f1;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 32px 48px;
-            overflow-y: auto;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
-        }
-
-        .header-left h1 {
-            font-family: 'Sora', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .header-left p {
-            color: var(--text-secondary);
-            font-size: 15px;
-        }
-
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-        }
-
-        .stat-card.success::before {
-            background: var(--color-primary);
-        }
-
-        .stat-card.warning::before {
-            background: var(--color-warning);
-        }
-
-        .stat-card.danger::before {
-            background: var(--color-danger);
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 12px;
-        }
-
-        .stat-value {
-            font-family: 'Sora', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .filters {
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        .filter-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-
-        .filter-group input,
-        .filter-group select {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: 'Outfit', sans-serif;
-            outline: none;
-        }
+        .content { flex: 1; padding: 32px 40px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .header h1 { font-family: 'Sora', sans-serif; font-size: 26px; }
+        .header p { color: var(--muted); margin-top: 4px; }
 
         .btn {
-            padding: 12px 24px;
+            padding: 10px 16px;
             border-radius: 10px;
             border: none;
-            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            background: var(--primary);
+            color: #fff;
         }
 
-        .btn-primary {
-            background: var(--color-primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #059669;
-            transform: translateY(-2px);
-        }
-
-        .payments-table {
-            background: white;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        thead {
-            background: #f9fafb;
-        }
-
-        th {
-            text-align: left;
-            padding: 16px 20px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        td {
-            padding: 16px 20px;
-            border-top: 1px solid var(--border-color);
-            font-size: 15px;
-        }
-
-        tbody tr {
-            transition: background 0.2s;
-        }
-
-        tbody tr:hover {
-            background: #f9fafb;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .status-paye {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .status-partiel {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .status-impaye {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .amount {
-            font-family: 'Sora', sans-serif;
-            font-weight: 700;
-        }
-
-        .amount.paid {
-            color: var(--color-primary);
-        }
-
-        .amount.unpaid {
-            color: var(--color-danger);
-        }
-
-        .action-btns {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            transition: all 0.2s;
-        }
-
-        .btn-view {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .btn-view:hover {
-            background: #3b82f6;
-            color: white;
-        }
-
-        .btn-pay {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .btn-pay:hover {
-            background: #10b981;
-            color: white;
-        }
-
-        .btn-remind {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .btn-remind:hover {
-            background: #f59e0b;
-            color: white;
-        }
-
-        .progress-bar {
-            width: 100px;
-            height: 8px;
-            background: #f3f4f6;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--color-primary);
-            transition: width 0.3s;
-        }
-
-        /* Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.45);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            width: 100%;
-            max-width: 560px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
             margin-bottom: 16px;
         }
+        .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
+        .stat-title { font-size: 12px; color: var(--muted); }
+        .stat-value { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; margin-top: 4px; }
 
-        .modal-header h2 {
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        .close-modal {
-            border: none;
-            background: transparent;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .form-grid {
+        .filters {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 12px;
-            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+        .filters label { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: block; }
+        .filters input, .filters select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-family: inherit;
         }
 
-        .btn-secondary {
-            background: #f3f4f6;
-            color: var(--text-primary);
+        table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+        thead { background: #f9fafb; }
+        th, td { text-align: left; padding: 14px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
+        th { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+        tr:last-child td { border-bottom: none; }
+
+        .badge { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; display: inline-flex; }
+        .badge-ok { background: #d1fae5; color: #065f46; }
+        .badge-warn { background: #fef3c7; color: #92400e; }
+        .badge-bad { background: #fee2e2; color: #991b1b; }
+
+        .progress { width: 100px; height: 8px; background: #f2f4f7; border-radius: 999px; overflow: hidden; }
+        .progress span { display: block; height: 100%; background: var(--primary); }
+
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            .sidebar { width: 100%; }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
-            <div class="logo-icon">ðŸŽ“</div>
-            <div class="logo-text">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
-        </div>
-        
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="/" class="nav-link">
-                    <span>ðŸ“Š</span> Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/personnel.html" class="nav-link">
-                    <span>ðŸ‘¥</span> Personnel
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/eleves.html" class="nav-link">
-                    <span>ðŸŽ“</span> Ã‰lÃ¨ves
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/emploi-temps.html" class="nav-link">
-                    <span>ðŸ“…</span> Emploi du Temps
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/absences.html" class="nav-link">
-                    <span>ðŸ“‹</span> Absences
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/finance.html" class="nav-link active">
-                    <span>ðŸ’°</span> Finance (APEE)
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/bulletins.html" class="nav-link">
-                    <span>ðŸ“„</span> Bulletins
-                </a>
-            </li>
-        </ul>
-    </div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">ðŸŽ“</div>
+                <div>
+                    <div class="logo-title">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
+                    <div class="logo-subtitle">SystÃ¨me de gestion</div>
+                </div>
+            </div>
+            <a class="nav-link" href="/">ðŸ“Š Dashboard</a>
+            <a class="nav-link" href="/personnel.html">ðŸ‘¥ Personnel</a>
+            <a class="nav-link" href="/eleves.html">ðŸŽ“ Ã‰lÃ¨ves</a>
+            <a class="nav-link" href="/emploi-temps.html">ðŸ“… Emploi du temps</a>
+            <a class="nav-link" href="/absences.html">ðŸ“‹ Absences</a>
+            <a class="nav-link active" href="/finance.html">ðŸ’° Finance (APEE)</a>
+            <a class="nav-link" href="/bulletins.html">ðŸ“„ Bulletins</a>
+        </aside>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="header">
-            <div class="header-left">
-                <h1>ðŸ’° Finance (APEE)</h1>
-                <p>Gestion des paiements et relances</p>
+        <main class="content">
+            <div class="header">
+                <div>
+                    <h1>Finance (APEE)</h1>
+                    <p>Suivi des paiements et relances.</p>
+                </div>
+                <button class="btn" onclick="alert('Enregistrement Ã  venir')">âž• Enregistrer un paiement</button>
             </div>
-            <button class="btn btn-primary" onclick="openPaymentModal()">
-                âž• Enregistrer un paiement
-            </button>
-        </div>
 
-        <div class="stats-row">
-            <div class="stat-card success">
-                <div class="stat-icon" style="background: #d1fae5; color: #10b981;">ðŸ’°</div>
-                <div class="stat-value" id="statTotalPercu">0 FCFA</div>
-                <div class="stat-label">Total perÃ§u</div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-title">Total perÃ§u</div>
+                    <div class="stat-value">485 000 FCFA</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">En attente</div>
+                    <div class="stat-value">125 000 FCFA</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">ImpayÃ©s critiques</div>
+                    <div class="stat-value">67 000 FCFA</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Taux de recouvrement</div>
+                    <div class="stat-value">79,6 %</div>
+                </div>
             </div>
-            <div class="stat-card warning">
-                <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">â³</div>
-                <div class="stat-value" id="statEnAttente">0 FCFA</div>
-                <div class="stat-label">En attente</div>
-            </div>
-            <div class="stat-card danger">
-                <div class="stat-icon" style="background: #fee2e2; color: #ef4444;">âš ï¸</div>
-                <div class="stat-value" id="statImpayes">0 FCFA</div>
-                <div class="stat-label">ImpayÃ©s critiques</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon" style="background: #e0e7ff; color: #4f46e5;">ðŸ“Š</div>
-                <div class="stat-value" id="statRecouvrement">0%</div>
-                <div class="stat-label">Taux de recouvrement</div>
-            </div>
-        </div>
 
-        <div class="filters">
-            <div class="filter-group">
-                <label>ðŸ” Rechercher</label>
-                <input type="text" id="searchInput" placeholder="Nom de l'Ã©lÃ¨ve..." onkeyup="filterPayments()">
+            <div class="filters">
+                <div>
+                    <label>Recherche</label>
+                    <input type="text" placeholder="Nom de l'Ã©lÃ¨ve">
+                </div>
+                <div>
+                    <label>Classe</label>
+                    <select>
+                        <option value="">Toutes</option>
+                        <option>6Ã¨me</option>
+                        <option>5Ã¨me</option>
+                        <option>4Ã¨me</option>
+                        <option>3Ã¨me</option>
+                        <option>2nde</option>
+                        <option>1Ã¨re</option>
+                        <option>Terminale</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Statut</label>
+                    <select>
+                        <option value="">Tous</option>
+                        <option>PayÃ©</option>
+                        <option>Partiel</option>
+                        <option>ImpayÃ©</option>
+                    </select>
+                </div>
             </div>
-            <div class="filter-group">
-                <label>ðŸ“š Classe</label>
-                <select id="classFilter" onchange="filterPayments()">
-                    <option value="">Toutes les classes</option>
-                    <option value="6e">6e</option>
-                    <option value="5e">5e</option>
-                    <option value="4e">4e</option>
-                    <option value="3e">3e</option>
-                    <option value="2nde">2nde</option>
-                    <option value="1Ã¨re">1Ã¨re</option>
-                    <option value="Tle">Tle</option>
-                    <option value="F1">F1</option>
-                    <option value="F2">F2</option>
-                    <option value="F3">F3</option>
-                    <option value="F4">F4</option>
-                    <option value="F5">F5</option>
-                    <option value="LSA">LSA</option>
-                    <option value="UPSA">UPSA</option>
-                    <option value="LSS">LSS</option>
-                    <option value="UPSS">UPSS</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>ðŸ·ï¸ Statut</label>
-                <select id="statusFilter" onchange="filterPayments()">
-                    <option value="">Tous les statuts</option>
-                    <option value="paye">PayÃ©</option>
-                    <option value="partiel">Paiement partiel</option>
-                    <option value="impaye">ImpayÃ©</option>
-                </select>
-            </div>
-        </div>
 
-        <div class="payments-table">
             <table>
                 <thead>
                     <tr>
@@ -590,301 +188,39 @@
                         <th>Reste</th>
                         <th>Progression</th>
                         <th>Statut</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="paymentsBody"></tbody>
+                <tbody>
+                    <tr>
+                        <td>Aissatou Ndongo</td>
+                        <td>1Ã¨re</td>
+                        <td>25 000 FCFA</td>
+                        <td>25 000 FCFA</td>
+                        <td>0 FCFA</td>
+                        <td><div class="progress"><span style="width: 100%;"></span></div></td>
+                        <td><span class="badge badge-ok">PayÃ©</span></td>
+                    </tr>
+                    <tr>
+                        <td>Grace Mbarga</td>
+                        <td>2nde</td>
+                        <td>25 000 FCFA</td>
+                        <td>10 000 FCFA</td>
+                        <td>15 000 FCFA</td>
+                        <td><div class="progress"><span style="width: 40%;"></span></div></td>
+                        <td><span class="badge badge-warn">Partiel</span></td>
+                    </tr>
+                    <tr>
+                        <td>Larissa Tankoua</td>
+                        <td>4Ã¨me</td>
+                        <td>20 000 FCFA</td>
+                        <td>0 FCFA</td>
+                        <td>20 000 FCFA</td>
+                        <td><div class="progress"><span style="width: 0%;"></span></div></td>
+                        <td><span class="badge badge-bad">ImpayÃ©</span></td>
+                    </tr>
+                </tbody>
             </table>
-        </div>
+        </main>
     </div>
-
-    <!-- Modal -->
-    <div class="modal" id="paymentModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="paymentModalTitle">Enregistrer un paiement</h2>
-                <button class="close-modal" onclick="closePaymentModal()">âœ•</button>
-            </div>
-            <form id="paymentForm">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Ã‰lÃ¨ve *</label>
-                        <input type="text" id="paymentEleve" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Classe *</label>
-                        <select id="paymentClasse" required>
-                            <option value="">SÃ©lectionner</option>
-                            <option value="6e">6e</option>
-                            <option value="5e">5e</option>
-                            <option value="4e">4e</option>
-                            <option value="3e">3e</option>
-                            <option value="2nde">2nde</option>
-                            <option value="1Ã¨re">1Ã¨re</option>
-                            <option value="Tle">Tle</option>
-                            <option value="F1">F1</option>
-                            <option value="F2">F2</option>
-                            <option value="F3">F3</option>
-                            <option value="F4">F4</option>
-                            <option value="F5">F5</option>
-                            <option value="LSA">LSA</option>
-                            <option value="UPSA">UPSA</option>
-                            <option value="LSS">LSS</option>
-                            <option value="UPSS">UPSS</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Montant dÃ» (FCFA) *</label>
-                        <input type="number" id="paymentTotal" min="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Montant payÃ© (FCFA) *</label>
-                        <input type="number" id="paymentPaid" min="0" required>
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closePaymentModal()">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="modal" id="receiptModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>ReÃ§u de paiement</h2>
-                <button class="close-modal" onclick="closeReceiptModal()">âœ•</button>
-            </div>
-            <div id="receiptContent" style="padding: 16px; border: 1px dashed #e5e7eb; border-radius: 12px;">
-                <h3 style="text-align: center; margin-bottom: 16px;">LycÃ©e Pascal NjÃ¨rÃ¨ IV</h3>
-                <p><strong>Ã‰lÃ¨ve:</strong> <span id="receiptEleve"></span></p>
-                <p><strong>Classe:</strong> <span id="receiptClasse"></span></p>
-                <p><strong>Montant dÃ»:</strong> <span id="receiptTotal"></span></p>
-                <p><strong>Montant payÃ©:</strong> <span id="receiptPaid"></span></p>
-                <p><strong>Reste:</strong> <span id="receiptReste"></span></p>
-                <p><strong>Date:</strong> <span id="receiptDate"></span></p>
-                <div style="margin-top: 32px; display: flex; justify-content: space-between;">
-                    <div>
-                        <p>Signature intendant</p>
-                        <div style="margin-top: 24px; border-top: 1px solid #111827; width: 180px;"></div>
-                    </div>
-                    <div>
-                        <p>Cachet</p>
-                        <div style="margin-top: 24px; border: 1px solid #111827; width: 80px; height: 80px;"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-actions">
-                <button type="button" class="btn btn-secondary" onclick="closeReceiptModal()">Fermer</button>
-                <button type="button" class="btn btn-primary" onclick="printReceipt()">Imprimer</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let payments = [];
-        let editingPaymentId = null;
-
-        function formatCurrency(amount) {
-            return `${Number(amount || 0).toLocaleString('fr-FR')} FCFA`;
-        }
-
-        function computeStatus(total, paid) {
-            if (paid >= total && total > 0) return 'paye';
-            if (paid > 0) return 'partiel';
-            return 'impaye';
-        }
-
-        function statusLabel(status) {
-            if (status === 'paye') return { text: 'PayÃ©', className: 'status-paye' };
-            if (status === 'partiel') return { text: 'Partiel', className: 'status-partiel' };
-            return { text: 'ImpayÃ©', className: 'status-impaye' };
-        }
-
-        function updateStats() {
-            const totalDu = payments.reduce((sum, p) => sum + Number(p.montant_total || p.montantTotal || 0), 0);
-            const totalPaye = payments.reduce((sum, p) => sum + Number(p.montant_paye || p.montantPaye || 0), 0);
-            const totalReste = Math.max(0, totalDu - totalPaye);
-            const impayesCritiques = payments
-                .filter(p => Number(p.montant_paye || p.montantPaye || 0) === 0)
-                .reduce((sum, p) => sum + Number(p.montant_total || p.montantTotal || 0), 0);
-            const taux = totalDu > 0 ? Math.round((totalPaye / totalDu) * 100) : 0;
-
-            document.getElementById('statTotalPercu').textContent = formatCurrency(totalPaye);
-            document.getElementById('statEnAttente').textContent = formatCurrency(totalReste);
-            document.getElementById('statImpayes').textContent = formatCurrency(impayesCritiques);
-            document.getElementById('statRecouvrement').textContent = `${taux}%`;
-        }
-
-        function renderPayments(list = payments) {
-            const tbody = document.getElementById('paymentsBody');
-            tbody.innerHTML = '';
-
-            list.forEach((payment, index) => {
-                const total = Number(payment.montant_total || payment.montantTotal || 0);
-                const paid = Number(payment.montant_paye || payment.montantPaye || 0);
-                const restant = Math.max(0, total - paid);
-                const progress = total > 0 ? Math.min(100, Math.round((paid / total) * 100)) : 0;
-                const status = statusLabel(computeStatus(total, paid));
-
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${payment.eleve}</td>
-                    <td>${payment.classe}</td>
-                    <td class="amount">${formatCurrency(total)}</td>
-                    <td class="amount paid">${formatCurrency(paid)}</td>
-                    <td class="amount ${restant > 0 ? 'unpaid' : ''}">${formatCurrency(restant)}</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${progress}%;"></div>
-                        </div>
-                    </td>
-                    <td><span class="status-badge ${status.className}">${status.text}</span></td>
-                    <td>
-                        <div class="action-btns">
-                            <button class="btn-icon btn-view" title="Voir dÃ©tails" onclick="viewPayment(${index})">ðŸ‘ï¸</button>
-                            <button class="btn-icon btn-pay" title="Modifier" onclick="editPayment(${index})">âœï¸</button>
-                            <button class="btn-icon btn-remind" title="Supprimer" onclick="deletePayment(${index})">ðŸ—‘ï¸</button>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
-            updateStats();
-        }
-
-        function filterPayments() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const classFilter = document.getElementById('classFilter').value;
-            const statusFilter = document.getElementById('statusFilter').value;
-
-            const filtered = payments.filter(payment => {
-                const total = Number(payment.montant_total || payment.montantTotal || 0);
-                const paid = Number(payment.montant_paye || payment.montantPaye || 0);
-                const status = computeStatus(total, paid);
-                const matchesSearch = payment.eleve.toLowerCase().includes(searchTerm);
-                const matchesClass = !classFilter || String(payment.classe).startsWith(classFilter);
-                const matchesStatus = !statusFilter || status === statusFilter;
-                return matchesSearch && matchesClass && matchesStatus;
-            });
-
-            renderPayments(filtered);
-        }
-
-        function openPaymentModal() {
-            editingPaymentId = null;
-            document.getElementById('paymentModalTitle').textContent = 'Enregistrer un paiement';
-            document.getElementById('paymentForm').reset();
-            document.getElementById('paymentModal').classList.add('active');
-        }
-
-        function closePaymentModal() {
-            document.getElementById('paymentModal').classList.remove('active');
-        }
-
-        function viewPayment(index) {
-            const payment = payments[index];
-            const total = Number(payment.montant_total || payment.montantTotal || 0);
-            const paid = Number(payment.montant_paye || payment.montantPaye || 0);
-            const restant = Math.max(0, total - paid);
-            document.getElementById('receiptEleve').textContent = payment.eleve;
-            document.getElementById('receiptClasse').textContent = payment.classe;
-            document.getElementById('receiptTotal').textContent = formatCurrency(total);
-            document.getElementById('receiptPaid').textContent = formatCurrency(paid);
-            document.getElementById('receiptReste').textContent = formatCurrency(restant);
-            document.getElementById('receiptDate').textContent = new Date().toLocaleDateString('fr-FR');
-            document.getElementById('receiptModal').classList.add('active');
-        }
-
-        function closeReceiptModal() {
-            document.getElementById('receiptModal').classList.remove('active');
-        }
-
-        function printReceipt() {
-            const content = document.getElementById('receiptContent').innerHTML;
-            const printWindow = window.open('', '', 'width=800,height=600');
-            printWindow.document.write(`<html><head><title>ReÃ§u de paiement</title></head><body>${content}</body></html>`);
-            printWindow.document.close();
-            printWindow.focus();
-            printWindow.print();
-            printWindow.close();
-        }
-
-        function editPayment(index) {
-            const payment = payments[index];
-            editingPaymentId = payment.id;
-            document.getElementById('paymentEleve').value = payment.eleve;
-            document.getElementById('paymentClasse').value = payment.classe;
-            document.getElementById('paymentTotal').value = payment.montant_total || payment.montantTotal || 0;
-            document.getElementById('paymentPaid').value = payment.montant_paye || payment.montantPaye || 0;
-            document.getElementById('paymentModalTitle').textContent = 'Modifier un paiement';
-            document.getElementById('paymentModal').classList.add('active');
-        }
-
-        async function deletePayment(index) {
-            const payment = payments[index];
-            if (!payment) return;
-            if (confirm('Supprimer ce paiement ?')) {
-                try {
-                    const response = await fetch(`/api/finances/${payment.id}`, { method: 'DELETE' });
-                    if (response.ok) {
-                        await loadPayments();
-                    }
-                } catch (error) {
-                    console.error('Erreur:', error);
-                    alert('Erreur lors de la suppression');
-                }
-            }
-        }
-
-        async function loadPayments() {
-            try {
-                const response = await fetch('/api/finances');
-                payments = await response.json();
-                renderPayments();
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors du chargement des paiements');
-            }
-        }
-
-        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const payload = {
-                eleve: document.getElementById('paymentEleve').value,
-                classe: document.getElementById('paymentClasse').value,
-                montant_total: Number(document.getElementById('paymentTotal').value),
-                montant_paye: Number(document.getElementById('paymentPaid').value)
-            };
-
-            try {
-                let response;
-                if (editingPaymentId) {
-                    response = await fetch(`/api/finances/${editingPaymentId}`, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                } else {
-                    response = await fetch('/api/finances', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                }
-
-                if (response.ok) {
-                    await loadPayments();
-                    closePaymentModal();
-                }
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors de l\'enregistrement');
-            }
-        });
-
-        loadPayments();
-    </script>
 </body>
 </html>

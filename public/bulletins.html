@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -6,875 +6,202 @@
     <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Bulletins</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
-            --bg-primary: #f8f9fc;
-            --bg-card: #ffffff;
-            --text-primary: #1a1d29;
-            --text-secondary: #6b7280;
-            --border-color: #e5e7eb;
-            --color-primary: #06b6d4;
-            --color-primary-light: #cffafe;
+            --bg: #f6f7fb;
+            --card: #ffffff;
+            --text: #101828;
+            --muted: #667085;
+            --border: #e4e7ec;
+            --primary: #06b6d4;
+            --primary-soft: #cffafe;
         }
 
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            display: flex;
-            min-height: 100vh;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); }
 
+        .layout { display: flex; min-height: 100vh; }
         .sidebar {
             width: 260px;
-            background: var(--bg-card);
-            border-right: 1px solid var(--border-color);
-            padding: 24px 0;
-            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.03);
+            background: var(--card);
+            border-right: 1px solid var(--border);
+            padding: 24px 18px;
         }
+        .logo { display: flex; gap: 12px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+        .logo-icon { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #6366f1, #4338ca); color: #fff; display: grid; place-items: center; font-size: 20px; }
+        .logo-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; }
+        .logo-subtitle { font-size: 12px; color: var(--muted); }
+        .nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 6px; text-decoration: none; color: var(--muted); border-radius: 10px; font-weight: 500; transition: 0.2s; }
+        .nav-link:hover, .nav-link.active { background: var(--primary-soft); color: #0e7490; }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0 24px 32px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 24px;
-        }
+        .content { flex: 1; padding: 32px 40px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .header h1 { font-family: 'Sora', sans-serif; font-size: 26px; }
+        .header p { color: var(--muted); margin-top: 4px; }
 
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 20px;
-        }
-
-        .logo-text {
-            font-family: 'Sora', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .nav-menu {
-            list-style: none;
-        }
-
-        .nav-item {
-            margin: 4px 0;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 24px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .nav-link:hover {
-            background: rgba(99, 102, 241, 0.06);
-            color: #6366f1;
-        }
-
-        .nav-link.active {
-            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
-            color: #6366f1;
-            border-right: 3px solid #6366f1;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 32px 48px;
-            overflow-y: auto;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
-        }
-
-        .header-left h1 {
-            font-family: 'Sora', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .header-left p {
-            color: var(--text-secondary);
-            font-size: 15px;
-        }
-
-        .generator-section {
-            background: white;
-            border: 1px solid var(--border-color);
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 32px;
+            padding: 20px;
+            margin-bottom: 16px;
         }
 
-        .generator-title {
-            font-family: 'Sora', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--text-primary);
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            font-size: 15px;
-            font-family: 'Outfit', sans-serif;
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
-        }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+        .form-group label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+        .form-group select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; }
 
         .btn {
-            padding: 12px 24px;
+            padding: 10px 16px;
             border-radius: 10px;
             border: none;
-            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            background: var(--primary);
+            color: #fff;
         }
+        .btn-secondary { background: #f2f4f7; color: var(--text); }
 
-        .btn-primary {
-            background: var(--color-primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #0891b2;
-            transform: translateY(-2px);
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
-        .bulletins-list {
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-        }
-
-        .list-title {
-            font-family: 'Sora', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .bulletin-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
+        .bulletin {
+            background: #f9fafb;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.2s;
+            gap: 12px;
         }
 
-        .bulletin-card:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
+        .bulletin h3 { font-size: 16px; margin-bottom: 4px; }
+        .bulletin-meta { color: var(--muted); font-size: 13px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .badge { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--primary-soft); color: #0e7490; }
 
-        .bulletin-info {
-            flex: 1;
-        }
+        .actions { display: flex; gap: 8px; }
+        .icon-btn { border: none; background: #e2e8f0; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
 
-        .bulletin-name {
-            font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .bulletin-details {
-            display: flex;
-            gap: 24px;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .detail-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .bulletin-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            transition: all 0.2s;
-        }
-
-        .btn-view {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .btn-view:hover {
-            background: #3b82f6;
-            color: white;
-        }
-
-        .btn-download {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .btn-download:hover {
-            background: #10b981;
-            color: white;
-        }
-
-        .btn-print {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .btn-print:hover {
-            background: #f59e0b;
-            color: white;
-        }
-
-        .moyenne-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            margin-left: 12px;
-        }
-
-        .moyenne-excellent {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .moyenne-bien {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .moyenne-passable {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .moyenne-faible {
-            background: #fee2e2;
-            color: #991b1b;
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .bulletin { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
-            <div class="logo-icon">ðŸŽ“</div>
-            <div class="logo-text">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
-        </div>
-        
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="/" class="nav-link">
-                    <span>ðŸ“Š</span> Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/personnel.html" class="nav-link">
-                    <span>ðŸ‘¥</span> Personnel
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/eleves.html" class="nav-link">
-                    <span>ðŸŽ“</span> Ã‰lÃ¨ves
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/emploi-temps.html" class="nav-link">
-                    <span>ðŸ“…</span> Emploi du Temps
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/absences.html" class="nav-link">
-                    <span>ðŸ“‹</span> Absences
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/finance.html" class="nav-link">
-                    <span>ðŸ’°</span> Finance (APEE)
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/bulletins.html" class="nav-link active">
-                    <span>ðŸ“„</span> Bulletins
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="header">
-            <div class="header-left">
-                <h1>ðŸ“„ Bulletins Scolaires</h1>
-                <p>GÃ©nÃ©rer et imprimer les bulletins des Ã©lÃ¨ves</p>
-            </div>
-        </div>
-
-        <div class="generator-section">
-            <h2 class="generator-title">ðŸ“‹ GÃ©nÃ©rer des bulletins</h2>
-            <form id="bulletinForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>ðŸ“š Classe *</label>
-                        <select id="classe" required>
-                            <option value="">SÃ©lectionner une classe</option>
-                            <option value="6eme">6Ã¨me</option>
-                            <option value="5eme">5Ã¨me</option>
-                            <option value="4eme">4Ã¨me</option>
-                            <option value="3eme">3Ã¨me</option>
-                            <option value="2nde">2nde</option>
-                            <option value="1ere">1Ã¨re</option>
-                            <option value="tle">Terminale</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>ðŸ“… PÃ©riode *</label>
-                        <select id="periode" required>
-                            <option value="">SÃ©lectionner une pÃ©riode</option>
-                            <option value="seq1">1Ã¨re sÃ©quence</option>
-                            <option value="seq2">2e sÃ©quence</option>
-                            <option value="trim1">1er trimestre</option>
-                            <option value="seq3">3e sÃ©quence</option>
-                            <option value="seq4">4e sÃ©quence</option>
-                            <option value="trim2">2e trimestre</option>
-                            <option value="seq5">5e sÃ©quence</option>
-                            <option value="annuel">Annuel</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>ðŸ“† AnnÃ©e scolaire *</label>
-                        <select id="annee" required>
-                            <option value="">SÃ©lectionner l'annÃ©e</option>
-                            <option value="2025-2026" selected>2025-2026</option>
-                            <option value="2024-2025">2024-2025</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>ðŸ‘¤ Ã‰lÃ¨ve *</label>
-                        <input type="text" id="eleve" required>
-                    </div>
-                    <div class="form-group">
-                        <label>ðŸ“Š Moyenne (/20) *</label>
-                        <input type="number" id="moyenne" min="0" max="20" step="0.1" required>
-                    </div>
-                    <div class="form-group">
-                        <label>ðŸ† Rang *</label>
-                        <input type="text" id="rang" placeholder="2Ã¨me/32" required>
-                    </div>
-                </div>
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary">
-                        ðŸ“„ GÃ©nÃ©rer les bulletins
-                    </button>
-                    <button type="button" class="btn" style="background: #f3f4f6; color: var(--text-primary);" onclick="previewBulletin()">
-                        ðŸ‘ï¸ AperÃ§u
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <div class="generator-section">
-            <h2 class="generator-title">ðŸ“± Saisie des notes (enseignants)</h2>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>RÃ´le utilisateur</label>
-                    <select id="roleSelect">
-                        <option value="enseignant">Enseignant</option>
-                        <option value="conseiller">Conseiller pÃ©dagogique</option>
-                        <option value="admin">Administration</option>
-                    </select>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">ðŸŽ“</div>
+                <div>
+                    <div class="logo-title">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
+                    <div class="logo-subtitle">SystÃ¨me de gestion</div>
                 </div>
             </div>
-            <div id="teacherSection">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Nom enseignant *</label>
-                        <input type="text" id="teacherName">
-                    </div>
-                    <div class="form-group">
-                        <label>MatiÃ¨re *</label>
-                        <input type="text" id="teacherSubject">
-                    </div>
-                    <div class="form-group">
-                        <label>Classe *</label>
-                        <input type="text" id="teacherClass" placeholder="6e1, 2nde, F3...">
-                    </div>
-                </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary" onclick="loadNotesRoster()">Charger les Ã©lÃ¨ves</button>
-                </div>
-                <div style="margin-top: 16px;">
-                    <table id="notesTable" style="width:100%; border-collapse: collapse;">
-                        <thead>
-                            <tr>
-                                <th>Ã‰lÃ¨ve</th>
-                                <th>Note /20</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-                <div class="btn-group" style="margin-top: 12px;">
-                    <button type="button" class="btn btn-primary" onclick="saveNotes()">Enregistrer les notes</button>
+            <a class="nav-link" href="/">ðŸ“Š Dashboard</a>
+            <a class="nav-link" href="/personnel.html">ðŸ‘¥ Personnel</a>
+            <a class="nav-link" href="/eleves.html">ðŸŽ“ Ã‰lÃ¨ves</a>
+            <a class="nav-link" href="/emploi-temps.html">ðŸ“… Emploi du temps</a>
+            <a class="nav-link" href="/absences.html">ðŸ“‹ Absences</a>
+            <a class="nav-link" href="/finance.html">ðŸ’° Finance (APEE)</a>
+            <a class="nav-link active" href="/bulletins.html">ðŸ“„ Bulletins</a>
+        </aside>
+
+        <main class="content">
+            <div class="header">
+                <div>
+                    <h1>Bulletins</h1>
+                    <p>GÃ©nÃ©ration et impression des rÃ©sultats scolaires.</p>
                 </div>
             </div>
-            <div id="advisorSection" style="display:none; margin-top: 16px;">
-                <h3>Somme des absences (rÃ©servÃ© conseillers)</h3>
-                <table id="absenceSummaryTable" style="width:100%; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            <th>Ã‰lÃ¨ve</th>
-                            <th>Total absences</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+
+            <div class="card">
+                <h2 style="font-family: 'Sora', sans-serif; font-size: 18px; margin-bottom: 12px;">GÃ©nÃ©rer des bulletins</h2>
+                <form id="bulletinForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Classe</label>
+                            <select id="classe" required>
+                                <option value="">SÃ©lectionner</option>
+                                <option value="6eme">6Ã¨me</option>
+                                <option value="5eme">5Ã¨me</option>
+                                <option value="4eme">4Ã¨me</option>
+                                <option value="3eme">3Ã¨me</option>
+                                <option value="2nde">2nde</option>
+                                <option value="1ere">1Ã¨re</option>
+                                <option value="tle">Terminale</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>PÃ©riode</label>
+                            <select id="periode" required>
+                                <option value="">SÃ©lectionner</option>
+                                <option value="trim1">1er Trimestre</option>
+                                <option value="trim2">2Ã¨me Trimestre</option>
+                                <option value="trim3">3Ã¨me Trimestre</option>
+                                <option value="annuel">Annuel</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>AnnÃ©e scolaire</label>
+                            <select id="annee" required>
+                                <option value="2025-2026" selected>2025-2026</option>
+                                <option value="2024-2025">2024-2025</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap: 10px; margin-top: 12px;">
+                        <button type="submit" class="btn">ðŸ“„ GÃ©nÃ©rer</button>
+                        <button type="button" class="btn btn-secondary" onclick="alert('AperÃ§u en dÃ©veloppement')">ðŸ‘ï¸ AperÃ§u</button>
+                    </div>
+                </form>
             </div>
-        </div>
 
-        <div class="generator-section">
-            <h2 class="generator-title">ðŸ“Š Statistiques par matiÃ¨re</h2>
-            <table id="subjectStatsTable" style="width:100%; border-collapse: collapse;">
-                <thead>
-                    <tr>
-                        <th>MatiÃ¨re</th>
-                        <th>Moyenne</th>
-                        <th>Nombre de notes</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-
-        <div class="generator-section">
-            <h2 class="generator-title">ðŸ•’ Historique des notes</h2>
-            <table id="notesHistoryTable" style="width:100%; border-collapse: collapse;">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Enseignant</th>
-                        <th>Classe</th>
-                        <th>MatiÃ¨re</th>
-                        <th>Ã‰lÃ¨ve</th>
-                        <th>Note</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-
-        <div class="bulletins-list">
-            <h2 class="list-title">ðŸ“š Bulletins gÃ©nÃ©rÃ©s</h2>
-            <div id="bulletinsList"></div>
-        </div>
+            <div class="card">
+                <h2 style="font-family: 'Sora', sans-serif; font-size: 18px; margin-bottom: 12px;">Bulletins gÃ©nÃ©rÃ©s</h2>
+                <div class="bulletin" style="margin-bottom: 10px;">
+                    <div>
+                        <h3>Aissatou Ndongo <span class="badge">Moyenne 16,5/20</span></h3>
+                        <div class="bulletin-meta">
+                            <span>Classe: 1Ã¨re Scientifique</span>
+                            <span>PÃ©riode: 2Ã¨me Trimestre</span>
+                            <span>Rang: 2Ã¨me / 32</span>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="icon-btn">ðŸ‘ï¸</button>
+                        <button class="icon-btn">ðŸ’¾</button>
+                        <button class="icon-btn">ðŸ–¨ï¸</button>
+                    </div>
+                </div>
+                <div class="bulletin">
+                    <div>
+                        <h3>Mohamed Kamara <span class="badge">Moyenne 17,2/20</span></h3>
+                        <div class="bulletin-meta">
+                            <span>Classe: Terminale Scientifique</span>
+                            <span>PÃ©riode: 2Ã¨me Trimestre</span>
+                            <span>Rang: 1er / 28</span>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="icon-btn">ðŸ‘ï¸</button>
+                        <button class="icon-btn">ðŸ’¾</button>
+                        <button class="icon-btn">ðŸ–¨ï¸</button>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
-        let bulletins = [];
-        let editingBulletinId = null;
-
-        function formatPeriode(value) {
-            const map = {
-                seq1: '1Ã¨re sÃ©quence',
-                seq2: '2e sÃ©quence',
-                trim1: '1er trimestre',
-                seq3: '3e sÃ©quence',
-                seq4: '4e sÃ©quence',
-                trim2: '2e trimestre',
-                seq5: '5e sÃ©quence',
-                annuel: 'Annuel'
-            };
-            return map[value] || value;
-        }
-
-        function moyenneClass(value) {
-            const moyenne = Number(value);
-            if (moyenne >= 16) return 'moyenne-excellent';
-            if (moyenne >= 14) return 'moyenne-bien';
-            if (moyenne >= 10) return 'moyenne-passable';
-            return 'moyenne-faible';
-        }
-
-        function renderBulletins() {
-            const container = document.getElementById('bulletinsList');
-            container.innerHTML = '';
-
-            bulletins.forEach((bulletin, index) => {
-                const moyenneBadge = moyenneClass(bulletin.moyenne);
-                const card = document.createElement('div');
-                card.className = 'bulletin-card';
-                card.innerHTML = `
-                    <div class="bulletin-info">
-                        <div class="bulletin-name">
-                            ${bulletin.eleve}
-                            <span class="moyenne-badge ${moyenneBadge}">Moyenne: ${bulletin.moyenne}/20</span>
-                        </div>
-                        <div class="bulletin-details">
-                            <div class="detail-item">
-                                <span>ðŸ“š</span>
-                                <span>${bulletin.classe}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span>ðŸ“…</span>
-                                <span>${formatPeriode(bulletin.periode)} ${bulletin.annee}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span>ðŸ†</span>
-                                <span>Rang: ${bulletin.rang}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bulletin-actions">
-                        <button class="btn-icon btn-view" title="Voir" onclick="viewBulletin(${index})">ðŸ‘ï¸</button>
-                        <button class="btn-icon btn-download" title="Modifier" onclick="editBulletin(${index})">âœï¸</button>
-                        <button class="btn-icon btn-print" title="Supprimer" onclick="deleteBulletin(${index})">ðŸ—‘ï¸</button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        async function loadBulletins() {
-            try {
-                const response = await fetch('/api/bulletins');
-                bulletins = await response.json();
-                renderBulletins();
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors du chargement des bulletins');
-            }
-        }
-
-        function previewBulletin() {
+        document.getElementById('bulletinForm').addEventListener('submit', (event) => {
+            event.preventDefault();
             const classe = document.getElementById('classe').value;
             const periode = document.getElementById('periode').value;
             const annee = document.getElementById('annee').value;
-            const eleve = document.getElementById('eleve').value;
-            const moyenne = document.getElementById('moyenne').value;
-            const rang = document.getElementById('rang').value;
-
-            if (!classe || !periode || !annee || !eleve || !moyenne || !rang) {
-                alert('Veuillez renseigner tous les champs pour l\'aperÃ§u.');
-                return;
-            }
-
-            alert(`AperÃ§u du bulletin:\n\nÃ‰lÃ¨ve: ${eleve}\nClasse: ${classe}\nPÃ©riode: ${formatPeriode(periode)}\nAnnÃ©e: ${annee}\nMoyenne: ${moyenne}/20\nRang: ${rang}`);
-        }
-
-        function viewBulletin(index) {
-            const bulletin = bulletins[index];
-            alert(`Bulletin:\n\nÃ‰lÃ¨ve: ${bulletin.eleve}\nClasse: ${bulletin.classe}\nPÃ©riode: ${formatPeriode(bulletin.periode)}\nAnnÃ©e: ${bulletin.annee}\nMoyenne: ${bulletin.moyenne}/20\nRang: ${bulletin.rang}`);
-        }
-
-        function editBulletin(index) {
-            const bulletin = bulletins[index];
-            editingBulletinId = bulletin.id;
-            document.getElementById('classe').value = bulletin.classe;
-            document.getElementById('periode').value = bulletin.periode;
-            document.getElementById('annee').value = bulletin.annee;
-            document.getElementById('eleve').value = bulletin.eleve;
-            document.getElementById('moyenne').value = bulletin.moyenne;
-            document.getElementById('rang').value = bulletin.rang;
-            document.getElementById('eleve').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        async function deleteBulletin(index) {
-            const bulletin = bulletins[index];
-            if (!bulletin) return;
-            if (confirm('Supprimer ce bulletin ?')) {
-                try {
-                    const response = await fetch(`/api/bulletins/${bulletin.id}`, { method: 'DELETE' });
-                    if (response.ok) {
-                        await loadBulletins();
-                    }
-                } catch (error) {
-                    console.error('Erreur:', error);
-                    alert('Erreur lors de la suppression');
-                }
-            }
-        }
-
-        let notes = [];
-        let currentRoster = [];
-
-        function toggleRoleSections() {
-            const role = document.getElementById('roleSelect').value;
-            document.getElementById('teacherSection').style.display = role === 'enseignant' || role === 'admin' ? 'block' : 'none';
-            document.getElementById('advisorSection').style.display = role === 'conseiller' || role === 'admin' ? 'block' : 'none';
-            if (role === 'conseiller' || role === 'admin') {
-                loadAbsenceSummary();
-            }
-        }
-
-        async function loadNotesRoster() {
-            const classe = document.getElementById('teacherClass').value.trim();
-            const teacher = document.getElementById('teacherName').value.trim();
-            const subject = document.getElementById('teacherSubject').value.trim();
-            if (!classe || !teacher || !subject) {
-                alert('Veuillez renseigner le nom, la matiÃ¨re et la classe.');
-                return;
-            }
-            try {
-                const response = await fetch('/api/eleves');
-                const eleves = await response.json();
-                currentRoster = eleves.filter(e => e.classe === classe);
-                renderNotesTable();
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors du chargement des Ã©lÃ¨ves');
-            }
-        }
-
-        function renderNotesTable() {
-            const tbody = document.querySelector('#notesTable tbody');
-            tbody.innerHTML = '';
-            currentRoster.forEach(eleve => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${eleve.prenom} ${eleve.nom}</td>
-                    <td><input type="number" min="0" max="20" step="0.1" data-eleve-id="${eleve.id}" data-eleve-nom="${eleve.prenom} ${eleve.nom}"></td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        async function saveNotes() {
-            const teacher = document.getElementById('teacherName').value.trim();
-            const subject = document.getElementById('teacherSubject').value.trim();
-            const classe = document.getElementById('teacherClass').value.trim();
-            const periode = document.getElementById('periode').value || 'annuel';
-
-            const inputs = document.querySelectorAll('#notesTable tbody input');
-            const requests = [];
-            inputs.forEach(input => {
-                const value = input.value;
-                if (value !== '') {
-                    const payload = {
-                        enseignant: teacher,
-                        matiere: subject,
-                        classe,
-                        periode,
-                        eleve_id: Number(input.dataset.eleveId),
-                        eleve_nom: input.dataset.eleveNom,
-                        note: Number(value)
-                    };
-                    requests.push(fetch('/api/notes', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    }));
-                }
-            });
-
-            try {
-                await Promise.all(requests);
-                await loadNotes();
-                alert('Notes enregistrÃ©es avec succÃ¨s.');
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors de l\'enregistrement des notes');
-            }
-        }
-
-        async function loadNotes() {
-            try {
-                const response = await fetch('/api/notes');
-                notes = await response.json();
-                renderSubjectStats();
-                renderNotesHistory();
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors du chargement des notes');
-            }
-        }
-
-        function renderSubjectStats() {
-            const stats = {};
-            notes.forEach(note => {
-                if (!stats[note.matiere]) {
-                    stats[note.matiere] = { total: 0, count: 0 };
-                }
-                stats[note.matiere].total += Number(note.note || 0);
-                stats[note.matiere].count += 1;
-            });
-
-            const tbody = document.querySelector('#subjectStatsTable tbody');
-            tbody.innerHTML = '';
-            Object.keys(stats).sort().forEach(matiere => {
-                const data = stats[matiere];
-                const moyenne = data.count ? (data.total / data.count).toFixed(2) : '0';
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${matiere}</td><td>${moyenne}</td><td>${data.count}</td>`;
-                tbody.appendChild(row);
-            });
-        }
-
-        function renderNotesHistory() {
-            const tbody = document.querySelector('#notesHistoryTable tbody');
-            tbody.innerHTML = '';
-            notes.forEach(note => {
-                const date = note.created_at ? new Date(note.created_at).toLocaleDateString('fr-FR') : '';
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${date}</td>
-                    <td>${note.enseignant || ''}</td>
-                    <td>${note.classe || ''}</td>
-                    <td>${note.matiere || ''}</td>
-                    <td>${note.eleve_nom || ''}</td>
-                    <td>${note.note}</td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        async function loadAbsenceSummary() {
-            try {
-                const response = await fetch('/api/absences');
-                const absences = await response.json();
-                const totals = {};
-                absences.forEach(absence => {
-                    totals[absence.eleve] = (totals[absence.eleve] || 0) + 1;
-                });
-                const tbody = document.querySelector('#absenceSummaryTable tbody');
-                tbody.innerHTML = '';
-                Object.keys(totals).sort().forEach(eleve => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `<td>${eleve}</td><td>${totals[eleve]}</td>`;
-                    tbody.appendChild(row);
-                });
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors du chargement des absences');
-            }
-        }
-
-        document.getElementById('bulletinForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const payload = {
-                classe: document.getElementById('classe').value,
-                periode: document.getElementById('periode').value,
-                annee: document.getElementById('annee').value,
-                eleve: document.getElementById('eleve').value,
-                moyenne: Number(document.getElementById('moyenne').value),
-                rang: document.getElementById('rang').value
-            };
-
-            try {
-                let response;
-                if (editingBulletinId) {
-                    response = await fetch(`/api/bulletins/${editingBulletinId}`, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                } else {
-                    response = await fetch('/api/bulletins', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                }
-
-                if (response.ok) {
-                    editingBulletinId = null;
-                    document.getElementById('bulletinForm').reset();
-                    await loadBulletins();
-                }
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors de l\'enregistrement');
-            }
+            alert(`GÃ©nÃ©ration des bulletins\nClasse: ${classe}\nPÃ©riode: ${periode}\nAnnÃ©e: ${annee}`);
         });
-
-        document.getElementById('roleSelect').addEventListener('change', toggleRoleSections);
-        toggleRoleSections();
-        loadNotes();
-        loadBulletins();
     </script>
 </body>
 </html>

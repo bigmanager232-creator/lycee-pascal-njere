@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -6,605 +6,256 @@
     <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Ã‰lÃ¨ves</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
-            --bg-primary: #f8f9fc;
-            --bg-card: #ffffff;
-            --text-primary: #1a1d29;
-            --text-secondary: #6b7280;
-            --border-color: #e5e7eb;
-            --color-primary: #f59e0b;
-            --color-primary-light: #fef3c7;
-            --color-success: #10b981;
-            --color-danger: #ef4444;
+            --bg: #f6f7fb;
+            --card: #ffffff;
+            --text: #101828;
+            --muted: #667085;
+            --border: #e4e7ec;
+            --primary: #f59e0b;
+            --primary-soft: #fef3c7;
+            --success: #10b981;
+            --danger: #ef4444;
         }
 
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            display: flex;
-            min-height: 100vh;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); }
 
+        .layout { display: flex; min-height: 100vh; }
         .sidebar {
             width: 260px;
-            background: var(--bg-card);
-            border-right: 1px solid var(--border-color);
-            padding: 24px 0;
-            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.03);
+            background: var(--card);
+            border-right: 1px solid var(--border);
+            padding: 24px 18px;
         }
+        .logo { display: flex; gap: 12px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+        .logo-icon { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #6366f1, #4338ca); color: #fff; display: grid; place-items: center; font-size: 20px; }
+        .logo-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; }
+        .logo-subtitle { font-size: 12px; color: var(--muted); }
+        .nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 6px; text-decoration: none; color: var(--muted); border-radius: 10px; font-weight: 500; transition: 0.2s; }
+        .nav-link:hover, .nav-link.active { background: var(--primary-soft); color: #b45309; }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0 24px 32px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 24px;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 20px;
-        }
-
-        .logo-text {
-            font-family: 'Sora', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .nav-menu {
-            list-style: none;
-        }
-
-        .nav-item {
-            margin: 4px 0;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 24px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .nav-link:hover {
-            background: rgba(99, 102, 241, 0.06);
-            color: #6366f1;
-        }
-
-        .nav-link.active {
-            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
-            color: #6366f1;
-            border-right: 3px solid #6366f1;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 32px 48px;
-            overflow-y: auto;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
-        }
-
-        .header-left h1 {
-            font-family: 'Sora', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .header-left p {
-            color: var(--text-secondary);
-            font-size: 15px;
-        }
+        .content { flex: 1; padding: 32px 40px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .header h1 { font-family: 'Sora', sans-serif; font-size: 26px; }
+        .header p { color: var(--muted); margin-top: 4px; }
 
         .btn {
-            padding: 12px 24px;
+            padding: 10px 16px;
             border-radius: 10px;
             border: none;
-            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
-
-        .btn-primary {
-            background: var(--color-primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #d97706;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-        }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-secondary { background: #f2f4f7; color: var(--text); }
 
         .filters {
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px 20px;
-            margin-bottom: 24px;
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .filter-group {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .filter-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-
-        .filter-group input,
-        .filter-group select {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: 'Outfit', sans-serif;
-            outline: none;
-        }
-
-        .students-grid {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .student-card {
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .student-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .student-header {
-            display: flex;
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
             margin-bottom: 16px;
         }
-
-        .student-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .student-info {
-            flex: 1;
-        }
-
-        .student-name {
-            font-family: 'Sora', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .student-class {
-            color: var(--text-secondary);
-            font-size: 13px;
-            margin-bottom: 4px;
-        }
-
-        .student-id {
-            color: var(--text-secondary);
-            font-size: 12px;
-        }
-
-        .student-details {
-            padding-top: 16px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-
-        .detail-label {
-            color: var(--text-secondary);
-        }
-
-        .detail-value {
-            font-weight: 600;
-        }
-
-        .student-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 16px;
-        }
-
-        .btn-small {
-            flex: 1;
-            padding: 8px 12px;
-            font-size: 13px;
-            border-radius: 8px;
-        }
-
-        .btn-edit {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .btn-view {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .btn-delete {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .status-solvable {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .status-insolvable {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        .filters label { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: block; }
+        .filters input, .filters select {
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-family: inherit;
         }
 
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 16px;
-            padding: 32px;
-            width: 90%;
-            max-width: 700px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .modal-header h2 {
-            font-family: 'Sora', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .close-modal {
-            width: 32px;
-            height: 32px;
-            border: none;
-            background: #f3f4f6;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 20px;
-            color: var(--text-secondary);
-        }
-
-        .form-row {
+        .grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 16px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
         }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--text-primary);
+        .card-header { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--primary);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
         }
+        .card-title { font-weight: 700; }
+        .card-subtitle { font-size: 12px; color: var(--muted); }
+        .info { display: grid; gap: 6px; font-size: 13px; }
 
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            font-size: 15px;
-            font-family: 'Outfit', sans-serif;
-            outline: none;
-            transition: all 0.2s;
+        .badge { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; display: inline-flex; }
+        .badge-ok { background: #d1fae5; color: #065f46; }
+        .badge-bad { background: #fee2e2; color: #991b1b; }
+
+        .card-actions { display: flex; gap: 8px; margin-top: 12px; }
+        .icon-btn { border: none; background: #f2f4f7; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
+        .icon-btn.edit { background: #fde68a; color: #92400e; }
+        .icon-btn.delete { background: #fee2e2; color: #991b1b; }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        .modal.active { display: flex; }
+        .modal-content {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 24px;
+            width: min(680px, 95vw);
         }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .modal-header h2 { font-family: 'Sora', sans-serif; font-size: 20px; }
+        .close-btn { border: none; background: #f2f4f7; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; }
 
-        .form-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-            margin-top: 24px;
-        }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+        .form-group { margin-bottom: 10px; }
+        .form-group label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+        .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; }
+        .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
 
-        .btn-secondary {
-            background: #f3f4f6;
-            color: var(--text-primary);
-        }
-
-        .btn-secondary:hover {
-            background: #e5e7eb;
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            .sidebar { width: 100%; }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
-            <div class="logo-icon">ðŸŽ“</div>
-            <div class="logo-text">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
-        </div>
-        
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="/" class="nav-link">
-                    <span>ðŸ“Š</span> Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/personnel.html" class="nav-link">
-                    <span>ðŸ‘¥</span> Personnel
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/eleves.html" class="nav-link active">
-                    <span>ðŸŽ“</span> Ã‰lÃ¨ves
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/emploi-temps.html" class="nav-link">
-                    <span>ðŸ“…</span> Emploi du Temps
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/absences.html" class="nav-link">
-                    <span>ðŸ“‹</span> Absences
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/finance.html" class="nav-link">
-                    <span>ðŸ’°</span> Finance (APEE)
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/bulletins.html" class="nav-link">
-                    <span>ðŸ“„</span> Bulletins
-                </a>
-            </li>
-        </ul>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">ðŸŽ“</div>
+                <div>
+                    <div class="logo-title">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
+                    <div class="logo-subtitle">SystÃ¨me de gestion</div>
+                </div>
+            </div>
+            <a class="nav-link" href="/">ðŸ“Š Dashboard</a>
+            <a class="nav-link" href="/personnel.html">ðŸ‘¥ Personnel</a>
+            <a class="nav-link active" href="/eleves.html">ðŸŽ“ Ã‰lÃ¨ves</a>
+            <a class="nav-link" href="/emploi-temps.html">ðŸ“… Emploi du temps</a>
+            <a class="nav-link" href="/absences.html">ðŸ“‹ Absences</a>
+            <a class="nav-link" href="/finance.html">ðŸ’° Finance (APEE)</a>
+            <a class="nav-link" href="/bulletins.html">ðŸ“„ Bulletins</a>
+        </aside>
+
+        <main class="content">
+            <div class="header">
+                <div>
+                    <h1>Ã‰lÃ¨ves</h1>
+                    <p>Gestion des dossiers et du suivi scolaire.</p>
+                </div>
+                <button class="btn btn-primary" onclick="openModal()">âž• Inscrire</button>
+            </div>
+
+            <div class="filters">
+                <div>
+                    <label>Recherche</label>
+                    <input type="text" id="searchInput" placeholder="Nom, prÃ©nom, matricule" oninput="applyFilters()">
+                </div>
+                <div>
+                    <label>Classe</label>
+                    <select id="classFilter" onchange="applyFilters()">
+                        <option value="">Toutes</option>
+                        <option value="6Ã¨me">6Ã¨me</option>
+                        <option value="5Ã¨me">5Ã¨me</option>
+                        <option value="4Ã¨me">4Ã¨me</option>
+                        <option value="3Ã¨me">3Ã¨me</option>
+                        <option value="2nde">2nde</option>
+                        <option value="1Ã¨re">1Ã¨re</option>
+                        <option value="Tle">Terminale</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Statut financier</label>
+                    <select id="statusFilter" onchange="applyFilters()">
+                        <option value="">Tous</option>
+                        <option value="solvable">Solvable</option>
+                        <option value="insolvable">Insolvable</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid" id="studentsGrid"></div>
+        </main>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="header">
-            <div class="header-left">
-                <h1>ðŸŽ“ Ã‰lÃ¨ves</h1>
-                <p>Gestion des Ã©lÃ¨ves du lycÃ©e</p>
-            </div>
-            <button class="btn btn-primary" onclick="openModal()">
-                âž• Inscrire un Ã©lÃ¨ve
-            </button>
-        </div>
-
-        <div class="filters">
-            <div class="filter-group">
-                <label>ðŸ” Rechercher</label>
-                <input type="text" id="searchInput" placeholder="Nom, matricule..." onkeyup="filterStudents()">
-            </div>
-            <div class="filter-group">
-                <label>ðŸ“š Classe</label>
-                <select id="classFilter" onchange="filterStudents()">
-                    <option value="">Toutes les classes</option>
-                    <option value="6e">6e</option>
-                    <option value="5e">5e</option>
-                    <option value="4e">4e</option>
-                    <option value="3e">3e</option>
-                    <option value="2nde">2nde</option>
-                    <option value="1Ã¨re">1Ã¨re</option>
-                    <option value="Tle">Tle</option>
-                    <option value="F1">F1</option>
-                    <option value="F2">F2</option>
-                    <option value="F3">F3</option>
-                    <option value="F4">F4</option>
-                    <option value="F5">F5</option>
-                    <option value="LSA">LSA</option>
-                    <option value="UPSA">UPSA</option>
-                    <option value="LSS">LSS</option>
-                    <option value="UPSS">UPSS</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>ðŸŒ Section</label>
-                <select id="sectionFilter" onchange="filterStudents()">
-                    <option value="">Toutes</option>
-                    <option value="Francophone">Francophone</option>
-                    <option value="Anglophone">Anglophone</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label>ðŸ’° Statut financier</label>
-                <select id="statusFilter" onchange="filterStudents()">
-                    <option value="">Tous</option>
-                    <option value="solvable">Solvable</option>
-                    <option value="insolvable">Insolvable</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="students-grid" id="studentsGrid">
-            <!-- Student cards will be generated here -->
-        </div>
-    </div>
-
-    <!-- Modal -->
     <div class="modal" id="studentModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle">Inscrire un Ã©lÃ¨ve</h2>
-                <button class="close-modal" onclick="closeModal()">âœ•</button>
+                <button class="close-btn" onclick="closeModal()">âœ•</button>
             </div>
             <form id="studentForm">
-                <div class="form-row">
+                <div class="form-grid">
                     <div class="form-group">
-                        <label>Nom *</label>
+                        <label>Matricule</label>
+                        <input type="text" id="matricule" placeholder="Auto" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Nom</label>
                         <input type="text" id="nom" required>
                     </div>
                     <div class="form-group">
-                        <label>PrÃ©nom *</label>
+                        <label>PrÃ©nom</label>
                         <input type="text" id="prenom" required>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group">
-                        <label>Matricule (9 chiffres) *</label>
-                        <input type="text" id="matricule" pattern="\\d{9}" placeholder="202300001" required>
+                        <label>Date de naissance</label>
+                        <input type="date" id="date_naissance">
                     </div>
                     <div class="form-group">
-                        <label>Section *</label>
-                        <select id="section" required>
-                            <option value="Francophone">Francophone</option>
-                            <option value="Anglophone">Anglophone</option>
+                        <label>Classe</label>
+                        <select id="classe" required>
+                            <option value="">SÃ©lectionner</option>
+                            <option value="6Ã¨me">6Ã¨me</option>
+                            <option value="5Ã¨me">5Ã¨me</option>
+                            <option value="4Ã¨me">4Ã¨me</option>
+                            <option value="3Ã¨me">3Ã¨me</option>
+                            <option value="2nde">2nde</option>
+                            <option value="1Ã¨re">1Ã¨re</option>
+                            <option value="Tle">Terminale</option>
                         </select>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group">
-                        <label>Date de naissance *</label>
-                        <input type="date" id="dateNaissance" required>
+                        <label>TÃ©lÃ©phone</label>
+                        <input type="tel" id="telephone">
                     </div>
                     <div class="form-group">
-                        <label>Classe *</label>
-                        <input type="text" id="classe" list="classesList" placeholder="6e1, 2nde, F3..." required>
-                        <datalist id="classesList">
-                            <option value="6e"></option>
-                            <option value="6e1"></option>
-                            <option value="6e2"></option>
-                            <option value="5e"></option>
-                            <option value="4e"></option>
-                            <option value="3e"></option>
-                            <option value="2nde"></option>
-                            <option value="1Ã¨re"></option>
-                            <option value="Tle"></option>
-                            <option value="F1"></option>
-                            <option value="F2"></option>
-                            <option value="F3"></option>
-                            <option value="F4"></option>
-                            <option value="F5"></option>
-                            <option value="LSA"></option>
-                            <option value="UPSA"></option>
-                            <option value="LSS"></option>
-                            <option value="UPSS"></option>
-                        </datalist>
+                        <label>Email</label>
+                        <input type="email" id="email">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>TÃ©lÃ©phone parent *</label>
-                    <input type="tel" id="telephone" required>
-                </div>
-                <div class="form-group">
-                    <label>Email parent</label>
-                    <input type="email" id="email">
-                </div>
-                <div class="form-group">
-                    <label>Adresse des parents *</label>
-                    <input type="text" id="adresseParents" required>
-                </div>
-                <div class="form-group">
-                    <label>Statut financier *</label>
-                    <select id="statutFinancier" required>
-                        <option value="solvable">Solvable</option>
-                        <option value="insolvable">Insolvable</option>
-                    </select>
+                    <div class="form-group">
+                        <label>Adresse</label>
+                        <input type="text" id="adresse">
+                    </div>
+                    <div class="form-group">
+                        <label>Statut financier</label>
+                        <select id="statut_financier" required>
+                            <option value="solvable">Solvable</option>
+                            <option value="insolvable">Insolvable</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="closeModal()">Annuler</button>
@@ -616,185 +267,143 @@
 
     <script>
         let students = [];
-        let editingStudentId = null;
+        let editingId = null;
 
-        function renderStudents(studentsToRender = students) {
+        async function loadStudents() {
+            try {
+                const response = await fetch('/api/eleves');
+                if (!response.ok) throw new Error('Chargement impossible');
+                students = await response.json();
+                applyFilters();
+            } catch (error) {
+                console.error(error);
+                alert('Erreur lors du chargement des Ã©lÃ¨ves.');
+            }
+        }
+
+        function renderStudents(list) {
             const grid = document.getElementById('studentsGrid');
             grid.innerHTML = '';
 
-            studentsToRender.forEach((student, index) => {
-                const initials = student.prenom.charAt(0) + student.nom.charAt(0);
-                const statutFinancier = student.statut_financier || student.statutFinancier || 'solvable';
-                const statusClass = statutFinancier === 'solvable' ? 'status-solvable' : 'status-insolvable';
-                const statusText = statutFinancier === 'solvable' ? 'Solvable' : 'Insolvable';
-                const matricule = student.matricule || student.id;
-                const section = student.section || '';
+            list.forEach(student => {
+                const initials = `${(student.prenom || '').charAt(0)}${(student.nom || '').charAt(0)}`.toUpperCase();
+                const statusClass = student.statut_financier === 'insolvable' ? 'badge-bad' : 'badge-ok';
+                const statusText = student.statut_financier === 'insolvable' ? 'Insolvable' : 'Solvable';
 
                 const card = document.createElement('div');
-                card.className = 'student-card';
+                card.className = 'card';
                 card.innerHTML = `
-                    <div class="student-header">
-                        <div class="student-avatar">${initials}</div>
-                        <div class="student-info">
-                            <div class="student-name">${student.prenom} ${student.nom}</div>
-                            <div class="student-class">Classe: ${student.classe}</div>
-                            <div class="student-class">Section: ${section}</div>
-                            <div class="student-id">Matricule: ${matricule}</div>
+                    <div class="card-header">
+                        <div class="avatar">${initials || 'Ã‰'}</div>
+                        <div>
+                            <div class="card-title">${student.prenom || ''} ${student.nom || ''}</div>
+                            <div class="card-subtitle">Matricule: ${student.matricule || 'â€”'}</div>
                         </div>
                     </div>
-                    <div class="student-details">
-                        <div class="detail-row">
-                            <span class="detail-label">TÃ©lÃ©phone:</span>
-                            <span class="detail-value">${student.telephone}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Statut:</span>
-                            <span class="status-badge ${statusClass}">${statusText}</span>
-                        </div>
+                    <div class="info">
+                        <div>Classe: <strong>${student.classe || 'â€”'}</strong></div>
+                        <div>TÃ©lÃ©phone: <strong>${student.telephone || 'â€”'}</strong></div>
+                        <div>Email: <strong>${student.email || 'â€”'}</strong></div>
                     </div>
-                    <div class="student-actions">
-                        <button class="btn btn-small btn-view" onclick="viewStudent(${index})">ðŸ‘ï¸ Voir</button>
-                        <button class="btn btn-small btn-edit" onclick="editStudent(${index})">âœï¸ Modifier</button>
-                        <button class="btn btn-small btn-delete" onclick="deleteStudent(${index})">ðŸ—‘ï¸</button>
+                    <div style="margin-top: 10px;">
+                        <span class="badge ${statusClass}">${statusText}</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="icon-btn edit" onclick="editStudent(${student.id})">âœï¸</button>
+                        <button class="icon-btn delete" onclick="deleteStudent(${student.id})">ðŸ—‘ï¸</button>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        function filterStudents() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        function applyFilters() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
             const classFilter = document.getElementById('classFilter').value;
-            const sectionFilter = document.getElementById('sectionFilter').value;
             const statusFilter = document.getElementById('statusFilter').value;
 
             const filtered = students.filter(student => {
-                const matricule = String(student.matricule || student.id || '');
-                const statutFinancier = student.statut_financier || student.statutFinancier || 'solvable';
-                const section = student.section || '';
-                const matchesSearch = student.nom.toLowerCase().includes(searchTerm) ||
-                                    student.prenom.toLowerCase().includes(searchTerm) ||
-                                    matricule.toLowerCase().includes(searchTerm);
-                const matchesClass = !classFilter || String(student.classe).startsWith(classFilter);
-                const matchesSection = !sectionFilter || section === sectionFilter;
-                const matchesStatus = !statusFilter || statutFinancier === statusFilter;
-
-                return matchesSearch && matchesClass && matchesSection && matchesStatus;
+                const haystack = `${student.nom || ''} ${student.prenom || ''} ${student.matricule || ''}`.toLowerCase();
+                const matchesSearch = !search || haystack.includes(search);
+                const matchesClass = !classFilter || student.classe === classFilter;
+                const matchesStatus = !statusFilter || student.statut_financier === statusFilter;
+                return matchesSearch && matchesClass && matchesStatus;
             });
 
             renderStudents(filtered);
         }
 
         function openModal() {
-            document.getElementById('studentModal').classList.add('active');
+            editingId = null;
             document.getElementById('modalTitle').textContent = 'Inscrire un Ã©lÃ¨ve';
             document.getElementById('studentForm').reset();
-            editingStudentId = null;
+            document.getElementById('matricule').value = '';
+            document.getElementById('studentModal').classList.add('active');
         }
 
         function closeModal() {
             document.getElementById('studentModal').classList.remove('active');
         }
 
-        function viewStudent(index) {
-            const student = students[index];
-            const matricule = student.matricule || student.id;
-            const statutFinancier = student.statut_financier || student.statutFinancier || 'solvable';
-            const section = student.section || '';
-            const adresseParents = student.adresse_parents || '';
-            alert(`DÃ©tails de l'Ã©lÃ¨ve:\n\nNom: ${student.prenom} ${student.nom}\nMatricule: ${matricule}\nClasse: ${student.classe}\nSection: ${section}\nTÃ©lÃ©phone: ${student.telephone}\nAdresse parents: ${adresseParents}\nStatut: ${statutFinancier}`);
-        }
-
-        function editStudent(index) {
-            const student = students[index];
+        function editStudent(id) {
+            const student = students.find(s => s.id === id);
             if (!student) return;
-            editingStudentId = student.id;
-            document.getElementById('matricule').value = student.matricule || '';
-            document.getElementById('section').value = student.section || 'Francophone';
-            document.getElementById('nom').value = student.nom;
-            document.getElementById('prenom').value = student.prenom;
-            document.getElementById('classe').value = student.classe;
-            document.getElementById('dateNaissance').value = student.date_naissance || '';
-            document.getElementById('telephone').value = student.telephone;
-            document.getElementById('email').value = student.email || '';
-            document.getElementById('adresseParents').value = student.adresse_parents || '';
-            document.getElementById('statutFinancier').value = student.statut_financier || student.statutFinancier || 'solvable';
+            editingId = id;
             document.getElementById('modalTitle').textContent = 'Modifier un Ã©lÃ¨ve';
+            document.getElementById('matricule').value = student.matricule || '';
+            document.getElementById('nom').value = student.nom || '';
+            document.getElementById('prenom').value = student.prenom || '';
+            document.getElementById('date_naissance').value = student.date_naissance || '';
+            document.getElementById('classe').value = student.classe || '';
+            document.getElementById('telephone').value = student.telephone || '';
+            document.getElementById('email').value = student.email || '';
+            document.getElementById('adresse').value = student.adresse || '';
+            document.getElementById('statut_financier').value = student.statut_financier || 'solvable';
             document.getElementById('studentModal').classList.add('active');
         }
 
-        async function deleteStudent(index) {
-            const student = students[index];
-            if (!student) return;
-            if (confirm('ÃŠtes-vous sÃ»r de vouloir supprimer cet Ã©lÃ¨ve ?')) {
-                try {
-                    const response = await fetch(`/api/eleves/${student.id}`, {
-                        method: 'DELETE'
-                    });
-                    if (response.ok) {
-                        await loadStudents();
-                    }
-                } catch (error) {
-                    console.error('Erreur:', error);
-                    alert('Erreur lors de la suppression');
-                }
-            }
-        }
-
-        async function loadStudents() {
+        async function deleteStudent(id) {
+            if (!confirm('Supprimer cet Ã©lÃ¨ve ?')) return;
             try {
-                const response = await fetch('/api/eleves');
-                students = await response.json();
-                renderStudents();
+                const response = await fetch(`/api/eleves/${id}`, { method: 'DELETE' });
+                if (!response.ok) throw new Error('Suppression impossible');
+                await loadStudents();
             } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors du chargement des Ã©lÃ¨ves');
+                console.error(error);
+                alert('Erreur lors de la suppression.');
             }
         }
 
-        document.getElementById('studentForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const newStudent = {
-                matricule: document.getElementById('matricule').value,
-                section: document.getElementById('section').value,
-                nom: document.getElementById('nom').value,
-                prenom: document.getElementById('prenom').value,
+        document.getElementById('studentForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const payload = {
+                matricule: document.getElementById('matricule').value || undefined,
+                nom: document.getElementById('nom').value.trim(),
+                prenom: document.getElementById('prenom').value.trim(),
+                date_naissance: document.getElementById('date_naissance').value,
                 classe: document.getElementById('classe').value,
-                date_naissance: document.getElementById('dateNaissance').value,
-                telephone: document.getElementById('telephone').value,
-                email: document.getElementById('email').value,
-                adresse_parents: document.getElementById('adresseParents').value,
-                statut_financier: document.getElementById('statutFinancier').value
+                telephone: document.getElementById('telephone').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                adresse: document.getElementById('adresse').value.trim(),
+                statut_financier: document.getElementById('statut_financier').value
             };
 
             try {
-                let response;
-                if (editingStudentId) {
-                    response = await fetch(`/api/eleves/${editingStudentId}`, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(newStudent)
-                    });
-                } else {
-                    response = await fetch('/api/eleves', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(newStudent)
-                    });
-                }
+                const response = await fetch(editingId ? `/api/eleves/${editingId}` : '/api/eleves', {
+                    method: editingId ? 'PUT' : 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
 
-                if (response.ok) {
-                    await loadStudents();
-                    closeModal();
-                }
+                if (!response.ok) throw new Error('Sauvegarde impossible');
+                await loadStudents();
+                closeModal();
             } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors de l\'enregistrement');
+                console.error(error);
+                alert('Erreur lors de l\'enregistrement.');
             }
         });
 
-        // Initial render
         loadStudents();
     </script>
 </body>

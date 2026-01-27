@@ -1,633 +1,304 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion LycÃ©e - Dashboard</title>
+    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #f6f7fb;
+            --card: #ffffff;
+            --text: #101828;
+            --muted: #667085;
+            --border: #e4e7ec;
+            --primary: #4f46e5;
+            --primary-soft: #e0e7ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
         }
 
-        :root {
-            --bg-primary: #f8f9fc;
-            --bg-card: #ffffff;
-            --text-primary: #1a1d29;
-            --text-secondary: #6b7280;
-            --border-color: #e5e7eb;
-            
-            --color-professors: #3b82f6;
-            --color-professors-light: #dbeafe;
-            --color-students: #f59e0b;
-            --color-students-light: #fef3c7;
-            --color-finance: #10b981;
-            --color-finance-light: #d1fae5;
-            --color-alert: #ef4444;
-            --color-alert-light: #fee2e2;
-            --color-schedule: #8b5cf6;
-            --color-schedule-light: #ede9fe;
-            --color-absence: #ec4899;
-            --color-absence-light: #fce7f3;
-            --color-bulletin: #06b6d4;
-            --color-bulletin-light: #cffafe;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: 'Outfit', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .layout {
             display: flex;
             min-height: 100vh;
         }
 
-        /* Sidebar */
         .sidebar {
             width: 260px;
-            background: var(--bg-card);
-            border-right: 1px solid var(--border-color);
-            padding: 24px 0;
-            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.03);
+            background: var(--card);
+            border-right: 1px solid var(--border);
+            padding: 24px 18px;
         }
 
         .logo {
             display: flex;
-            align-items: center;
             gap: 12px;
-            padding: 0 24px 32px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 24px;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
         }
 
         .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6366f1, #4338ca);
+            color: #fff;
+            display: grid;
+            place-items: center;
             font-size: 20px;
         }
 
-        .logo-text {
+        .logo-title {
             font-family: 'Sora', sans-serif;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            color: var(--text-primary);
         }
 
-        .nav-menu {
-            list-style: none;
-        }
-
-        .nav-item {
-            margin: 4px 0;
+        .logo-subtitle {
+            font-size: 12px;
+            color: var(--muted);
         }
 
         .nav-link {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 24px;
-            color: var(--text-secondary);
+            gap: 10px;
+            padding: 10px 12px;
+            margin-bottom: 6px;
             text-decoration: none;
-            font-size: 15px;
+            color: var(--muted);
+            border-radius: 10px;
             font-weight: 500;
-            transition: all 0.2s;
+            transition: 0.2s;
         }
 
-        .nav-link:hover {
-            background: rgba(99, 102, 241, 0.06);
-            color: #6366f1;
-        }
-
+        .nav-link:hover,
         .nav-link.active {
-            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
-            color: #6366f1;
-            border-right: 3px solid #6366f1;
+            background: var(--primary-soft);
+            color: var(--primary);
         }
 
-        .nav-icon {
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Main Content */
-        .main-content {
+        .content {
             flex: 1;
-            padding: 32px 48px;
-            overflow-y: auto;
+            padding: 32px 40px;
         }
 
         .header {
-            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
         }
 
         .header h1 {
             font-family: 'Sora', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-primary);
+            font-size: 28px;
         }
 
         .header p {
-            color: var(--text-secondary);
-            font-size: 15px;
+            color: var(--muted);
+            margin-top: 6px;
         }
 
-        /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            margin-bottom: 48px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
         }
 
         .stat-card {
-            background: var(--bg-card);
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 24px;
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
+            padding: 18px;
         }
 
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-        }
-
-        .stat-card.professors::before { background: var(--color-professors); }
-        .stat-card.finance::before { background: var(--color-finance); }
-        .stat-card.students::before { background: var(--color-students); }
-        .stat-card.alert::before { background: var(--color-alert); }
-
-        .stat-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
-
-        .stat-title {
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .stat-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .professors .stat-icon {
-            background: var(--color-professors-light);
-            color: var(--color-professors);
-        }
-
-        .finance .stat-icon {
-            background: var(--color-finance-light);
-            color: var(--color-finance);
-        }
-
-        .students .stat-icon {
-            background: var(--color-students-light);
-            color: var(--color-students);
-        }
-
-        .alert .stat-icon {
-            background: var(--color-alert-light);
-            color: var(--color-alert);
+        .stat-label {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 6px;
         }
 
         .stat-value {
             font-family: 'Sora', sans-serif;
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 4px;
-            color: var(--text-primary);
-        }
-
-        .stat-subtitle {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        /* Modules Section */
-        .section-title {
-            font-family: 'Sora', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            color: var(--text-primary);
         }
 
         .modules-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
         }
 
-        .module-card {
-            background: var(--bg-card);
+        .module {
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 28px;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.2s;
         }
 
-        .module-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            opacity: 0.08;
-            transition: all 0.3s ease;
-        }
-
-        .module-card.professors::after { background: var(--color-professors); }
-        .module-card.students::after { background: var(--color-students); }
-        .module-card.schedule::after { background: var(--color-schedule); }
-        .module-card.absence::after { background: var(--color-absence); }
-        .module-card.finance::after { background: var(--color-finance); }
-        .module-card.bulletin::after { background: var(--color-bulletin); }
-
-        .module-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .module-card:hover::after {
-            transform: translate(20px, -20px) scale(1.2);
-            opacity: 0.12;
-        }
-
-        .module-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
+        .module:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08);
         }
 
         .module-title {
             font-family: 'Sora', sans-serif;
-            font-size: 18px;
             font-weight: 700;
-            color: var(--text-primary);
+            margin-bottom: 6px;
         }
 
-        .module-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .module-card.professors .module-icon {
-            background: var(--color-professors-light);
-            color: var(--color-professors);
-        }
-
-        .module-card.students .module-icon {
-            background: var(--color-students-light);
-            color: var(--color-students);
-        }
-
-        .module-card.schedule .module-icon {
-            background: var(--color-schedule-light);
-            color: var(--color-schedule);
-        }
-
-        .module-card.absence .module-icon {
-            background: var(--color-absence-light);
-            color: var(--color-absence);
-        }
-
-        .module-card.finance .module-icon {
-            background: var(--color-finance-light);
-            color: var(--color-finance);
-        }
-
-        .module-card.bulletin .module-icon {
-            background: var(--color-bulletin-light);
-            color: var(--color-bulletin);
-        }
-
-        .module-description {
-            color: var(--text-secondary);
+        .module-desc {
+            color: var(--muted);
             font-size: 14px;
-            margin-bottom: 16px;
-            line-height: 1.6;
         }
 
-        .module-info {
-            font-size: 13px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Notification Badge */
-        .notification-badge {
-            position: fixed;
-            bottom: 24px;
-            left: 24px;
-            background: white;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px 20px;
-            display: flex;
+        .pill {
+            display: inline-flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            animation: slideUp 0.3s ease;
+            gap: 6px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            margin-top: 12px;
         }
 
-        @keyframes slideUp {
-            from {
-                transform: translateY(100px);
-                opacity: 0;
+        @media (max-width: 900px) {
+            .layout {
+                flex-direction: column;
             }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
 
-        .notification-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--color-alert-light);
-            color: var(--color-alert);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .notification-text {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .close-notification {
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--text-secondary);
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .close-notification:hover {
-            background: var(--color-alert-light);
-            color: var(--color-alert);
-        }
-
-        @media (max-width: 1200px) {
-            .modules-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .modules-grid {
-                grid-template-columns: 1fr;
+            .sidebar {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
-            <div class="logo-icon">ðŸŽ“</div>
-            <div class="logo-text">Gestion LycÃ©e</div>
-        </div>
-        
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="/" class="nav-link active">
-                    <span class="nav-icon">ðŸ“Š</span>
-                    Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/personnel.html" class="nav-link">
-                    <span class="nav-icon">ðŸ‘¥</span>
-                    Personnel
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/eleves.html" class="nav-link">
-                    <span class="nav-icon">ðŸŽ“</span>
-                    Ã‰lÃ¨ves
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/emploi-temps.html" class="nav-link">
-                    <span class="nav-icon">ðŸ“…</span>
-                    Emploi du Temps
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/absences.html" class="nav-link">
-                    <span class="nav-icon">ðŸ“‹</span>
-                    Absences
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/finance.html" class="nav-link">
-                    <span class="nav-icon">ðŸ’°</span>
-                    Finance (APEE)
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/bulletins.html" class="nav-link">
-                    <span class="nav-icon">ðŸ“„</span>
-                    Bulletins
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="header">
-            <h1>ðŸ“Š Dashboard</h1>
-            <p>Vue d'ensemble de votre systÃ¨me de gestion de lycÃ©e</p>
-        </div>
-
-        <!-- Stats Cards -->
-        <div class="stats-grid">
-            <div class="stat-card professors">
-                <div class="stat-header">
-                    <span class="stat-title">Personnel prÃ©sents</span>
-                    <div class="stat-icon">â°</div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">ðŸŽ“</div>
+                <div>
+                    <div class="logo-title">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
+                    <div class="logo-subtitle">SystÃ¨me de gestion</div>
                 </div>
-                <div class="stat-value">28</div>
-                <div class="stat-subtitle">sur 35 Personnel</div>
+            </div>
+            <a class="nav-link active" href="/">ðŸ“Š Dashboard</a>
+            <a class="nav-link" href="/personnel.html">ðŸ‘¥ Personnel</a>
+            <a class="nav-link" href="/eleves.html">ðŸŽ“ Ã‰lÃ¨ves</a>
+            <a class="nav-link" href="/emploi-temps.html">ðŸ“… Emploi du temps</a>
+            <a class="nav-link" href="/absences.html">ðŸ“‹ Absences</a>
+            <a class="nav-link" href="/finance.html">ðŸ’° Finance (APEE)</a>
+            <a class="nav-link" href="/bulletins.html">ðŸ“„ Bulletins</a>
+        </aside>
+
+        <main class="content">
+            <div class="header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Vue d'ensemble du lycÃ©e et des indicateurs clÃ©s.</p>
+                </div>
             </div>
 
-            <div class="stat-card finance">
-                <div class="stat-header">
-                    <span class="stat-title">Total perÃ§u (APEE)</span>
-                    <div class="stat-icon">ðŸ“ˆ</div>
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Personnel actif</div>
+                    <div class="stat-value" id="statProf">--</div>
                 </div>
-                <div class="stat-value">485 000 FCFA</div>
-                <div class="stat-subtitle">125 000 FCFA en attente</div>
-            </div>
-
-            <div class="stat-card students">
-                <div class="stat-header">
-                    <span class="stat-title">Total Ã©lÃ¨ves</span>
-                    <div class="stat-icon">ðŸŽ“</div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Ã©lÃ¨ves</div>
+                    <div class="stat-value" id="statEleves">--</div>
                 </div>
-                <div class="stat-value">487</div>
-                <div class="stat-subtitle">Ã©lÃ¨ves inscrits</div>
-            </div>
-
-            <div class="stat-card alert">
-                <div class="stat-header">
-                    <span class="stat-title">Ã‰lÃ¨ves insolvables</span>
-                    <div class="stat-icon">âš ï¸</div>
+                <div class="stat-card">
+                    <div class="stat-label">Ã‰lÃ¨ves insolvables</div>
+                    <div class="stat-value" id="statInsolvables">--</div>
                 </div>
-                <div class="stat-value">23</div>
-                <div class="stat-subtitle">nÃ©cessitent un suivi</div>
-            </div>
-        </div>
-
-        <!-- Modules Section -->
-        <h2 class="section-title">Modules disponibles</h2>
-        <div class="modules-grid">
-            <a href="/personnel.html" style="text-decoration: none; color: inherit;">
-            <div class="module-card professors">
-                <div class="module-header">
-                    <h3 class="module-title">Personnel</h3>
-                    <div class="module-icon">ðŸ‘¥</div>
+                <div class="stat-card">
+                    <div class="stat-label">Total perÃ§u (APEE)</div>
+                    <div class="stat-value" id="statFinances">--</div>
                 </div>
-                <p class="module-description">GÃ©rer les informations des Personnel</p>
-                <div class="module-info">35 Personnel enregistrÃ©s</div>
-            </div>
-            </a>
+            </section>
 
-            <a href="/eleves.html" style="text-decoration: none; color: inherit;">
-            <div class="module-card students">
-                <div class="module-header">
-                    <h3 class="module-title">Ã‰lÃ¨ves</h3>
-                    <div class="module-icon">ðŸŽ“</div>
+            <section>
+                <h2 style="font-family: 'Sora', sans-serif; font-size: 20px; margin-bottom: 14px;">Modules</h2>
+                <div class="modules-grid">
+                    <a class="module" href="/personnel.html">
+                        <div class="module-title">Personnel</div>
+                        <div class="module-desc">Gestion des professeurs et du staff pÃ©dagogique.</div>
+                        <div class="pill">ðŸ‘¥ Gestion RH</div>
+                    </a>
+                    <a class="module" href="/eleves.html">
+                        <div class="module-title">Ã‰lÃ¨ves</div>
+                        <div class="module-desc">Inscriptions, suivi et informations scolaires.</div>
+                        <div class="pill">ðŸŽ“ Dossiers Ã©lÃ¨ves</div>
+                    </a>
+                    <a class="module" href="/emploi-temps.html">
+                        <div class="module-title">Emploi du temps</div>
+                        <div class="module-desc">Planification des cours par classe.</div>
+                        <div class="pill">ðŸ“… Planning</div>
+                    </a>
+                    <a class="module" href="/absences.html">
+                        <div class="module-title">Absences</div>
+                        <div class="module-desc">Suivi des absences et justifications.</div>
+                        <div class="pill">ðŸ“‹ Suivi</div>
+                    </a>
+                    <a class="module" href="/finance.html">
+                        <div class="module-title">Finance (APEE)</div>
+                        <div class="module-desc">Paiements, recouvrement et relances.</div>
+                        <div class="pill">ðŸ’° APEE</div>
+                    </a>
+                    <a class="module" href="/bulletins.html">
+                        <div class="module-title">Bulletins</div>
+                        <div class="module-desc">GÃ©nÃ©ration et impression des bulletins.</div>
+                        <div class="pill">ðŸ“„ RÃ©sultats</div>
+                    </a>
                 </div>
-                <p class="module-description">GÃ©rer les informations des Ã©lÃ¨ves</p>
-                <div class="module-info">487 Ã©lÃ¨ves inscrits</div>
-            </div>
-            </a>
-
-            <a href="/emploi-temps.html" style="text-decoration: none; color: inherit;">
-            <div class="module-card schedule">
-                <div class="module-header">
-                    <h3 class="module-title">Emploi du Temps</h3>
-                    <div class="module-icon">ðŸ“…</div>
-                </div>
-                <p class="module-description">Consulter et modifier les emplois du temps</p>
-                <div class="module-info">Module disponible</div>
-            </div>
-            </a>
-
-            <a href="/absences.html" style="text-decoration: none; color: inherit;">
-            <div class="module-card absence">
-                <div class="module-header">
-                    <h3 class="module-title">Absences</h3>
-                    <div class="module-icon">ðŸ“‹</div>
-                </div>
-                <p class="module-description">Suivre les absences des Ã©lÃ¨ves</p>
-                <div class="module-info">Module disponible</div>
-            </div>
-            </a>
-
-            <a href="/finance.html" style="text-decoration: none; color: inherit;">
-            <div class="module-card finance">
-                <div class="module-header">
-                    <h3 class="module-title">Finance (APEE)</h3>
-                    <div class="module-icon">ðŸ’°</div>
-                </div>
-                <p class="module-description">GÃ©rer les frais de l'association</p>
-                <div class="module-info">Module disponible</div>
-            </div>
-            </a>
-
-            <a href="/bulletins.html" style="text-decoration: none; color: inherit;">
-            <div class="module-card bulletin">
-                <div class="module-header">
-                    <h3 class="module-title">Bulletins</h3>
-                    <div class="module-icon">ðŸ“„</div>
-                </div>
-                <p class="module-description">GÃ©nÃ©rer et imprimer les bulletins scolaires</p>
-                <div class="module-info">Module disponible</div>
-            </div>
-            </a>
-        </div>
-    </div>
-
-    <!-- Notification Badge -->
-    <div class="notification-badge" id="notification">
-        <div class="notification-icon">!</div>
-        <div class="notification-text">23 Ã©lÃ¨ves nÃ©cessitent un suivi financier</div>
-        <button class="close-notification" onclick="closeNotification()">âœ•</button>
+            </section>
+        </main>
     </div>
 
     <script>
-        function closeNotification() {
-            const notification = document.getElementById('notification');
-            notification.style.animation = 'slideDown 0.3s ease';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 300);
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/stats');
+                if (!response.ok) throw new Error('Stats indisponibles');
+                const stats = await response.json();
+                document.getElementById('statProf').textContent = stats.professeurs_presents ?? '0';
+                document.getElementById('statEleves').textContent = stats.total_eleves ?? '0';
+                document.getElementById('statInsolvables').textContent = stats.eleves_insolvables ?? '0';
+                document.getElementById('statFinances').textContent = `${stats.total_percu ?? 0} FCFA`;
+            } catch (error) {
+                document.getElementById('statProf').textContent = 'â€”';
+                document.getElementById('statEleves').textContent = 'â€”';
+                document.getElementById('statInsolvables').textContent = 'â€”';
+                document.getElementById('statFinances').textContent = 'â€”';
+            }
         }
+
+        loadStats();
     </script>
 </body>
 </html>
