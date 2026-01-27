@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "matricule": "MAT001",
+    "nom": "Ndongo",
+    "prenom": "Aissatou",
+    "classe": "1ère",
+    "date_naissance": "2008-03-15",
+    "telephone": "+237 690 123 456",
+    "email": "parent1@email.cm",
+    "adresse": "Yaoundé",
+    "statut_financier": "solvable"
+  },
+  {
+    "id": 2,
+    "matricule": "MAT002",
+    "nom": "Kamara",
+    "prenom": "Mohamed",
+    "classe": "Tle",
+    "date_naissance": "2007-05-20",
+    "telephone": "+237 677 234 567",
+    "email": "parent2@email.cm",
+    "adresse": "Douala",
+    "statut_financier": "solvable"
+  },
+  {
+    "id": 3,
+    "matricule": "MAT003",
+    "nom": "Mbarga",
+    "prenom": "Grace",
+    "classe": "2nde",
+    "date_naissance": "2009-08-10",
+    "telephone": "+237 655 345 678",
+    "email": "parent3@email.cm",
+    "adresse": "Yaoundé",
+    "statut_financier": "insolvable"
+  },
+  {
+    "id": 4,
+    "matricule": "MAT004",
+    "nom": "Diop",
+    "prenom": "Ousmane",
+    "classe": "3ème",
+    "date_naissance": "2010-11-25",
+    "telephone": "+237 698 456 789",
+    "email": "parent4@email.cm",
+    "adresse": "Bafoussam",
+    "statut_financier": "solvable"
+  },
+  {
+    "id": 5,
+    "matricule": "MAT005",
+    "nom": "Tankoua",
+    "prenom": "Larissa",
+    "classe": "4ème",
+    "date_naissance": "2011-02-14",
+    "telephone": "+237 670 567 890",
+    "email": "parent5@email.cm",
+    "adresse": "Douala",
+    "statut_financier": "insolvable"
+  },
+  {
+    "id": 6,
+    "matricule": "MAT006",
+    "nom": "Fofana",
+    "prenom": "Ibrahim",
+    "classe": "1ère",
+    "date_naissance": "2008-07-30",
+    "telephone": "+237 691 234 567",
+    "email": "parent6@email.cm",
+    "adresse": "Yaoundé",
+    "statut_financier": "solvable"
+  }
+]
