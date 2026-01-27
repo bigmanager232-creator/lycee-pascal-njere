@@ -16,11 +16,13 @@ const DATA_DIR = path.join(__dirname, 'data');
 const PUBLIC_DATA_DIR = path.join(__dirname, 'public');
 const DATA_PATHS = {
     'eleves.json': PUBLIC_DATA_DIR,
+    'personnel.json': DATA_DIR,
     'professeurs.json': DATA_DIR,
     'absences.json': DATA_DIR,
     'finances.json': DATA_DIR,
     'emplois.json': DATA_DIR,
-    'bulletins.json': DATA_DIR
+    'bulletins.json': DATA_DIR,
+    'notes.json': DATA_DIR
 };
 
 function resolveDataPath(filename) {
@@ -53,11 +55,69 @@ function getNextId(data) {
     return Math.max(...data.map(item => item.id)) + 1;
 }
 
-// ==================== ROUTES PROFESSEURS ====================
+function generateMatricule9() {
+    const base = Math.floor(Math.random() * 1000000000);
+    return String(base).padStart(9, '0');
+}
+
+// ==================== ROUTES PERSONNEL ====================
+app.get('/api/personnel', (req, res) => {
+    try {
+        const personnel = readData('personnel.json');
+        res.json(personnel);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/api/personnel', (req, res) => {
+    try {
+        const personnel = readData('personnel.json');
+        const newPerson = {
+            id: getNextId(personnel),
+            ...req.body,
+            created_at: new Date().toISOString()
+        };
+        personnel.push(newPerson);
+        writeData('personnel.json', personnel);
+        res.json({ message: 'Personnel ajouté avec succès', data: newPerson });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.put('/api/personnel/:id', (req, res) => {
+    try {
+        const personnel = readData('personnel.json');
+        const index = personnel.findIndex(p => p.id === parseInt(req.params.id));
+        if (index !== -1) {
+            personnel[index] = { ...personnel[index], ...req.body };
+            writeData('personnel.json', personnel);
+            res.json({ message: 'Personnel mis à jour', data: personnel[index] });
+        } else {
+            res.status(404).json({ error: 'Personnel non trouvé' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.delete('/api/personnel/:id', (req, res) => {
+    try {
+        let personnel = readData('personnel.json');
+        personnel = personnel.filter(p => p.id !== parseInt(req.params.id));
+        writeData('personnel.json', personnel);
+        res.json({ message: 'Personnel supprimé' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Compat: anciens endpoints professeurs
 app.get('/api/professeurs', (req, res) => {
     try {
-        const professeurs = readData('professeurs.json');
-        res.json(professeurs);
+        const personnel = readData('personnel.json');
+        res.json(personnel);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -65,15 +125,15 @@ app.get('/api/professeurs', (req, res) => {
 
 app.post('/api/professeurs', (req, res) => {
     try {
-        const professeurs = readData('professeurs.json');
-        const newProf = {
-            id: getNextId(professeurs),
+        const personnel = readData('personnel.json');
+        const newPerson = {
+            id: getNextId(personnel),
             ...req.body,
             created_at: new Date().toISOString()
         };
-        professeurs.push(newProf);
-        writeData('professeurs.json', professeurs);
-        res.json({ message: 'Professeur ajouté avec succès', data: newProf });
+        personnel.push(newPerson);
+        writeData('personnel.json', personnel);
+        res.json({ message: 'Personnel ajouté avec succès', data: newPerson });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -81,14 +141,14 @@ app.post('/api/professeurs', (req, res) => {
 
 app.put('/api/professeurs/:id', (req, res) => {
     try {
-        const professeurs = readData('professeurs.json');
-        const index = professeurs.findIndex(p => p.id === parseInt(req.params.id));
+        const personnel = readData('personnel.json');
+        const index = personnel.findIndex(p => p.id === parseInt(req.params.id));
         if (index !== -1) {
-            professeurs[index] = { ...professeurs[index], ...req.body };
-            writeData('professeurs.json', professeurs);
-            res.json({ message: 'Professeur mis à jour', data: professeurs[index] });
+            personnel[index] = { ...personnel[index], ...req.body };
+            writeData('personnel.json', personnel);
+            res.json({ message: 'Personnel mis à jour', data: personnel[index] });
         } else {
-            res.status(404).json({ error: 'Professeur non trouvé' });
+            res.status(404).json({ error: 'Personnel non trouvé' });
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -97,15 +157,14 @@ app.put('/api/professeurs/:id', (req, res) => {
 
 app.delete('/api/professeurs/:id', (req, res) => {
     try {
-        let professeurs = readData('professeurs.json');
-        professeurs = professeurs.filter(p => p.id !== parseInt(req.params.id));
-        writeData('professeurs.json', professeurs);
-        res.json({ message: 'Professeur supprimé' });
+        let personnel = readData('personnel.json');
+        personnel = personnel.filter(p => p.id !== parseInt(req.params.id));
+        writeData('personnel.json', personnel);
+        res.json({ message: 'Personnel supprimé' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
-
 // ==================== ROUTES ÉLÈVES ====================
 app.get('/api/eleves', (req, res) => {
     try {
@@ -119,7 +178,7 @@ app.get('/api/eleves', (req, res) => {
 app.post('/api/eleves', (req, res) => {
     try {
         const eleves = readData('eleves.json');
-        const matricule = 'MAT' + String(eleves.length + 1).padStart(3, '0');
+        const matricule = req.body.matricule || generateMatricule9();
         const newEleve = {
             id: getNextId(eleves),
             matricule,
@@ -373,10 +432,63 @@ app.delete('/api/bulletins/:id', (req, res) => {
     }
 });
 
+// ==================== ROUTES NOTES ====================
+app.get('/api/notes', (req, res) => {
+    try {
+        const notes = readData('notes.json');
+        res.json(notes);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/api/notes', (req, res) => {
+    try {
+        const notes = readData('notes.json');
+        const newNote = {
+            id: getNextId(notes),
+            ...req.body,
+            created_at: new Date().toISOString()
+        };
+        notes.push(newNote);
+        writeData('notes.json', notes);
+        res.json({ message: 'Note enregistrée', data: newNote });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.put('/api/notes/:id', (req, res) => {
+    try {
+        const notes = readData('notes.json');
+        const index = notes.findIndex(n => n.id === parseInt(req.params.id));
+        if (index !== -1) {
+            notes[index] = { ...notes[index], ...req.body };
+            writeData('notes.json', notes);
+            res.json({ message: 'Note mise à jour', data: notes[index] });
+        } else {
+            res.status(404).json({ error: 'Note non trouvée' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.delete('/api/notes/:id', (req, res) => {
+    try {
+        let notes = readData('notes.json');
+        notes = notes.filter(n => n.id !== parseInt(req.params.id));
+        writeData('notes.json', notes);
+        res.json({ message: 'Note supprimée' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // ==================== ROUTES STATISTIQUES ====================
 app.get('/api/stats', (req, res) => {
     try {
-        const professeurs = readData('professeurs.json');
+        const personnel = readData('personnel.json');
         const eleves = readData('eleves.json');
         const finances = readData('finances.json');
 
@@ -386,8 +498,8 @@ app.get('/api/stats', (req, res) => {
         }, 0);
         
         const stats = {
-            professeurs_presents: professeurs.filter(p => p.statut === 'actif').length,
-            total_professeurs: professeurs.length,
+            professeurs_presents: personnel.filter(p => p.presence_effective === 'oui' || p.statut === 'actif').length,
+            total_professeurs: personnel.length,
             total_eleves: eleves.length,
             eleves_insolvables: eleves.filter(e => e.statut_financier === 'insolvable').length,
             total_percu: totalPercu

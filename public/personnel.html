@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lycée Pascal Njèrè IV - Professeurs</title>
+    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Personnel</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -367,44 +367,44 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">
-            <div class="logo-icon">🎓</div>
-            <div class="logo-text">Lycée Pascal Njèrè IV</div>
+            <div class="logo-icon">ðŸŽ“</div>
+            <div class="logo-text">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
         </div>
         
         <ul class="nav-menu">
             <li class="nav-item">
                 <a href="/" class="nav-link">
-                    <span>📊</span> Dashboard
+                    <span>ðŸ“Š</span> Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/professeurs.html" class="nav-link active">
-                    <span>👥</span> Professeurs
+                <a href="/personnel.html" class="nav-link active">
+                    <span>ðŸ‘¥</span> Personnel
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/eleves.html" class="nav-link">
-                    <span>🎓</span> Élèves
+                    <span>ðŸŽ“</span> Ã‰lÃ¨ves
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/emploi-temps.html" class="nav-link">
-                    <span>📅</span> Emploi du Temps
+                    <span>ðŸ“…</span> Emploi du Temps
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/absences.html" class="nav-link">
-                    <span>📋</span> Absences
+                    <span>ðŸ“‹</span> Absences
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/finance.html" class="nav-link">
-                    <span>💰</span> Finance (APEE)
+                    <span>ðŸ’°</span> Finance (APEE)
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/bulletins.html" class="nav-link">
-                    <span>📄</span> Bulletins
+                    <span>ðŸ“„</span> Bulletins
                 </a>
             </li>
         </ul>
@@ -414,17 +414,17 @@
     <div class="main-content">
         <div class="header">
             <div class="header-left">
-                <h1>👥 Professeurs</h1>
-                <p>Gestion des professeurs du lycée</p>
+                <h1>ðŸ‘¥ Personnel</h1>
+                <p>Gestion du personnel du lycÃ©e</p>
             </div>
             <button class="btn btn-primary" onclick="openModal()">
-                ➕ Ajouter un professeur
+                âž• Ajouter un personnel
             </button>
         </div>
 
         <div class="search-bar">
-            <span>🔍</span>
-            <input type="text" placeholder="Rechercher un professeur..." id="searchInput" onkeyup="searchTable()">
+            <span>ðŸ”</span>
+            <input type="text" placeholder="Rechercher un personnel..." id="searchInput" onkeyup="searchTable()">
         </div>
 
         <div class="professors-table">
@@ -432,102 +432,70 @@
                 <thead>
                     <tr>
                         <th>Nom complet</th>
-                        <th>Matière</th>
-                        <th>Téléphone</th>
+                        <th>CatÃ©gorie</th>
+                        <th>Matricule solde</th>
+                        <th>TÃ©lÃ©phone</th>
                         <th>Email</th>
-                        <th>Statut</th>
+                        <th>MatiÃ¨res</th>
+                        <th>PrÃ©sence</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Amadou Diallo</td>
-                        <td>Mathématiques</td>
-                        <td>+237 690 123 456</td>
-                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8feee2eeebe0faa1ebe6eee3e3e0cfe3f6eceaeaa1ece2">[email&#160;protected]</a></td>
-                        <td><span class="status-badge status-actif">Actif</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn-icon btn-edit" onclick="editProfessor(this)">✏️</button>
-                                <button class="btn-icon btn-delete" onclick="deleteProfessor(this)">🗑️</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Fatoumata Bah</td>
-                        <td>Physique-Chimie</td>
-                        <td>+237 677 234 567</td>
-                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a1c1b0e150f171b0e1b54181b123a1603191f1f541917">[email&#160;protected]</a></td>
-                        <td><span class="status-badge status-actif">Actif</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn-icon btn-edit" onclick="editProfessor(this)">✏️</button>
-                                <button class="btn-icon btn-delete" onclick="deleteProfessor(this)">🗑️</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Jean-Pierre Nkolo</td>
-                        <td>Histoire-Géographie</td>
-                        <td>+237 655 345 678</td>
-                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dfb5babeb1afb6baadadbaf1b1b4b0b3b09fb3a6bcbabaf1bcb2">[email&#160;protected]</a></td>
-                        <td><span class="status-badge status-actif">Actif</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn-icon btn-edit" onclick="editProfessor(this)">✏️</button>
-                                <button class="btn-icon btn-delete" onclick="deleteProfessor(this)">🗑️</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Marie Kouassi</td>
-                        <td>Français</td>
-                        <td>+237 698 456 789</td>
-                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6805091a010d4603071d091b1b012804110b0d0d460b05">[email&#160;protected]</a></td>
-                        <td><span class="status-badge status-conge">En congé</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn-icon btn-edit" onclick="editProfessor(this)">✏️</button>
-                                <button class="btn-icon btn-delete" onclick="deleteProfessor(this)">🗑️</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ibrahim Touré</td>
-                        <td>Anglais</td>
-                        <td>+237 670 567 890</td>
-                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cda4afbfaca5a4a0e3b9a2b8bfa88da1b4aea8a8e3aea0">[email&#160;protected]</a></td>
-                        <td><span class="status-badge status-actif">Actif</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn-icon btn-edit" onclick="editProfessor(this)">✏️</button>
-                                <button class="btn-icon btn-delete" onclick="deleteProfessor(this)">🗑️</button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal" id="professorModal">
+    <div class="modal" id="personnelModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modalTitle">Ajouter un professeur</h2>
-                <button class="close-modal" onclick="closeModal()">✕</button>
+                <h2 id="modalTitle">Ajouter un personnel</h2>
+                <button class="close-modal" onclick="closeModal()">âœ•</button>
             </div>
-            <form id="professorForm">
+            <form id="personnelForm">
+                <div class="form-group">
+                    <label>CatÃ©gorie *</label>
+                    <select id="categorie" required>
+                        <option value="Administration">Administration</option>
+                        <option value="Professeurs">Professeurs</option>
+                        <option value="Personnels d'appui">Personnels d'appui</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Nom complet *</label>
                     <input type="text" id="nomComplet" required>
                 </div>
                 <div class="form-group">
-                    <label>Matière *</label>
-                    <input type="text" id="matiere" required>
+                    <label>Matricule solde *</label>
+                    <input type="text" id="matriculeSolde" placeholder="123456A" pattern="\\d{6}[A-Za-z]" required>
                 </div>
                 <div class="form-group">
-                    <label>Téléphone *</label>
+                    <label>Date de naissance *</label>
+                    <input type="date" id="dateNaissance" required>
+                </div>
+                <div class="form-group">
+                    <label>Lieu de naissance *</label>
+                    <input type="text" id="lieuNaissance" required>
+                </div>
+                <div class="form-group">
+                    <label>RÃ©gion d'origine *</label>
+                    <input type="text" id="regionOrigine" required>
+                </div>
+                <div class="form-group">
+                    <label>DÃ©partement d'origine *</label>
+                    <input type="text" id="departementOrigine" required>
+                </div>
+                <div class="form-group">
+                    <label>Arrondissement d'origine *</label>
+                    <input type="text" id="arrondissementOrigine" required>
+                </div>
+                <div class="form-group">
+                    <label>Date d'entrÃ©e fonction publique *</label>
+                    <input type="date" id="dateEntree" required>
+                </div>
+                <div class="form-group">
+                    <label>TÃ©lÃ©phone *</label>
                     <input type="tel" id="telephone" required>
                 </div>
                 <div class="form-group">
@@ -535,10 +503,23 @@
                     <input type="email" id="email" required>
                 </div>
                 <div class="form-group">
-                    <label>Statut *</label>
-                    <select id="statut" required>
-                        <option value="actif">Actif</option>
-                        <option value="conge">En congé</option>
+                    <label>Statut matrimonial *</label>
+                    <select id="statutMatrimonial" required>
+                        <option value="celibataire">CÃ©libataire</option>
+                        <option value="marie">MariÃ©(e)</option>
+                        <option value="divorce">DivorcÃ©(e)</option>
+                        <option value="veuf">Veuf/Veuve</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>MatiÃ¨res enseignÃ©es</label>
+                    <input type="text" id="matieresEnseignees" placeholder="MathÃ©matiques, Physique">
+                </div>
+                <div class="form-group">
+                    <label>PrÃ©sence effective *</label>
+                    <select id="presenceEffective" required>
+                        <option value="oui">Oui</option>
+                        <option value="non">Non</option>
                     </select>
                 </div>
                 <div class="form-actions">
@@ -550,51 +531,53 @@
     </div>
 
     <script>
-        let editingProfId = null;
+        let editingPersonnelId = null;
 
-        // Load professors on page load
-        async function loadProfessors() {
+        async function loadPersonnel() {
             try {
-                const response = await fetch('/api/professeurs');
-                const professeurs = await response.json();
+                const response = await fetch('/api/personnel');
+                const personnel = await response.json();
                 const tbody = document.getElementById('professorsTable').getElementsByTagName('tbody')[0];
                 tbody.innerHTML = '';
-                
-                professeurs.forEach(prof => {
-                    const statusText = prof.statut === 'actif' ? 'Actif' : 'En congé';
-                    const statusClass = prof.statut === 'actif' ? 'status-actif' : 'status-conge';
-                    
+
+                personnel.forEach(person => {
+                    const presenceValue = person.presence_effective === 'non' || person.presence_effective === 'conge' ? 'non' : 'oui';
+                    const presenceText = presenceValue === 'oui' ? 'PrÃ©sent' : 'Absent';
+                    const presenceClass = presenceValue === 'oui' ? 'status-actif' : 'status-conge';
+
                     const row = tbody.insertRow();
-                    row.dataset.id = prof.id;
+                    row.dataset.id = person.id;
                     row.innerHTML = `
-                        <td>${prof.nom_complet}</td>
-                        <td>${prof.matiere}</td>
-                        <td>${prof.telephone}</td>
-                        <td>${prof.email}</td>
-                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td>${person.nom_complet || ''}</td>
+                        <td>${person.categorie || ''}</td>
+                        <td>${person.matricule_solde || ''}</td>
+                        <td>${person.telephone || ''}</td>
+                        <td>${person.email || ''}</td>
+                        <td>${person.matieres_enseignees || ''}</td>
+                        <td><span class="status-badge ${presenceClass}">${presenceText}</span></td>
                         <td>
                             <div class="action-btns">
-                                <button class="btn-icon btn-edit" onclick="editProfessor(${prof.id})">✏️</button>
-                                <button class="btn-icon btn-delete" onclick="deleteProfessor(${prof.id})">🗑️</button>
+                                <button class="btn-icon btn-edit" onclick="editPersonnel(${person.id})">âœï¸</button>
+                                <button class="btn-icon btn-delete" onclick="deletePersonnel(${person.id})">ðŸ—‘ï¸</button>
                             </div>
                         </td>
                     `;
                 });
             } catch (error) {
                 console.error('Erreur:', error);
-                alert('Erreur lors du chargement des professeurs');
+                alert('Erreur lors du chargement du personnel');
             }
         }
 
         function openModal() {
-            document.getElementById('professorModal').classList.add('active');
-            document.getElementById('modalTitle').textContent = 'Ajouter un professeur';
-            document.getElementById('professorForm').reset();
-            editingProfId = null;
+            document.getElementById('personnelModal').classList.add('active');
+            document.getElementById('modalTitle').textContent = 'Ajouter un personnel';
+            document.getElementById('personnelForm').reset();
+            editingPersonnelId = null;
         }
 
         function closeModal() {
-            document.getElementById('professorModal').classList.remove('active');
+            document.getElementById('personnelModal').classList.remove('active');
         }
 
         function searchTable() {
@@ -609,39 +592,49 @@
             }
         }
 
-        async function editProfessor(id) {
+        async function editPersonnel(id) {
             try {
-                const response = await fetch('/api/professeurs');
-                const professeurs = await response.json();
-                const prof = professeurs.find(p => p.id === id);
-                
-                if (prof) {
-                    document.getElementById('nomComplet').value = prof.nom_complet;
-                    document.getElementById('matiere').value = prof.matiere;
-                    document.getElementById('telephone').value = prof.telephone;
-                    document.getElementById('email').value = prof.email;
-                    document.getElementById('statut').value = prof.statut;
-                    
-                    editingProfId = id;
-                    document.getElementById('modalTitle').textContent = 'Modifier le professeur';
-                    document.getElementById('professorModal').classList.add('active');
+                const response = await fetch('/api/personnel');
+                const personnel = await response.json();
+                const person = personnel.find(p => p.id === id);
+
+                if (person) {
+                    document.getElementById('categorie').value = person.categorie || 'Professeurs';
+                    document.getElementById('nomComplet').value = person.nom_complet || '';
+                    document.getElementById('matriculeSolde').value = person.matricule_solde || '';
+                    document.getElementById('dateNaissance').value = person.date_naissance || '';
+                    document.getElementById('lieuNaissance').value = person.lieu_naissance || '';
+                    document.getElementById('regionOrigine').value = person.region_origine || '';
+                    document.getElementById('departementOrigine').value = person.departement_origine || '';
+                    document.getElementById('arrondissementOrigine').value = person.arrondissement_origine || '';
+                    document.getElementById('dateEntree').value = person.date_entree_fonction || '';
+                    document.getElementById('telephone').value = person.telephone || '';
+                    document.getElementById('email').value = person.email || '';
+                    document.getElementById('statutMatrimonial').value = person.statut_matrimonial || 'celibataire';
+                    document.getElementById('matieresEnseignees').value = person.matieres_enseignees || '';
+                    const presenceValue = person.presence_effective === 'non' || person.presence_effective === 'conge' ? 'non' : 'oui';
+                    document.getElementById('presenceEffective').value = presenceValue;
+
+                    editingPersonnelId = id;
+                    document.getElementById('modalTitle').textContent = 'Modifier le personnel';
+                    document.getElementById('personnelModal').classList.add('active');
                 }
             } catch (error) {
                 console.error('Erreur:', error);
-                alert('Erreur lors de la récupération des données');
+                alert('Erreur lors de la rÃ©cupÃ©ration des donnÃ©es');
             }
         }
 
-        async function deleteProfessor(id) {
-            if (confirm('Êtes-vous sûr de vouloir supprimer ce professeur ?')) {
+        async function deletePersonnel(id) {
+            if (confirm('ÃŠtes-vous sÃ»r de vouloir supprimer ce personnel ?')) {
                 try {
-                    const response = await fetch(`/api/professeurs/${id}`, {
+                    const response = await fetch(`/api/personnel/${id}`, {
                         method: 'DELETE'
                     });
-                    
+
                     if (response.ok) {
-                        await loadProfessors();
-                        alert('Professeur supprimé avec succès');
+                        await loadPersonnel();
+                        alert('Personnel supprimÃ© avec succÃ¨s');
                     }
                 } catch (error) {
                     console.error('Erreur:', error);
@@ -650,37 +643,46 @@
             }
         }
 
-        document.getElementById('professorForm').addEventListener('submit', async function(e) {
+        document.getElementById('personnelForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const data = {
+                categorie: document.getElementById('categorie').value,
                 nom_complet: document.getElementById('nomComplet').value,
-                matiere: document.getElementById('matiere').value,
+                matricule_solde: document.getElementById('matriculeSolde').value,
+                date_naissance: document.getElementById('dateNaissance').value,
+                lieu_naissance: document.getElementById('lieuNaissance').value,
+                region_origine: document.getElementById('regionOrigine').value,
+                departement_origine: document.getElementById('departementOrigine').value,
+                arrondissement_origine: document.getElementById('arrondissementOrigine').value,
+                date_entree_fonction: document.getElementById('dateEntree').value,
                 telephone: document.getElementById('telephone').value,
                 email: document.getElementById('email').value,
-                statut: document.getElementById('statut').value
+                statut_matrimonial: document.getElementById('statutMatrimonial').value,
+                matieres_enseignees: document.getElementById('matieresEnseignees').value,
+                presence_effective: document.getElementById('presenceEffective').value
             };
-            
+
             try {
                 let response;
-                if (editingProfId) {
-                    response = await fetch(`/api/professeurs/${editingProfId}`, {
+                if (editingPersonnelId) {
+                    response = await fetch(`/api/personnel/${editingPersonnelId}`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data)
                     });
                 } else {
-                    response = await fetch('/api/professeurs', {
+                    response = await fetch('/api/personnel', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data)
                     });
                 }
-                
+
                 if (response.ok) {
-                    await loadProfessors();
+                    await loadPersonnel();
                     closeModal();
-                    alert('Professeur enregistré avec succès');
+                    alert('Personnel enregistrÃ© avec succÃ¨s');
                 }
             } catch (error) {
                 console.error('Erreur:', error);
@@ -688,7 +690,6 @@
             }
         });
 
-        // Load on page load
-        loadProfessors();
+        loadPersonnel();
     </script>
                

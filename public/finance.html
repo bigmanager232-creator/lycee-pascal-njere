@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lycée Pascal Njèrè IV - Finance (APEE)</title>
+    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Finance (APEE)</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -463,44 +463,44 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">
-            <div class="logo-icon">🎓</div>
-            <div class="logo-text">Lycée Pascal Njèrè IV</div>
+            <div class="logo-icon">ðŸŽ“</div>
+            <div class="logo-text">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
         </div>
         
         <ul class="nav-menu">
             <li class="nav-item">
                 <a href="/" class="nav-link">
-                    <span>📊</span> Dashboard
+                    <span>ðŸ“Š</span> Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/professeurs.html" class="nav-link">
-                    <span>👥</span> Professeurs
+                <a href="/personnel.html" class="nav-link">
+                    <span>ðŸ‘¥</span> Personnel
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/eleves.html" class="nav-link">
-                    <span>🎓</span> Élèves
+                    <span>ðŸŽ“</span> Ã‰lÃ¨ves
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/emploi-temps.html" class="nav-link">
-                    <span>📅</span> Emploi du Temps
+                    <span>ðŸ“…</span> Emploi du Temps
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/absences.html" class="nav-link">
-                    <span>📋</span> Absences
+                    <span>ðŸ“‹</span> Absences
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/finance.html" class="nav-link active">
-                    <span>💰</span> Finance (APEE)
+                    <span>ðŸ’°</span> Finance (APEE)
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/bulletins.html" class="nav-link">
-                    <span>📄</span> Bulletins
+                    <span>ðŸ“„</span> Bulletins
                 </a>
             </li>
         </ul>
@@ -510,32 +510,32 @@
     <div class="main-content">
         <div class="header">
             <div class="header-left">
-                <h1>💰 Finance (APEE)</h1>
+                <h1>ðŸ’° Finance (APEE)</h1>
                 <p>Gestion des paiements et relances</p>
             </div>
             <button class="btn btn-primary" onclick="openPaymentModal()">
-                ➕ Enregistrer un paiement
+                âž• Enregistrer un paiement
             </button>
         </div>
 
         <div class="stats-row">
             <div class="stat-card success">
-                <div class="stat-icon" style="background: #d1fae5; color: #10b981;">💰</div>
+                <div class="stat-icon" style="background: #d1fae5; color: #10b981;">ðŸ’°</div>
                 <div class="stat-value" id="statTotalPercu">0 FCFA</div>
-                <div class="stat-label">Total perçu</div>
+                <div class="stat-label">Total perÃ§u</div>
             </div>
             <div class="stat-card warning">
-                <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">⏳</div>
+                <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">â³</div>
                 <div class="stat-value" id="statEnAttente">0 FCFA</div>
                 <div class="stat-label">En attente</div>
             </div>
             <div class="stat-card danger">
-                <div class="stat-icon" style="background: #fee2e2; color: #ef4444;">⚠️</div>
+                <div class="stat-icon" style="background: #fee2e2; color: #ef4444;">âš ï¸</div>
                 <div class="stat-value" id="statImpayes">0 FCFA</div>
-                <div class="stat-label">Impayés critiques</div>
+                <div class="stat-label">ImpayÃ©s critiques</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background: #e0e7ff; color: #4f46e5;">📊</div>
+                <div class="stat-icon" style="background: #e0e7ff; color: #4f46e5;">ðŸ“Š</div>
                 <div class="stat-value" id="statRecouvrement">0%</div>
                 <div class="stat-label">Taux de recouvrement</div>
             </div>
@@ -543,29 +543,38 @@
 
         <div class="filters">
             <div class="filter-group">
-                <label>🔍 Rechercher</label>
-                <input type="text" id="searchInput" placeholder="Nom de l'élève..." onkeyup="filterPayments()">
+                <label>ðŸ” Rechercher</label>
+                <input type="text" id="searchInput" placeholder="Nom de l'Ã©lÃ¨ve..." onkeyup="filterPayments()">
             </div>
             <div class="filter-group">
-                <label>📚 Classe</label>
+                <label>ðŸ“š Classe</label>
                 <select id="classFilter" onchange="filterPayments()">
                     <option value="">Toutes les classes</option>
-                    <option value="6eme">6ème</option>
-                    <option value="5eme">5ème</option>
-                    <option value="4eme">4ème</option>
-                    <option value="3eme">3ème</option>
+                    <option value="6e">6e</option>
+                    <option value="5e">5e</option>
+                    <option value="4e">4e</option>
+                    <option value="3e">3e</option>
                     <option value="2nde">2nde</option>
-                    <option value="1ere">1ère</option>
-                    <option value="tle">Terminale</option>
+                    <option value="1Ã¨re">1Ã¨re</option>
+                    <option value="Tle">Tle</option>
+                    <option value="F1">F1</option>
+                    <option value="F2">F2</option>
+                    <option value="F3">F3</option>
+                    <option value="F4">F4</option>
+                    <option value="F5">F5</option>
+                    <option value="LSA">LSA</option>
+                    <option value="UPSA">UPSA</option>
+                    <option value="LSS">LSS</option>
+                    <option value="UPSS">UPSS</option>
                 </select>
             </div>
             <div class="filter-group">
-                <label>🏷️ Statut</label>
+                <label>ðŸ·ï¸ Statut</label>
                 <select id="statusFilter" onchange="filterPayments()">
                     <option value="">Tous les statuts</option>
-                    <option value="paye">Payé</option>
+                    <option value="paye">PayÃ©</option>
                     <option value="partiel">Paiement partiel</option>
-                    <option value="impaye">Impayé</option>
+                    <option value="impaye">ImpayÃ©</option>
                 </select>
             </div>
         </div>
@@ -574,10 +583,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Élève</th>
+                        <th>Ã‰lÃ¨ve</th>
                         <th>Classe</th>
-                        <th>Montant dû</th>
-                        <th>Payé</th>
+                        <th>Montant dÃ»</th>
+                        <th>PayÃ©</th>
                         <th>Reste</th>
                         <th>Progression</th>
                         <th>Statut</th>
@@ -594,33 +603,42 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="paymentModalTitle">Enregistrer un paiement</h2>
-                <button class="close-modal" onclick="closePaymentModal()">✕</button>
+                <button class="close-modal" onclick="closePaymentModal()">âœ•</button>
             </div>
             <form id="paymentForm">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label>Élève *</label>
+                        <label>Ã‰lÃ¨ve *</label>
                         <input type="text" id="paymentEleve" required>
                     </div>
                     <div class="form-group">
                         <label>Classe *</label>
                         <select id="paymentClasse" required>
-                            <option value="">Sélectionner</option>
-                            <option value="6eme">6ème</option>
-                            <option value="5eme">5ème</option>
-                            <option value="4eme">4ème</option>
-                            <option value="3eme">3ème</option>
+                            <option value="">SÃ©lectionner</option>
+                            <option value="6e">6e</option>
+                            <option value="5e">5e</option>
+                            <option value="4e">4e</option>
+                            <option value="3e">3e</option>
                             <option value="2nde">2nde</option>
-                            <option value="1ere">1ère</option>
-                            <option value="tle">Terminale</option>
+                            <option value="1Ã¨re">1Ã¨re</option>
+                            <option value="Tle">Tle</option>
+                            <option value="F1">F1</option>
+                            <option value="F2">F2</option>
+                            <option value="F3">F3</option>
+                            <option value="F4">F4</option>
+                            <option value="F5">F5</option>
+                            <option value="LSA">LSA</option>
+                            <option value="UPSA">UPSA</option>
+                            <option value="LSS">LSS</option>
+                            <option value="UPSS">UPSS</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Montant dû (FCFA) *</label>
+                        <label>Montant dÃ» (FCFA) *</label>
                         <input type="number" id="paymentTotal" min="0" required>
                     </div>
                     <div class="form-group">
-                        <label>Montant payé (FCFA) *</label>
+                        <label>Montant payÃ© (FCFA) *</label>
                         <input type="number" id="paymentPaid" min="0" required>
                     </div>
                 </div>
@@ -629,6 +647,38 @@
                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div class="modal" id="receiptModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ReÃ§u de paiement</h2>
+                <button class="close-modal" onclick="closeReceiptModal()">âœ•</button>
+            </div>
+            <div id="receiptContent" style="padding: 16px; border: 1px dashed #e5e7eb; border-radius: 12px;">
+                <h3 style="text-align: center; margin-bottom: 16px;">LycÃ©e Pascal NjÃ¨rÃ¨ IV</h3>
+                <p><strong>Ã‰lÃ¨ve:</strong> <span id="receiptEleve"></span></p>
+                <p><strong>Classe:</strong> <span id="receiptClasse"></span></p>
+                <p><strong>Montant dÃ»:</strong> <span id="receiptTotal"></span></p>
+                <p><strong>Montant payÃ©:</strong> <span id="receiptPaid"></span></p>
+                <p><strong>Reste:</strong> <span id="receiptReste"></span></p>
+                <p><strong>Date:</strong> <span id="receiptDate"></span></p>
+                <div style="margin-top: 32px; display: flex; justify-content: space-between;">
+                    <div>
+                        <p>Signature intendant</p>
+                        <div style="margin-top: 24px; border-top: 1px solid #111827; width: 180px;"></div>
+                    </div>
+                    <div>
+                        <p>Cachet</p>
+                        <div style="margin-top: 24px; border: 1px solid #111827; width: 80px; height: 80px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeReceiptModal()">Fermer</button>
+                <button type="button" class="btn btn-primary" onclick="printReceipt()">Imprimer</button>
+            </div>
         </div>
     </div>
 
@@ -647,9 +697,9 @@
         }
 
         function statusLabel(status) {
-            if (status === 'paye') return { text: 'Payé', className: 'status-paye' };
+            if (status === 'paye') return { text: 'PayÃ©', className: 'status-paye' };
             if (status === 'partiel') return { text: 'Partiel', className: 'status-partiel' };
-            return { text: 'Impayé', className: 'status-impaye' };
+            return { text: 'ImpayÃ©', className: 'status-impaye' };
         }
 
         function updateStats() {
@@ -693,9 +743,9 @@
                     <td><span class="status-badge ${status.className}">${status.text}</span></td>
                     <td>
                         <div class="action-btns">
-                            <button class="btn-icon btn-view" title="Voir détails" onclick="viewPayment(${index})">👁️</button>
-                            <button class="btn-icon btn-pay" title="Modifier" onclick="editPayment(${index})">✏️</button>
-                            <button class="btn-icon btn-remind" title="Supprimer" onclick="deletePayment(${index})">🗑️</button>
+                            <button class="btn-icon btn-view" title="Voir dÃ©tails" onclick="viewPayment(${index})">ðŸ‘ï¸</button>
+                            <button class="btn-icon btn-pay" title="Modifier" onclick="editPayment(${index})">âœï¸</button>
+                            <button class="btn-icon btn-remind" title="Supprimer" onclick="deletePayment(${index})">ðŸ—‘ï¸</button>
                         </div>
                     </td>
                 `;
@@ -714,7 +764,7 @@
                 const paid = Number(payment.montant_paye || payment.montantPaye || 0);
                 const status = computeStatus(total, paid);
                 const matchesSearch = payment.eleve.toLowerCase().includes(searchTerm);
-                const matchesClass = !classFilter || payment.classe === classFilter;
+                const matchesClass = !classFilter || String(payment.classe).startsWith(classFilter);
                 const matchesStatus = !statusFilter || status === statusFilter;
                 return matchesSearch && matchesClass && matchesStatus;
             });
@@ -735,7 +785,30 @@
 
         function viewPayment(index) {
             const payment = payments[index];
-            alert(`Paiement:\n\nÉlève: ${payment.eleve}\nClasse: ${payment.classe}\nMontant dû: ${formatCurrency(payment.montant_total || payment.montantTotal)}\nMontant payé: ${formatCurrency(payment.montant_paye || payment.montantPaye)}`);
+            const total = Number(payment.montant_total || payment.montantTotal || 0);
+            const paid = Number(payment.montant_paye || payment.montantPaye || 0);
+            const restant = Math.max(0, total - paid);
+            document.getElementById('receiptEleve').textContent = payment.eleve;
+            document.getElementById('receiptClasse').textContent = payment.classe;
+            document.getElementById('receiptTotal').textContent = formatCurrency(total);
+            document.getElementById('receiptPaid').textContent = formatCurrency(paid);
+            document.getElementById('receiptReste').textContent = formatCurrency(restant);
+            document.getElementById('receiptDate').textContent = new Date().toLocaleDateString('fr-FR');
+            document.getElementById('receiptModal').classList.add('active');
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receiptModal').classList.remove('active');
+        }
+
+        function printReceipt() {
+            const content = document.getElementById('receiptContent').innerHTML;
+            const printWindow = window.open('', '', 'width=800,height=600');
+            printWindow.document.write(`<html><head><title>ReÃ§u de paiement</title></head><body>${content}</body></html>`);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
         }
 
         function editPayment(index) {

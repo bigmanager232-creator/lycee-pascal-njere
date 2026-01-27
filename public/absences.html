@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lycée Pascal Njèrè IV - Absences</title>
+    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Absences</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -404,44 +404,44 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">
-            <div class="logo-icon">🎓</div>
-            <div class="logo-text">Lycée Pascal Njèrè IV</div>
+            <div class="logo-icon">ðŸŽ“</div>
+            <div class="logo-text">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
         </div>
         
         <ul class="nav-menu">
             <li class="nav-item">
                 <a href="/" class="nav-link">
-                    <span>📊</span> Dashboard
+                    <span>ðŸ“Š</span> Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/professeurs.html" class="nav-link">
-                    <span>👥</span> Professeurs
+                <a href="/personnel.html" class="nav-link">
+                    <span>ðŸ‘¥</span> Personnel
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/eleves.html" class="nav-link">
-                    <span>🎓</span> Élèves
+                    <span>ðŸŽ“</span> Ã‰lÃ¨ves
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/emploi-temps.html" class="nav-link">
-                    <span>📅</span> Emploi du Temps
+                    <span>ðŸ“…</span> Emploi du Temps
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/absences.html" class="nav-link active">
-                    <span>📋</span> Absences
+                    <span>ðŸ“‹</span> Absences
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/finance.html" class="nav-link">
-                    <span>💰</span> Finance (APEE)
+                    <span>ðŸ’°</span> Finance (APEE)
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/bulletins.html" class="nav-link">
-                    <span>📄</span> Bulletins
+                    <span>ðŸ“„</span> Bulletins
                 </a>
             </li>
         </ul>
@@ -451,65 +451,87 @@
     <div class="main-content">
         <div class="header">
             <div class="header-left">
-                <h1>📋 Absences</h1>
-                <p>Suivi des absences des élèves</p>
+                <h1>ðŸ“‹ Absences</h1>
+                <p>Suivi des absences des Ã©lÃ¨ves</p>
             </div>
             <button class="btn btn-primary" onclick="openAbsenceModal()">
-                ➕ Enregistrer une absence
+                âž• Enregistrer une absence
             </button>
         </div>
 
         <div class="stats-row">
             <div class="stat-card">
-                <div class="stat-icon" style="background: #fce7f3; color: #ec4899;">📋</div>
+                <div class="stat-icon" style="background: #fce7f3; color: #ec4899;">ðŸ“‹</div>
                 <div class="stat-value" id="statTotal">0</div>
                 <div class="stat-label">Total absences ce mois</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background: #d1fae5; color: #10b981;">✓</div>
+                <div class="stat-icon" style="background: #d1fae5; color: #10b981;">âœ“</div>
                 <div class="stat-value" id="statJustifie">0</div>
-                <div class="stat-label">Absences justifiées</div>
+                <div class="stat-label">Absences justifiÃ©es</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background: #fee2e2; color: #ef4444;">✗</div>
+                <div class="stat-icon" style="background: #fee2e2; color: #ef4444;">âœ—</div>
                 <div class="stat-value" id="statInjustifie">0</div>
-                <div class="stat-label">Absences injustifiées</div>
+                <div class="stat-label">Absences injustifiÃ©es</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">⏳</div>
+                <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">â³</div>
                 <div class="stat-value" id="statAttente">0</div>
                 <div class="stat-label">En attente de justificatif</div>
             </div>
         </div>
 
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #e0e7ff; color: #4f46e5;">ðŸ«</div>
+                <div class="stat-value" id="statTotalMonthlySchool">0</div>
+                <div class="stat-label">Total mensuel lycÃ©e</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #dcfce7; color: #16a34a;">ðŸ“†</div>
+                <div class="stat-value" id="statTotalYearSchool">0</div>
+                <div class="stat-label">Total annuel lycÃ©e</div>
+            </div>
+        </div>
+
         <div class="filters">
             <div class="filter-group">
-                <label>🔍 Rechercher</label>
-                <input type="text" id="searchInput" placeholder="Nom de l'élève..." onkeyup="filterAbsences()">
+                <label>ðŸ” Rechercher</label>
+                <input type="text" id="searchInput" placeholder="Nom de l'Ã©lÃ¨ve..." onkeyup="filterAbsences()">
             </div>
             <div class="filter-group">
-                <label>📚 Classe</label>
+                <label>ðŸ“š Classe</label>
                 <select id="classFilter" onchange="filterAbsences()">
                     <option value="">Toutes les classes</option>
-                    <option value="6eme">6ème</option>
-                    <option value="5eme">5ème</option>
-                    <option value="4eme">4ème</option>
-                    <option value="3eme">3ème</option>
+                    <option value="6e">6e</option>
+                    <option value="5e">5e</option>
+                    <option value="4e">4e</option>
+                    <option value="3e">3e</option>
                     <option value="2nde">2nde</option>
-                    <option value="1ere">1ère</option>
-                    <option value="tle">Terminale</option>
+                    <option value="1Ã¨re">1Ã¨re</option>
+                    <option value="Tle">Tle</option>
+                    <option value="F1">F1</option>
+                    <option value="F2">F2</option>
+                    <option value="F3">F3</option>
+                    <option value="F4">F4</option>
+                    <option value="F5">F5</option>
+                    <option value="LSA">LSA</option>
+                    <option value="UPSA">UPSA</option>
+                    <option value="LSS">LSS</option>
+                    <option value="UPSS">UPSS</option>
                 </select>
             </div>
             <div class="filter-group">
-                <label>📅 Date</label>
+                <label>ðŸ“… Date</label>
                 <input type="date" id="dateFilter" onchange="filterAbsences()">
             </div>
             <div class="filter-group">
-                <label>🏷️ Statut</label>
+                <label>ðŸ·ï¸ Statut</label>
                 <select id="statusFilter" onchange="filterAbsences()">
                     <option value="">Tous les statuts</option>
-                    <option value="justifie">Justifié</option>
-                    <option value="injustifie">Injustifié</option>
+                    <option value="justifie">JustifiÃ©</option>
+                    <option value="injustifie">InjustifiÃ©</option>
                     <option value="attente">En attente</option>
                 </select>
             </div>
@@ -519,7 +541,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Élève</th>
+                        <th>Ã‰lÃ¨ve</th>
                         <th>Classe</th>
                         <th>Date</th>
                         <th>Heure</th>
@@ -531,6 +553,32 @@
                 <tbody id="absencesBody"></tbody>
             </table>
         </div>
+
+        <div class="absences-table" style="margin-top: 24px;">
+            <h3 style="padding: 16px 20px;">Totaux mensuels par classe</h3>
+            <table id="monthlyTotalsTable">
+                <thead>
+                    <tr>
+                        <th>Classe</th>
+                        <th>Total mensuel</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="absences-table" style="margin-top: 24px;">
+            <h3 style="padding: 16px 20px;">Totaux annuels par classe</h3>
+            <table id="yearlyTotalsTable">
+                <thead>
+                    <tr>
+                        <th>Classe</th>
+                        <th>Total annuel</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Modal -->
@@ -538,25 +586,34 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="absenceModalTitle">Enregistrer une absence</h2>
-                <button class="close-modal" onclick="closeAbsenceModal()">✕</button>
+                <button class="close-modal" onclick="closeAbsenceModal()">âœ•</button>
             </div>
             <form id="absenceForm">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label>Élève *</label>
+                        <label>Ã‰lÃ¨ve *</label>
                         <input type="text" id="absenceEleve" required>
                     </div>
                     <div class="form-group">
                         <label>Classe *</label>
                         <select id="absenceClasse" required>
-                            <option value="">Sélectionner</option>
-                            <option value="6eme">6ème</option>
-                            <option value="5eme">5ème</option>
-                            <option value="4eme">4ème</option>
-                            <option value="3eme">3ème</option>
+                            <option value="">SÃ©lectionner</option>
+                            <option value="6e">6e</option>
+                            <option value="5e">5e</option>
+                            <option value="4e">4e</option>
+                            <option value="3e">3e</option>
                             <option value="2nde">2nde</option>
-                            <option value="1ere">1ère</option>
-                            <option value="tle">Terminale</option>
+                            <option value="1Ã¨re">1Ã¨re</option>
+                            <option value="Tle">Tle</option>
+                            <option value="F1">F1</option>
+                            <option value="F2">F2</option>
+                            <option value="F3">F3</option>
+                            <option value="F4">F4</option>
+                            <option value="F5">F5</option>
+                            <option value="LSA">LSA</option>
+                            <option value="UPSA">UPSA</option>
+                            <option value="LSS">LSS</option>
+                            <option value="UPSS">UPSS</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -575,8 +632,8 @@
                         <label>Statut *</label>
                         <select id="absenceStatut" required>
                             <option value="attente">En attente</option>
-                            <option value="justifie">Justifié</option>
-                            <option value="injustifie">Injustifié</option>
+                            <option value="justifie">JustifiÃ©</option>
+                            <option value="injustifie">InjustifiÃ©</option>
                         </select>
                     </div>
                 </div>
@@ -600,8 +657,8 @@
         }
 
         function statusLabel(status) {
-            if (status === 'justifie') return { text: 'Justifié', className: 'status-justifie' };
-            if (status === 'injustifie') return { text: 'Injustifié', className: 'status-injustifie' };
+            if (status === 'justifie') return { text: 'JustifiÃ©', className: 'status-justifie' };
+            if (status === 'injustifie') return { text: 'InjustifiÃ©', className: 'status-injustifie' };
             return { text: 'En attente', className: 'status-en-attente' };
         }
 
@@ -614,6 +671,49 @@
             document.getElementById('statJustifie').textContent = justifie;
             document.getElementById('statInjustifie').textContent = injustifie;
             document.getElementById('statAttente').textContent = attente;
+
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+
+            const monthlyAbsences = absences.filter(a => {
+                const date = new Date(a.date);
+                return !Number.isNaN(date.getTime()) && date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+            });
+
+            const yearlyAbsences = absences.filter(a => {
+                const date = new Date(a.date);
+                return !Number.isNaN(date.getTime()) && date.getFullYear() === currentYear;
+            });
+
+            document.getElementById('statTotalMonthlySchool').textContent = monthlyAbsences.length;
+            document.getElementById('statTotalYearSchool').textContent = yearlyAbsences.length;
+
+            const monthlyTotals = {};
+            monthlyAbsences.forEach(a => {
+                monthlyTotals[a.classe] = (monthlyTotals[a.classe] || 0) + 1;
+            });
+
+            const yearlyTotals = {};
+            yearlyAbsences.forEach(a => {
+                yearlyTotals[a.classe] = (yearlyTotals[a.classe] || 0) + 1;
+            });
+
+            const monthlyBody = document.querySelector('#monthlyTotalsTable tbody');
+            monthlyBody.innerHTML = '';
+            Object.keys(monthlyTotals).sort().forEach(classe => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${classe}</td><td>${monthlyTotals[classe]}</td>`;
+                monthlyBody.appendChild(row);
+            });
+
+            const yearlyBody = document.querySelector('#yearlyTotalsTable tbody');
+            yearlyBody.innerHTML = '';
+            Object.keys(yearlyTotals).sort().forEach(classe => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${classe}</td><td>${yearlyTotals[classe]}</td>`;
+                yearlyBody.appendChild(row);
+            });
         }
 
         function renderAbsences(list = absences) {
@@ -632,9 +732,9 @@
                     <td><span class="status-badge ${status.className}">${status.text}</span></td>
                     <td>
                         <div class="action-btns">
-                            <button class="btn-icon btn-view" title="Voir détails" onclick="viewAbsence(${index})">👁️</button>
-                            <button class="btn-icon btn-justify" title="Modifier" onclick="editAbsence(${index})">✏️</button>
-                            <button class="btn-icon btn-delete" title="Supprimer" onclick="deleteAbsence(${index})">🗑️</button>
+                            <button class="btn-icon btn-view" title="Voir dÃ©tails" onclick="viewAbsence(${index})">ðŸ‘ï¸</button>
+                            <button class="btn-icon btn-justify" title="Modifier" onclick="editAbsence(${index})">âœï¸</button>
+                            <button class="btn-icon btn-delete" title="Supprimer" onclick="deleteAbsence(${index})">ðŸ—‘ï¸</button>
                         </div>
                     </td>
                 `;
@@ -651,7 +751,7 @@
 
             const filtered = absences.filter(absence => {
                 const matchesSearch = absence.eleve.toLowerCase().includes(searchTerm);
-                const matchesClass = !classFilter || absence.classe === classFilter;
+                const matchesClass = !classFilter || String(absence.classe).startsWith(classFilter);
                 const matchesDate = !dateFilter || absence.date === dateFilter;
                 const matchesStatus = !statusFilter || absence.statut === statusFilter;
                 return matchesSearch && matchesClass && matchesDate && matchesStatus;
@@ -673,7 +773,7 @@
 
         function viewAbsence(index) {
             const absence = absences[index];
-            alert(`Absence:\n\nÉlève: ${absence.eleve}\nClasse: ${absence.classe}\nDate: ${formatDate(absence.date)}\nHeure: ${absence.heure}\nCours: ${absence.cours}\nStatut: ${absence.statut}`);
+            alert(`Absence:\n\nÃ‰lÃ¨ve: ${absence.eleve}\nClasse: ${absence.classe}\nDate: ${formatDate(absence.date)}\nHeure: ${absence.heure}\nCours: ${absence.cours}\nStatut: ${absence.statut}`);
         }
 
         function editAbsence(index) {
