@@ -9,7 +9,6 @@ const PORT = 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-
 const PUBLIC_DIR = path.join(__dirname, 'public');
 app.use(express.static(PUBLIC_DIR));
 
@@ -162,8 +161,8 @@ app.get('/api/stats', (req, res) => {
 });
 
 // Serve HTML files
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(PUBLIC_DIR, 'index.html'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
 });
 
 // Start server
