@@ -4,13 +4,14 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-const PUBLIC_DIR = path.resolve(__dirname, 'public');
-app.use(express.static(PUBLIC_DIR));
+
+const STATIC_DIR = path.join(__dirname, 'public');
+app.use(express.static(STATIC_DIR));
 
 // Data directory
 const DATA_DIR = path.join(__dirname, 'data');
@@ -162,7 +163,7 @@ app.get('/api/stats', (req, res) => {
 
 // Serve HTML files
 app.get('/', (req, res) => {
-    res.sendFile('index.html', { root: PUBLIC_DIR });
+    res.sendFile(path.join(STATIC_DIR, 'index.html'));
 });
 
 // Start server
@@ -170,6 +171,7 @@ app.listen(PORT, () => {
     console.log('\n╔═══════════════════════════════════════════════════════╗');
     console.log('║    🎓 LYCÉE PASCAL NJÈRÈ IV - SYSTÈME DE GESTION     ║');
     console.log('╚═══════════════════════════════════════════════════════╝\n');
+    console.log(`📁 Dossier statique: ${STATIC_DIR}`);
     console.log(`🚀 Serveur démarré sur http://localhost:${PORT}`);
     console.log(`📊 Dashboard: http://localhost:${PORT}\n`);
     console.log('✅ Base de données JSON initialisée');
