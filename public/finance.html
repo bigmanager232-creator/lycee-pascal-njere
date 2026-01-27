@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Finance (APEE)</title>
+    <title>Lycée Pascal Njèrè IV - Finance (APEE)</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -463,44 +463,44 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">
-            <div class="logo-icon">ðŸŽ“</div>
-            <div class="logo-text">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
+            <div class="logo-icon">�YZ"</div>
+            <div class="logo-text">Lycée Pascal Njèrè IV</div>
         </div>
         
         <ul class="nav-menu">
             <li class="nav-item">
                 <a href="/" class="nav-link">
-                    <span>ðŸ“Š</span> Dashboard
+                    <span>�Y"S</span> Dashboard
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/personnel.html" class="nav-link">
-                    <span>ðŸ‘¥</span> Personnel
+                    <span>�Y'�</span> Personnel
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/eleves.html" class="nav-link">
-                    <span>ðŸŽ“</span> Ã‰lÃ¨ves
+                    <span>�YZ"</span> �?lèves
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/emploi-temps.html" class="nav-link">
-                    <span>ðŸ“…</span> Emploi du Temps
+                    <span>�Y".</span> Emploi du Temps
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/absences.html" class="nav-link">
-                    <span>ðŸ“‹</span> Absences
+                    <span>�Y"<</span> Absences
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/finance.html" class="nav-link active">
-                    <span>ðŸ’°</span> Finance (APEE)
+                    <span>�Y'�</span> Finance (APEE)
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/bulletins.html" class="nav-link">
-                    <span>ðŸ“„</span> Bulletins
+                    <span>�Y""</span> Bulletins
                 </a>
             </li>
         </ul>
@@ -510,32 +510,32 @@
     <div class="main-content">
         <div class="header">
             <div class="header-left">
-                <h1>ðŸ’° Finance (APEE)</h1>
+                <h1>�Y'� Finance (APEE)</h1>
                 <p>Gestion des paiements et relances</p>
             </div>
             <button class="btn btn-primary" onclick="openPaymentModal()">
-                âž• Enregistrer un paiement
+                �z. Enregistrer un paiement
             </button>
         </div>
 
         <div class="stats-row">
             <div class="stat-card success">
-                <div class="stat-icon" style="background: #d1fae5; color: #10b981;">ðŸ’°</div>
+                <div class="stat-icon" style="background: #d1fae5; color: #10b981;">�Y'�</div>
                 <div class="stat-value" id="statTotalPercu">0 FCFA</div>
-                <div class="stat-label">Total perÃ§u</div>
+                <div class="stat-label">Total perçu</div>
             </div>
             <div class="stat-card warning">
-                <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">â³</div>
+                <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">⏳</div>
                 <div class="stat-value" id="statEnAttente">0 FCFA</div>
                 <div class="stat-label">En attente</div>
             </div>
             <div class="stat-card danger">
-                <div class="stat-icon" style="background: #fee2e2; color: #ef4444;">âš ï¸</div>
+                <div class="stat-icon" style="background: #fee2e2; color: #ef4444;">�s�️</div>
                 <div class="stat-value" id="statImpayes">0 FCFA</div>
-                <div class="stat-label">ImpayÃ©s critiques</div>
+                <div class="stat-label">Impayés critiques</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background: #e0e7ff; color: #4f46e5;">ðŸ“Š</div>
+                <div class="stat-icon" style="background: #e0e7ff; color: #4f46e5;">�Y"S</div>
                 <div class="stat-value" id="statRecouvrement">0%</div>
                 <div class="stat-label">Taux de recouvrement</div>
             </div>
@@ -543,11 +543,11 @@
 
         <div class="filters">
             <div class="filter-group">
-                <label>ðŸ” Rechercher</label>
-                <input type="text" id="searchInput" placeholder="Nom de l'Ã©lÃ¨ve..." onkeyup="filterPayments()">
+                <label>�Y"� Rechercher</label>
+                <input type="text" id="searchInput" placeholder="Nom de l'élève..." onkeyup="filterPayments()">
             </div>
             <div class="filter-group">
-                <label>ðŸ“š Classe</label>
+                <label>�Y"s Classe</label>
                 <select id="classFilter" onchange="filterPayments()">
                     <option value="">Toutes les classes</option>
                     <option value="6e">6e</option>
@@ -555,7 +555,7 @@
                     <option value="4e">4e</option>
                     <option value="3e">3e</option>
                     <option value="2nde">2nde</option>
-                    <option value="1Ã¨re">1Ã¨re</option>
+                    <option value="1ère">1ère</option>
                     <option value="Tle">Tle</option>
                     <option value="F1">F1</option>
                     <option value="F2">F2</option>
@@ -569,12 +569,12 @@
                 </select>
             </div>
             <div class="filter-group">
-                <label>ðŸ·ï¸ Statut</label>
+                <label>�Y��️ Statut</label>
                 <select id="statusFilter" onchange="filterPayments()">
                     <option value="">Tous les statuts</option>
-                    <option value="paye">PayÃ©</option>
+                    <option value="paye">Payé</option>
                     <option value="partiel">Paiement partiel</option>
-                    <option value="impaye">ImpayÃ©</option>
+                    <option value="impaye">Impayé</option>
                 </select>
             </div>
         </div>
@@ -583,10 +583,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Ã‰lÃ¨ve</th>
+                        <th>�?lève</th>
                         <th>Classe</th>
-                        <th>Montant dÃ»</th>
-                        <th>PayÃ©</th>
+                        <th>Montant dû</th>
+                        <th>Payé</th>
                         <th>Reste</th>
                         <th>Progression</th>
                         <th>Statut</th>
@@ -603,24 +603,24 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="paymentModalTitle">Enregistrer un paiement</h2>
-                <button class="close-modal" onclick="closePaymentModal()">âœ•</button>
+                <button class="close-modal" onclick="closePaymentModal()">�o.</button>
             </div>
             <form id="paymentForm">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label>Ã‰lÃ¨ve *</label>
+                        <label>�?lève *</label>
                         <input type="text" id="paymentEleve" required>
                     </div>
                     <div class="form-group">
                         <label>Classe *</label>
                         <select id="paymentClasse" required>
-                            <option value="">SÃ©lectionner</option>
+                            <option value="">Sélectionner</option>
                             <option value="6e">6e</option>
                             <option value="5e">5e</option>
                             <option value="4e">4e</option>
                             <option value="3e">3e</option>
                             <option value="2nde">2nde</option>
-                            <option value="1Ã¨re">1Ã¨re</option>
+                            <option value="1ère">1ère</option>
                             <option value="Tle">Tle</option>
                             <option value="F1">F1</option>
                             <option value="F2">F2</option>
@@ -634,11 +634,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Montant dÃ» (FCFA) *</label>
+                        <label>Montant dû (FCFA) *</label>
                         <input type="number" id="paymentTotal" min="0" required>
                     </div>
                     <div class="form-group">
-                        <label>Montant payÃ© (FCFA) *</label>
+                        <label>Montant payé (FCFA) *</label>
                         <input type="number" id="paymentPaid" min="0" required>
                     </div>
                 </div>
@@ -653,15 +653,15 @@
     <div class="modal" id="receiptModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>ReÃ§u de paiement</h2>
-                <button class="close-modal" onclick="closeReceiptModal()">âœ•</button>
+                <h2>Reçu de paiement</h2>
+                <button class="close-modal" onclick="closeReceiptModal()">�o.</button>
             </div>
             <div id="receiptContent" style="padding: 16px; border: 1px dashed #e5e7eb; border-radius: 12px;">
-                <h3 style="text-align: center; margin-bottom: 16px;">LycÃ©e Pascal NjÃ¨rÃ¨ IV</h3>
-                <p><strong>Ã‰lÃ¨ve:</strong> <span id="receiptEleve"></span></p>
+                <h3 style="text-align: center; margin-bottom: 16px;">Lycée Pascal Njèrè IV</h3>
+                <p><strong>�?lève:</strong> <span id="receiptEleve"></span></p>
                 <p><strong>Classe:</strong> <span id="receiptClasse"></span></p>
-                <p><strong>Montant dÃ»:</strong> <span id="receiptTotal"></span></p>
-                <p><strong>Montant payÃ©:</strong> <span id="receiptPaid"></span></p>
+                <p><strong>Montant dû:</strong> <span id="receiptTotal"></span></p>
+                <p><strong>Montant payé:</strong> <span id="receiptPaid"></span></p>
                 <p><strong>Reste:</strong> <span id="receiptReste"></span></p>
                 <p><strong>Date:</strong> <span id="receiptDate"></span></p>
                 <div style="margin-top: 32px; display: flex; justify-content: space-between;">
@@ -697,9 +697,9 @@
         }
 
         function statusLabel(status) {
-            if (status === 'paye') return { text: 'PayÃ©', className: 'status-paye' };
+            if (status === 'paye') return { text: 'Payé', className: 'status-paye' };
             if (status === 'partiel') return { text: 'Partiel', className: 'status-partiel' };
-            return { text: 'ImpayÃ©', className: 'status-impaye' };
+            return { text: 'Impayé', className: 'status-impaye' };
         }
 
         function updateStats() {
@@ -743,9 +743,9 @@
                     <td><span class="status-badge ${status.className}">${status.text}</span></td>
                     <td>
                         <div class="action-btns">
-                            <button class="btn-icon btn-view" title="Voir dÃ©tails" onclick="viewPayment(${index})">ðŸ‘ï¸</button>
-                            <button class="btn-icon btn-pay" title="Modifier" onclick="editPayment(${index})">âœï¸</button>
-                            <button class="btn-icon btn-remind" title="Supprimer" onclick="deletePayment(${index})">ðŸ—‘ï¸</button>
+                            <button class="btn-icon btn-view" title="Voir détails" onclick="viewPayment(${index})">�Y'�️</button>
+                            <button class="btn-icon btn-pay" title="Modifier" onclick="editPayment(${index})">�o�️</button>
+                            <button class="btn-icon btn-remind" title="Supprimer" onclick="deletePayment(${index})">�Y-'️</button>
                         </div>
                     </td>
                 `;
@@ -804,7 +804,7 @@
         function printReceipt() {
             const content = document.getElementById('receiptContent').innerHTML;
             const printWindow = window.open('', '', 'width=800,height=600');
-            printWindow.document.write(`<html><head><title>ReÃ§u de paiement</title></head><body>${content}</body></html>`);
+            printWindow.document.write(`<html><head><title>Reçu de paiement</title></head><body>${content}</body></html>`);
             printWindow.document.close();
             printWindow.focus();
             printWindow.print();

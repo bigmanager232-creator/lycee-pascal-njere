@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Bulletins</title>
+    <title>Lycée Pascal Njèrè IV - Bulletins</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -340,44 +340,44 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">
-            <div class="logo-icon">ðŸŽ“</div>
-            <div class="logo-text">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
+            <div class="logo-icon">�YZ"</div>
+            <div class="logo-text">Lycée Pascal Njèrè IV</div>
         </div>
         
         <ul class="nav-menu">
             <li class="nav-item">
                 <a href="/" class="nav-link">
-                    <span>ðŸ“Š</span> Dashboard
+                    <span>�Y"S</span> Dashboard
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/personnel.html" class="nav-link">
-                    <span>ðŸ‘¥</span> Personnel
+                    <span>�Y'�</span> Personnel
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/eleves.html" class="nav-link">
-                    <span>ðŸŽ“</span> Ã‰lÃ¨ves
+                    <span>�YZ"</span> �?lèves
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/emploi-temps.html" class="nav-link">
-                    <span>ðŸ“…</span> Emploi du Temps
+                    <span>�Y".</span> Emploi du Temps
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/absences.html" class="nav-link">
-                    <span>ðŸ“‹</span> Absences
+                    <span>�Y"<</span> Absences
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/finance.html" class="nav-link">
-                    <span>ðŸ’°</span> Finance (APEE)
+                    <span>�Y'�</span> Finance (APEE)
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/bulletins.html" class="nav-link active">
-                    <span>ðŸ“„</span> Bulletins
+                    <span>�Y""</span> Bulletins
                 </a>
             </li>
         </ul>
@@ -387,46 +387,46 @@
     <div class="main-content">
         <div class="header">
             <div class="header-left">
-                <h1>ðŸ“„ Bulletins Scolaires</h1>
-                <p>GÃ©nÃ©rer et imprimer les bulletins des Ã©lÃ¨ves</p>
+                <h1>�Y"" Bulletins Scolaires</h1>
+                <p>Générer et imprimer les bulletins des élèves</p>
             </div>
         </div>
 
         <div class="generator-section">
-            <h2 class="generator-title">ðŸ“‹ GÃ©nÃ©rer des bulletins</h2>
+            <h2 class="generator-title">�Y"< Générer des bulletins</h2>
             <form id="bulletinForm">
                 <div class="form-row">
                     <div class="form-group">
-                        <label>ðŸ“š Classe *</label>
+                        <label>�Y"s Classe *</label>
                         <select id="classe" required>
-                            <option value="">SÃ©lectionner une classe</option>
-                            <option value="6eme">6Ã¨me</option>
-                            <option value="5eme">5Ã¨me</option>
-                            <option value="4eme">4Ã¨me</option>
-                            <option value="3eme">3Ã¨me</option>
+                            <option value="">Sélectionner une classe</option>
+                            <option value="6eme">6ème</option>
+                            <option value="5eme">5ème</option>
+                            <option value="4eme">4ème</option>
+                            <option value="3eme">3ème</option>
                             <option value="2nde">2nde</option>
-                            <option value="1ere">1Ã¨re</option>
+                            <option value="1ere">1ère</option>
                             <option value="tle">Terminale</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>ðŸ“… PÃ©riode *</label>
+                        <label>�Y". Période *</label>
                         <select id="periode" required>
-                            <option value="">SÃ©lectionner une pÃ©riode</option>
-                            <option value="seq1">1Ã¨re sÃ©quence</option>
-                            <option value="seq2">2e sÃ©quence</option>
+                            <option value="">Sélectionner une période</option>
+                            <option value="seq1">1ère séquence</option>
+                            <option value="seq2">2e séquence</option>
                             <option value="trim1">1er trimestre</option>
-                            <option value="seq3">3e sÃ©quence</option>
-                            <option value="seq4">4e sÃ©quence</option>
+                            <option value="seq3">3e séquence</option>
+                            <option value="seq4">4e séquence</option>
                             <option value="trim2">2e trimestre</option>
-                            <option value="seq5">5e sÃ©quence</option>
+                            <option value="seq5">5e séquence</option>
                             <option value="annuel">Annuel</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>ðŸ“† AnnÃ©e scolaire *</label>
+                        <label>�Y"? Année scolaire *</label>
                         <select id="annee" required>
-                            <option value="">SÃ©lectionner l'annÃ©e</option>
+                            <option value="">Sélectionner l'année</option>
                             <option value="2025-2026" selected>2025-2026</option>
                             <option value="2024-2025">2024-2025</option>
                         </select>
@@ -434,37 +434,37 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>ðŸ‘¤ Ã‰lÃ¨ve *</label>
+                        <label>�Y'� �?lève *</label>
                         <input type="text" id="eleve" required>
                     </div>
                     <div class="form-group">
-                        <label>ðŸ“Š Moyenne (/20) *</label>
+                        <label>�Y"S Moyenne (/20) *</label>
                         <input type="number" id="moyenne" min="0" max="20" step="0.1" required>
                     </div>
                     <div class="form-group">
-                        <label>ðŸ† Rang *</label>
-                        <input type="text" id="rang" placeholder="2Ã¨me/32" required>
+                        <label>�Y�? Rang *</label>
+                        <input type="text" id="rang" placeholder="2ème/32" required>
                     </div>
                 </div>
                 <div class="btn-group">
                     <button type="submit" class="btn btn-primary">
-                        ðŸ“„ GÃ©nÃ©rer les bulletins
+                        �Y"" Générer les bulletins
                     </button>
                     <button type="button" class="btn" style="background: #f3f4f6; color: var(--text-primary);" onclick="previewBulletin()">
-                        ðŸ‘ï¸ AperÃ§u
+                        �Y'�️ Aperçu
                     </button>
                 </div>
             </form>
         </div>
 
         <div class="generator-section">
-            <h2 class="generator-title">ðŸ“± Saisie des notes (enseignants)</h2>
+            <h2 class="generator-title">�Y"� Saisie des notes (enseignants)</h2>
             <div class="form-row">
                 <div class="form-group">
-                    <label>RÃ´le utilisateur</label>
+                    <label>Rôle utilisateur</label>
                     <select id="roleSelect">
                         <option value="enseignant">Enseignant</option>
-                        <option value="conseiller">Conseiller pÃ©dagogique</option>
+                        <option value="conseiller">Conseiller pédagogique</option>
                         <option value="admin">Administration</option>
                     </select>
                 </div>
@@ -476,7 +476,7 @@
                         <input type="text" id="teacherName">
                     </div>
                     <div class="form-group">
-                        <label>MatiÃ¨re *</label>
+                        <label>Matière *</label>
                         <input type="text" id="teacherSubject">
                     </div>
                     <div class="form-group">
@@ -485,13 +485,13 @@
                     </div>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary" onclick="loadNotesRoster()">Charger les Ã©lÃ¨ves</button>
+                    <button type="button" class="btn btn-primary" onclick="loadNotesRoster()">Charger les élèves</button>
                 </div>
                 <div style="margin-top: 16px;">
                     <table id="notesTable" style="width:100%; border-collapse: collapse;">
                         <thead>
                             <tr>
-                                <th>Ã‰lÃ¨ve</th>
+                                <th>�?lève</th>
                                 <th>Note /20</th>
                             </tr>
                         </thead>
@@ -503,11 +503,11 @@
                 </div>
             </div>
             <div id="advisorSection" style="display:none; margin-top: 16px;">
-                <h3>Somme des absences (rÃ©servÃ© conseillers)</h3>
+                <h3>Somme des absences (réservé conseillers)</h3>
                 <table id="absenceSummaryTable" style="width:100%; border-collapse: collapse;">
                     <thead>
                         <tr>
-                            <th>Ã‰lÃ¨ve</th>
+                            <th>�?lève</th>
                             <th>Total absences</th>
                         </tr>
                     </thead>
@@ -517,11 +517,11 @@
         </div>
 
         <div class="generator-section">
-            <h2 class="generator-title">ðŸ“Š Statistiques par matiÃ¨re</h2>
+            <h2 class="generator-title">�Y"S Statistiques par matière</h2>
             <table id="subjectStatsTable" style="width:100%; border-collapse: collapse;">
                 <thead>
                     <tr>
-                        <th>MatiÃ¨re</th>
+                        <th>Matière</th>
                         <th>Moyenne</th>
                         <th>Nombre de notes</th>
                     </tr>
@@ -531,15 +531,15 @@
         </div>
 
         <div class="generator-section">
-            <h2 class="generator-title">ðŸ•’ Historique des notes</h2>
+            <h2 class="generator-title">�Y.' Historique des notes</h2>
             <table id="notesHistoryTable" style="width:100%; border-collapse: collapse;">
                 <thead>
                     <tr>
                         <th>Date</th>
                         <th>Enseignant</th>
                         <th>Classe</th>
-                        <th>MatiÃ¨re</th>
-                        <th>Ã‰lÃ¨ve</th>
+                        <th>Matière</th>
+                        <th>�?lève</th>
                         <th>Note</th>
                     </tr>
                 </thead>
@@ -548,7 +548,7 @@
         </div>
 
         <div class="bulletins-list">
-            <h2 class="list-title">ðŸ“š Bulletins gÃ©nÃ©rÃ©s</h2>
+            <h2 class="list-title">�Y"s Bulletins générés</h2>
             <div id="bulletinsList"></div>
         </div>
     </div>
@@ -559,13 +559,13 @@
 
         function formatPeriode(value) {
             const map = {
-                seq1: '1Ã¨re sÃ©quence',
-                seq2: '2e sÃ©quence',
+                seq1: '1ère séquence',
+                seq2: '2e séquence',
                 trim1: '1er trimestre',
-                seq3: '3e sÃ©quence',
-                seq4: '4e sÃ©quence',
+                seq3: '3e séquence',
+                seq4: '4e séquence',
                 trim2: '2e trimestre',
-                seq5: '5e sÃ©quence',
+                seq5: '5e séquence',
                 annuel: 'Annuel'
             };
             return map[value] || value;
@@ -595,23 +595,23 @@
                         </div>
                         <div class="bulletin-details">
                             <div class="detail-item">
-                                <span>ðŸ“š</span>
+                                <span>�Y"s</span>
                                 <span>${bulletin.classe}</span>
                             </div>
                             <div class="detail-item">
-                                <span>ðŸ“…</span>
+                                <span>�Y".</span>
                                 <span>${formatPeriode(bulletin.periode)} ${bulletin.annee}</span>
                             </div>
                             <div class="detail-item">
-                                <span>ðŸ†</span>
+                                <span>�Y�?</span>
                                 <span>Rang: ${bulletin.rang}</span>
                             </div>
                         </div>
                     </div>
                     <div class="bulletin-actions">
-                        <button class="btn-icon btn-view" title="Voir" onclick="viewBulletin(${index})">ðŸ‘ï¸</button>
-                        <button class="btn-icon btn-download" title="Modifier" onclick="editBulletin(${index})">âœï¸</button>
-                        <button class="btn-icon btn-print" title="Supprimer" onclick="deleteBulletin(${index})">ðŸ—‘ï¸</button>
+                        <button class="btn-icon btn-view" title="Voir" onclick="viewBulletin(${index})">�Y'�️</button>
+                        <button class="btn-icon btn-download" title="Modifier" onclick="editBulletin(${index})">�o�️</button>
+                        <button class="btn-icon btn-print" title="Supprimer" onclick="deleteBulletin(${index})">�Y-'️</button>
                     </div>
                 `;
                 container.appendChild(card);
@@ -638,16 +638,16 @@
             const rang = document.getElementById('rang').value;
 
             if (!classe || !periode || !annee || !eleve || !moyenne || !rang) {
-                alert('Veuillez renseigner tous les champs pour l\'aperÃ§u.');
+                alert('Veuillez renseigner tous les champs pour l\'aperçu.');
                 return;
             }
 
-            alert(`AperÃ§u du bulletin:\n\nÃ‰lÃ¨ve: ${eleve}\nClasse: ${classe}\nPÃ©riode: ${formatPeriode(periode)}\nAnnÃ©e: ${annee}\nMoyenne: ${moyenne}/20\nRang: ${rang}`);
+            alert(`Aperçu du bulletin:\n\n�?lève: ${eleve}\nClasse: ${classe}\nPériode: ${formatPeriode(periode)}\nAnnée: ${annee}\nMoyenne: ${moyenne}/20\nRang: ${rang}`);
         }
 
         function viewBulletin(index) {
             const bulletin = bulletins[index];
-            alert(`Bulletin:\n\nÃ‰lÃ¨ve: ${bulletin.eleve}\nClasse: ${bulletin.classe}\nPÃ©riode: ${formatPeriode(bulletin.periode)}\nAnnÃ©e: ${bulletin.annee}\nMoyenne: ${bulletin.moyenne}/20\nRang: ${bulletin.rang}`);
+            alert(`Bulletin:\n\n�?lève: ${bulletin.eleve}\nClasse: ${bulletin.classe}\nPériode: ${formatPeriode(bulletin.periode)}\nAnnée: ${bulletin.annee}\nMoyenne: ${bulletin.moyenne}/20\nRang: ${bulletin.rang}`);
         }
 
         function editBulletin(index) {
@@ -695,7 +695,7 @@
             const teacher = document.getElementById('teacherName').value.trim();
             const subject = document.getElementById('teacherSubject').value.trim();
             if (!classe || !teacher || !subject) {
-                alert('Veuillez renseigner le nom, la matiÃ¨re et la classe.');
+                alert('Veuillez renseigner le nom, la matière et la classe.');
                 return;
             }
             try {
@@ -705,7 +705,7 @@
                 renderNotesTable();
             } catch (error) {
                 console.error('Erreur:', error);
-                alert('Erreur lors du chargement des Ã©lÃ¨ves');
+                alert('Erreur lors du chargement des élèves');
             }
         }
 
@@ -753,7 +753,7 @@
             try {
                 await Promise.all(requests);
                 await loadNotes();
-                alert('Notes enregistrÃ©es avec succÃ¨s.');
+                alert('Notes enregistrées avec succès.');
             } catch (error) {
                 console.error('Erreur:', error);
                 alert('Erreur lors de l\'enregistrement des notes');

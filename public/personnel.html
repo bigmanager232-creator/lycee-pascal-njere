@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LycÃ©e Pascal NjÃ¨rÃ¨ IV - Personnel</title>
+    <title>Lycée Pascal Njèrè IV - Personnel</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -367,44 +367,44 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">
-            <div class="logo-icon">ðŸŽ“</div>
-            <div class="logo-text">LycÃ©e Pascal NjÃ¨rÃ¨ IV</div>
+            <div class="logo-icon">�YZ"</div>
+            <div class="logo-text">Lycée Pascal Njèrè IV</div>
         </div>
         
         <ul class="nav-menu">
             <li class="nav-item">
                 <a href="/" class="nav-link">
-                    <span>ðŸ“Š</span> Dashboard
+                    <span>�Y"S</span> Dashboard
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/personnel.html" class="nav-link active">
-                    <span>ðŸ‘¥</span> Personnel
+                    <span>�Y'�</span> Personnel
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/eleves.html" class="nav-link">
-                    <span>ðŸŽ“</span> Ã‰lÃ¨ves
+                    <span>�YZ"</span> �?lèves
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/emploi-temps.html" class="nav-link">
-                    <span>ðŸ“…</span> Emploi du Temps
+                    <span>�Y".</span> Emploi du Temps
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/absences.html" class="nav-link">
-                    <span>ðŸ“‹</span> Absences
+                    <span>�Y"<</span> Absences
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/finance.html" class="nav-link">
-                    <span>ðŸ’°</span> Finance (APEE)
+                    <span>�Y'�</span> Finance (APEE)
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/bulletins.html" class="nav-link">
-                    <span>ðŸ“„</span> Bulletins
+                    <span>�Y""</span> Bulletins
                 </a>
             </li>
         </ul>
@@ -414,16 +414,16 @@
     <div class="main-content">
         <div class="header">
             <div class="header-left">
-                <h1>ðŸ‘¥ Personnel</h1>
-                <p>Gestion du personnel du lycÃ©e</p>
+                <h1>�Y'� Personnel</h1>
+                <p>Gestion du personnel du lycée</p>
             </div>
             <button class="btn btn-primary" onclick="openModal()">
-                âž• Ajouter un personnel
+                �z. Ajouter un personnel
             </button>
         </div>
 
         <div class="search-bar">
-            <span>ðŸ”</span>
+            <span>�Y"�</span>
             <input type="text" placeholder="Rechercher un personnel..." id="searchInput" onkeyup="searchTable()">
         </div>
 
@@ -432,12 +432,12 @@
                 <thead>
                     <tr>
                         <th>Nom complet</th>
-                        <th>CatÃ©gorie</th>
+                        <th>Catégorie</th>
                         <th>Matricule solde</th>
-                        <th>TÃ©lÃ©phone</th>
+                        <th>Téléphone</th>
                         <th>Email</th>
-                        <th>MatiÃ¨res</th>
-                        <th>PrÃ©sence</th>
+                        <th>Matières</th>
+                        <th>Présence</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -451,11 +451,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle">Ajouter un personnel</h2>
-                <button class="close-modal" onclick="closeModal()">âœ•</button>
+                <button class="close-modal" onclick="closeModal()">�o.</button>
             </div>
             <form id="personnelForm">
                 <div class="form-group">
-                    <label>CatÃ©gorie *</label>
+                    <label>Catégorie *</label>
                     <select id="categorie" required>
                         <option value="Administration">Administration</option>
                         <option value="Professeurs">Professeurs</option>
@@ -479,11 +479,11 @@
                     <input type="text" id="lieuNaissance" required>
                 </div>
                 <div class="form-group">
-                    <label>RÃ©gion d'origine *</label>
+                    <label>Région d'origine *</label>
                     <input type="text" id="regionOrigine" required>
                 </div>
                 <div class="form-group">
-                    <label>DÃ©partement d'origine *</label>
+                    <label>Département d'origine *</label>
                     <input type="text" id="departementOrigine" required>
                 </div>
                 <div class="form-group">
@@ -491,11 +491,11 @@
                     <input type="text" id="arrondissementOrigine" required>
                 </div>
                 <div class="form-group">
-                    <label>Date d'entrÃ©e fonction publique *</label>
+                    <label>Date d'entrée fonction publique *</label>
                     <input type="date" id="dateEntree" required>
                 </div>
                 <div class="form-group">
-                    <label>TÃ©lÃ©phone *</label>
+                    <label>Téléphone *</label>
                     <input type="tel" id="telephone" required>
                 </div>
                 <div class="form-group">
@@ -505,18 +505,18 @@
                 <div class="form-group">
                     <label>Statut matrimonial *</label>
                     <select id="statutMatrimonial" required>
-                        <option value="celibataire">CÃ©libataire</option>
-                        <option value="marie">MariÃ©(e)</option>
-                        <option value="divorce">DivorcÃ©(e)</option>
+                        <option value="celibataire">Célibataire</option>
+                        <option value="marie">Marié(e)</option>
+                        <option value="divorce">Divorcé(e)</option>
                         <option value="veuf">Veuf/Veuve</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>MatiÃ¨res enseignÃ©es</label>
-                    <input type="text" id="matieresEnseignees" placeholder="MathÃ©matiques, Physique">
+                    <label>Matières enseignées</label>
+                    <input type="text" id="matieresEnseignees" placeholder="Mathématiques, Physique">
                 </div>
                 <div class="form-group">
-                    <label>PrÃ©sence effective *</label>
+                    <label>Présence effective *</label>
                     <select id="presenceEffective" required>
                         <option value="oui">Oui</option>
                         <option value="non">Non</option>
@@ -542,7 +542,7 @@
 
                 personnel.forEach(person => {
                     const presenceValue = person.presence_effective === 'non' || person.presence_effective === 'conge' ? 'non' : 'oui';
-                    const presenceText = presenceValue === 'oui' ? 'PrÃ©sent' : 'Absent';
+                    const presenceText = presenceValue === 'oui' ? 'Présent' : 'Absent';
                     const presenceClass = presenceValue === 'oui' ? 'status-actif' : 'status-conge';
 
                     const row = tbody.insertRow();
@@ -557,8 +557,8 @@
                         <td><span class="status-badge ${presenceClass}">${presenceText}</span></td>
                         <td>
                             <div class="action-btns">
-                                <button class="btn-icon btn-edit" onclick="editPersonnel(${person.id})">âœï¸</button>
-                                <button class="btn-icon btn-delete" onclick="deletePersonnel(${person.id})">ðŸ—‘ï¸</button>
+                                <button class="btn-icon btn-edit" onclick="editPersonnel(${person.id})">�o�️</button>
+                                <button class="btn-icon btn-delete" onclick="deletePersonnel(${person.id})">�Y-'️</button>
                             </div>
                         </td>
                     `;
@@ -621,12 +621,12 @@
                 }
             } catch (error) {
                 console.error('Erreur:', error);
-                alert('Erreur lors de la rÃ©cupÃ©ration des donnÃ©es');
+                alert('Erreur lors de la récupération des données');
             }
         }
 
         async function deletePersonnel(id) {
-            if (confirm('ÃŠtes-vous sÃ»r de vouloir supprimer ce personnel ?')) {
+            if (confirm('�Stes-vous sûr de vouloir supprimer ce personnel ?')) {
                 try {
                     const response = await fetch(`/api/personnel/${id}`, {
                         method: 'DELETE'
@@ -634,7 +634,7 @@
 
                     if (response.ok) {
                         await loadPersonnel();
-                        alert('Personnel supprimÃ© avec succÃ¨s');
+                        alert('Personnel supprimé avec succès');
                     }
                 } catch (error) {
                     console.error('Erreur:', error);
@@ -682,7 +682,7 @@
                 if (response.ok) {
                     await loadPersonnel();
                     closeModal();
-                    alert('Personnel enregistrÃ© avec succÃ¨s');
+                    alert('Personnel enregistré avec succès');
                 }
             } catch (error) {
                 console.error('Erreur:', error);
