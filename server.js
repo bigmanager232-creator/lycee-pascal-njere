@@ -9,13 +9,7 @@ const PORT = 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public', {
-    setHeaders: (res, filePath) => {
-        if (filePath.endsWith('.html')) {
-            res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        }
-    }
-}));
+app.use(express.static('public'));
 
 // Data directories
 const DATA_DIR = path.join(__dirname, 'data');
