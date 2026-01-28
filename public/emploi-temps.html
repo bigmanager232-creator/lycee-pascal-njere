@@ -38,6 +38,8 @@
         th { background: var(--primary-soft); color: var(--primary); }
         .time { background: #f9fafb; color: var(--muted); font-weight: 600; }
         .course { background: #7c3aed; color: white; border-radius: 6px; padding: 6px; font-size: 12px; }
+        .edit-entry { margin-top: 6px; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.4); color: white; border-radius: 4px; font-size: 11px; padding: 2px 6px; cursor: pointer; }
+        .edit-entry:hover { background: rgba(255, 255, 255, 0.35); }
         .break { background: #fef3c7; color: #92400e; font-weight: 600; }
         @media (max-width: 900px) { .layout { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
@@ -160,6 +162,37 @@
             const selectedClass = document.getElementById('classSelect').value;
             console.log('Classe sélectionnée:', selectedClass);
         }
+
+        function editEntry(button) {
+            const courseDiv = button.closest('.course');
+            if (!courseDiv) return;
+            const lines = Array.from(courseDiv.childNodes)
+                .filter(node => node.nodeType === Node.TEXT_NODE)
+                .map(node => node.textContent.trim())
+                .filter(Boolean);
+            const currentCourse = lines[0] || '';
+            const currentTeacher = lines[1] || '';
+            const newCourse = prompt('Modifier la matière', currentCourse);
+            if (newCourse === null) return;
+            const newTeacher = prompt('Modifier l’enseignant', currentTeacher);
+            if (newTeacher === null) return;
+            courseDiv.innerHTML = `${newCourse}<br>${newTeacher}<br><button class="edit-entry" onclick="editEntry(this)">Modifier</button>`;
+        }
+
+        function addEditButtons() {
+            document.querySelectorAll('.course').forEach(course => {
+                if (course.querySelector('.edit-entry')) return;
+                const btn = document.createElement('button');
+                btn.className = 'edit-entry';
+                btn.type = 'button';
+                btn.textContent = 'Modifier';
+                btn.addEventListener('click', () => editEntry(btn));
+                course.appendChild(document.createElement('br'));
+                course.appendChild(btn);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', addEditButtons);
     </script>
 </body>
 </html>

@@ -144,6 +144,59 @@ app.delete('/api/eleves/:id', (req, res) => {
     }
 });
 
+// ==================== ROUTES ABSENCES ====================
+app.get('/api/absences', (req, res) => {
+    try {
+        const absences = readData('absences.json');
+        res.json(absences);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/api/absences', (req, res) => {
+    try {
+        const absences = readData('absences.json');
+        const newAbsence = {
+            id: getNextId(absences),
+            ...req.body,
+            created_at: new Date().toISOString()
+        };
+        absences.push(newAbsence);
+        writeData('absences.json', absences);
+        res.json({ message: 'Absence ajoutée avec succès', data: newAbsence });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.put('/api/absences/:id', (req, res) => {
+    try {
+        const absences = readData('absences.json');
+        const index = absences.findIndex(a => a.id === parseInt(req.params.id));
+        if (index !== -1) {
+            absences[index] = { ...absences[index], ...req.body };
+            writeData('absences.json', absences);
+            res.json({ message: 'Absence mise à jour', data: absences[index] });
+        } else {
+            res.status(404).json({ error: 'Absence non trouvée' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.delete('/api/absences/:id', (req, res) => {
+    try {
+        let absences = readData('absences.json');
+        absences = absences.filter(a => a.id !== parseInt(req.params.id));
+        writeData('absences.json', absences);
+        res.json({ message: 'Absence supprimée' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // ==================== ROUTES STATISTIQUES ====================
 app.get('/api/stats', (req, res) => {
     try {

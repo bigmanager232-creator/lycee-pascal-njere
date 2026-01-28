@@ -68,7 +68,7 @@
                 <p>Génération et impression des résultats scolaires.</p>
             </div>
 
-            <div class="card">
+            <div class="card" id="bulletinFormCard">
                 <h3 style="margin-bottom: 12px;">Générer des bulletins</h3>
                 <form id="bulletinForm">
                     <div class="form-grid">
@@ -105,14 +105,18 @@
                     </div>
                     <div style="display:flex; gap: 10px; margin-top: 12px;">
                         <button type="submit" class="btn">Générer</button>
-                        <button type="button" class="btn btn-secondary" onclick="alert('Aperçu en développement')">Aperçu</button>
+                        <button type="button" class="btn btn-secondary" onclick="previewSelection()">Aperçu</button>
+                        <button type="button" class="btn btn-secondary" onclick="scrollToBulletins()">Voir les bulletins</button>
                     </div>
                 </form>
             </div>
 
-            <div class="card">
-                <h3 style="margin-bottom: 12px;">Bulletins générés</h3>
-                <div class="bulletin" style="margin-bottom: 10px;">
+            <div class="card" id="bulletinsListCard">
+                <div style="display:flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <h3>Bulletins générés</h3>
+                    <button type="button" class="btn btn-secondary" onclick="scrollToForm()">Créer un bulletin</button>
+                </div>
+                <div class="bulletin" style="margin-bottom: 10px;" data-eleve="Aissatou Ndongo" data-classe="1re Scientifique" data-periode="2e trimestre" data-rang="2e / 32" data-moyenne="16,5/20">
                     <div>
                         <h3>Aissatou Ndongo <span class="badge">Moyenne 16,5/20</span></h3>
                         <div class="bulletin-meta">
@@ -122,12 +126,12 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <button class="icon-btn" title="Voir">Voir</button>
-                        <button class="icon-btn" title="Télécharger">PDF</button>
-                        <button class="icon-btn" title="Imprimer">Impr.</button>
+                        <button class="icon-btn" title="Voir" onclick="viewBulletin(this)">Voir</button>
+                        <button class="icon-btn" title="Télécharger" onclick="downloadBulletin(this)">PDF</button>
+                        <button class="icon-btn" title="Imprimer" onclick="printBulletin(this)">Impr.</button>
                     </div>
                 </div>
-                <div class="bulletin">
+                <div class="bulletin" data-eleve="Mohamed Kamara" data-classe="Terminale Scientifique" data-periode="2e trimestre" data-rang="1er / 28" data-moyenne="17,2/20">
                     <div>
                         <h3>Mohamed Kamara <span class="badge">Moyenne 17,2/20</span></h3>
                         <div class="bulletin-meta">
@@ -137,9 +141,9 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <button class="icon-btn" title="Voir">Voir</button>
-                        <button class="icon-btn" title="Télécharger">PDF</button>
-                        <button class="icon-btn" title="Imprimer">Impr.</button>
+                        <button class="icon-btn" title="Voir" onclick="viewBulletin(this)">Voir</button>
+                        <button class="icon-btn" title="Télécharger" onclick="downloadBulletin(this)">PDF</button>
+                        <button class="icon-btn" title="Imprimer" onclick="printBulletin(this)">Impr.</button>
                     </div>
                 </div>
             </div>
@@ -147,6 +151,87 @@
     </div>
 
     <script>
+        function scrollToBulletins() {
+            document.getElementById('bulletinsListCard').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToForm() {
+            document.getElementById('bulletinFormCard').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function getBulletinData(button) {
+            const card = button.closest('.bulletin');
+            if (!card) return null;
+            return {
+                eleve: card.dataset.eleve,
+                classe: card.dataset.classe,
+                periode: card.dataset.periode,
+                rang: card.dataset.rang,
+                moyenne: card.dataset.moyenne
+            };
+        }
+
+        function viewBulletin(button) {
+            const bulletin = getBulletinData(button);
+            if (!bulletin) return;
+            alert(`Bulletin\n\nÉlève: ${bulletin.eleve}\nClasse: ${bulletin.classe}\nPériode: ${bulletin.periode}\nRang: ${bulletin.rang}\nMoyenne: ${bulletin.moyenne}`);
+        }
+
+        function openPrintWindow(bulletin) {
+            const printWindow = window.open('', '', 'width=900,height=650');
+            if (!printWindow) return;
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Bulletin - ${bulletin.eleve}</title>
+                    <style>
+                        body { font-family: "Outfit", system-ui, sans-serif; padding: 24px; color: #111827; }
+                        h1 { font-size: 22px; margin-bottom: 6px; }
+                        .meta { color: #6b7280; font-size: 14px; margin-bottom: 12px; }
+                        .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #cffafe; color: #0e7490; font-weight: 600; font-size: 12px; }
+                        .section { border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Bulletin scolaire</h1>
+                    <div class="meta">Année: ${document.getElementById('annee').value || '2025-2026'}</div>
+                    <div class="section">
+                        <h2 style="font-size:16px; margin:0 0 8px;">${bulletin.eleve} <span class="badge">Moyenne ${bulletin.moyenne}</span></h2>
+                        <div class="meta">Classe: ${bulletin.classe} | Période: ${bulletin.periode} | Rang: ${bulletin.rang}</div>
+                        <p>Résultats et appréciations disponibles dans le système.</p>
+                    </div>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+        }
+
+        function printBulletin(button) {
+            const bulletin = getBulletinData(button);
+            if (!bulletin) return;
+            openPrintWindow(bulletin);
+        }
+
+        function downloadBulletin(button) {
+            const bulletin = getBulletinData(button);
+            if (!bulletin) return;
+            alert(`Téléchargement en préparation pour ${bulletin.eleve}.`);
+        }
+
+        function previewSelection() {
+            const classe = document.getElementById('classe').value;
+            const periode = document.getElementById('periode').value;
+            const annee = document.getElementById('annee').value;
+            if (!classe || !periode || !annee) {
+                alert('Veuillez sélectionner la classe, la période et l’année.');
+                return;
+            }
+            alert(`Aperçu des bulletins\nClasse: ${classe}\nPériode: ${periode}\nAnnée: ${annee}`);
+            scrollToBulletins();
+        }
+
         document.getElementById('bulletinForm').addEventListener('submit', (event) => {
             event.preventDefault();
             const classe = document.getElementById('classe').value;

@@ -97,7 +97,8 @@
             <div class="filters">
                 <div>
                     <label>Recherche</label>
-                    <input type="text" placeholder="Nom de l'élève">
+                    <input type="text" id="searchEleveInput" placeholder="Nom de l'élève" list="elevesList">
+                    <datalist id="elevesList"></datalist>
                 </div>
                 <div>
                     <label>Classe</label>
@@ -167,5 +168,28 @@
             </table>
         </main>
     </div>
+    <script>
+        async function loadElevesForAutocomplete() {
+            try {
+                const response = await fetch('/eleves.json');
+                if (!response.ok) return;
+                const eleves = await response.json();
+                const dataList = document.getElementById('elevesList');
+                dataList.innerHTML = '';
+                eleves.forEach(eleve => {
+                    const option = document.createElement('option');
+                    const nomComplet = [eleve.nom, eleve.prenom].filter(Boolean).join(' ');
+                    option.value = nomComplet || eleve.matricule || '';
+                    if (option.value) {
+                        dataList.appendChild(option);
+                    }
+                });
+            } catch (error) {
+                console.error('Erreur autocomplétion:', error);
+            }
+        }
+
+        loadElevesForAutocomplete();
+    </script>
 </body>
 </html>
