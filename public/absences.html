@@ -4,113 +4,533 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lycée Pascal Njèrè IV - Absences</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #f6f7fb;
-            --card: #ffffff;
-            --text: #111827;
-            --muted: #6b7280;
-            --border: #e5e7eb;
-            --primary: #ec4899;
-            --primary-soft: #fce7f3;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
-        .layout { display: flex; min-height: 100vh; }
-        .sidebar { width: 240px; background: var(--card); border-right: 1px solid var(--border); padding: 20px; }
-        .brand h1 { font-size: 18px; margin-bottom: 4px; }
-        .brand p { color: var(--muted); font-size: 13px; }
-        .nav a { display: block; padding: 10px 12px; border-radius: 8px; text-decoration: none; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
-        .nav a.active, .nav a:hover { background: var(--primary-soft); color: var(--primary); }
-        .content { flex: 1; padding: 28px 36px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
-        .header h2 { font-size: 24px; }
-        .header p { color: var(--muted); margin-top: 6px; }
-        .btn { padding: 10px 16px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; }
-        .btn-primary { background: var(--primary); color: white; }
-        .filters { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
-        .filters label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; }
-        .filters input, .filters select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; }
-        table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-        th, td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; font-size: 14px; }
-        th { background: #f9fafb; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3px; font-size: 12px; }
-        tr:last-child td { border-bottom: none; }
-        .status { padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-        .status-justifie { background: #d1fae5; color: #065f46; }
-        .status-injustifie { background: #fee2e2; color: #991b1b; }
-        .status-attente { background: #fef3c7; color: #92400e; }
-        .modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); display: none; align-items: center; justify-content: center; padding: 20px; }
-        .modal.active { display: flex; }
-        .modal-content { background: var(--card); border-radius: 12px; padding: 20px; width: min(560px, 95vw); }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .close-btn { border: none; background: #f3f4f6; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-        .form-group label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
-        .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; }
-        .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px; }
-        @media (max-width: 900px) { .layout { flex-direction: column; } .sidebar { width: 100%; } }
+
+        :root {
+            --bg-primary: #f8f9fc;
+            --bg-card: #ffffff;
+            --text-primary: #1a1d29;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --color-primary: #ec4899;
+            --color-primary-light: #fce7f3;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+            --sidebar: #1e3a8a;
+            --sidebar-dark: #1e40af;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(180deg, var(--sidebar) 0%, var(--sidebar-dark) 100%);
+            padding: 24px 0;
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+            color: #e2e8f0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 24px 32px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: #f59e0b;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1f2937;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-family: 'Sora', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 4px 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            border-right: 3px solid #fbbf24;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 32px 48px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .header-left h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header-left p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            font-family: 'Sora', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .filters {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Outfit', sans-serif;
+            outline: none;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #db2777;
+            transform: translateY(-2px);
+        }
+
+        .absences-table {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f9fafb;
+        }
+
+        th {
+            text-align: left;
+            padding: 16px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 15px;
+        }
+
+        tbody tr {
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .status-justifie {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-injustifie {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-en-attente {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .btn-view {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .btn-view:hover {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-justify {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .btn-justify:hover {
+            background: #10b981;
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 560px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .close-modal {
+            border: none;
+            background: transparent;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: var(--text-primary);
+        }
     </style>
 </head>
 <body>
-    <div class="layout">
-        <aside class="sidebar">
-            <div class="brand">
-                <h1>Lycée Pascal Njèrè IV</h1>
-                <p>Système de gestion</p>
-            </div>
-            <nav class="nav">
-                <a href="/">Tableau de bord</a>
-                <a href="/personnel.html">Personnel</a>
-                <a href="/eleves.html">Élèves</a>
-                <a href="/emploi-temps.html">Emploi du temps</a>
-                <a class="active" href="/absences.html">Absences</a>
-                <a href="/finance.html">Finance (APEE)</a>
-                <a href="/bulletins.html">Bulletins</a>
-            </nav>
-        </aside>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">🎓</div>
+            <div class="logo-text">Lycée Pascal Njèrè IV</div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="/" class="nav-link">
+                    <span>📊</span> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/personnel.html" class="nav-link">
+                    <span>👥</span> Personnel
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/eleves.html" class="nav-link">
+                    <span>🎓</span> Élèves
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/emploi-temps.html" class="nav-link">
+                    <span>📅</span> Emploi du Temps
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/absences.html" class="nav-link active">
+                    <span>📋</span> Absences
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/finance.html" class="nav-link">
+                    <span>💰</span> Finance (APEE)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/bulletins.html" class="nav-link">
+                    <span>📄</span> Bulletins
+                </a>
+            </li>
+        </ul>
+    </div>
 
-        <main class="content">
-            <div class="header">
-                <div>
-                    <h2>Absences</h2>
-                    <p>Suivi des absences et justificatifs.</p>
-                </div>
-                <button class="btn btn-primary" onclick="openAbsenceModal()">Enregistrer une absence</button>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <div class="header-left">
+                <h1>📋 Absences</h1>
+                <p>Suivi des absences des élèves</p>
             </div>
+            <button class="btn btn-primary" onclick="openAbsenceModal()">
+                ➕ Enregistrer une absence
+            </button>
+        </div>
 
-            <div class="filters">
-                <div>
-                    <label>Recherche</label>
-                    <input type="text" id="searchInput" placeholder="Nom de l'élève" oninput="filterAbsences()">
-                </div>
-                <div>
-                    <label>Classe</label>
-                    <select id="classFilter" onchange="filterAbsences()">
-                        <option value="">Toutes</option>
-                        <option value="6e">6e</option>
-                        <option value="5e">5e</option>
-                        <option value="4e">4e</option>
-                        <option value="3e">3e</option>
-                        <option value="2nde">2nde</option>
-                        <option value="1re">1re</option>
-                        <option value="Tle">Terminale</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Date</label>
-                    <input type="date" id="dateFilter" onchange="filterAbsences()">
-                </div>
-                <div>
-                    <label>Statut</label>
-                    <select id="statusFilter" onchange="filterAbsences()">
-                        <option value="">Tous</option>
-                        <option value="justifie">Justifié</option>
-                        <option value="injustifie">Injustifié</option>
-                        <option value="attente">En attente</option>
-                    </select>
-                </div>
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #fce7f3; color: #ec4899;">📋</div>
+                <div class="stat-value" id="statTotal">0</div>
+                <div class="stat-label">Total absences ce mois</div>
             </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #d1fae5; color: #10b981;">✓</div>
+                <div class="stat-value" id="statJustifie">0</div>
+                <div class="stat-label">Absences justifiées</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #fee2e2; color: #ef4444;">✗</div>
+                <div class="stat-value" id="statInjustifie">0</div>
+                <div class="stat-label">Absences injustifiées</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">⏳</div>
+                <div class="stat-value" id="statAttente">0</div>
+                <div class="stat-label">En attente de justificatif</div>
+            </div>
+        </div>
 
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #e0e7ff; color: #4f46e5;">🏫</div>
+                <div class="stat-value" id="statTotalMonthlySchool">0</div>
+                <div class="stat-label">Total mensuel lycée</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #dcfce7; color: #16a34a;">📆</div>
+                <div class="stat-value" id="statTotalYearSchool">0</div>
+                <div class="stat-label">Total annuel lycée</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>🔍 Rechercher</label>
+                <input type="text" id="searchInput" placeholder="Nom de l'élève..." onkeyup="filterAbsences()">
+            </div>
+            <div class="filter-group">
+                <label>📚 Classe</label>
+                <select id="classFilter" onchange="filterAbsences()">
+                    <option value="">Toutes les classes</option>
+                    <option value="6eme">6ème</option>
+                    <option value="5eme">5ème</option>
+                    <option value="4eme">4ème</option>
+                    <option value="3eme">3ème</option>
+                    <option value="2nde">2nde</option>
+                    <option value="1ere">1ère</option>
+                    <option value="tle">Terminale</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>📅 Date</label>
+                <input type="date" id="dateFilter" onchange="filterAbsences()">
+            </div>
+            <div class="filter-group">
+                <label>🏷️ Statut</label>
+                <select id="statusFilter" onchange="filterAbsences()">
+                    <option value="">Tous les statuts</option>
+                    <option value="justifie">Justifié</option>
+                    <option value="injustifie">Injustifié</option>
+                    <option value="attente">En attente</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="absences-table">
             <table>
                 <thead>
                     <tr>
@@ -120,52 +540,80 @@
                         <th>Heure</th>
                         <th>Cours</th>
                         <th>Statut</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="absencesBody"></tbody>
             </table>
-        </main>
+        </div>
+
+        <div class="absences-table" style="margin-top: 24px;">
+            <h3 style="padding: 16px 20px;">Totaux mensuels par classe</h3>
+            <table id="monthlyTotalsTable">
+                <thead>
+                    <tr>
+                        <th>Classe</th>
+                        <th>Total mensuel</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="absences-table" style="margin-top: 24px;">
+            <h3 style="padding: 16px 20px;">Totaux annuels par classe</h3>
+            <table id="yearlyTotalsTable">
+                <thead>
+                    <tr>
+                        <th>Classe</th>
+                        <th>Total annuel</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 
+    <!-- Modal -->
     <div class="modal" id="absenceModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Enregistrer une absence</h3>
-                <button class="close-btn" onclick="closeAbsenceModal()">X</button>
+                <h2 id="absenceModalTitle">Enregistrer une absence</h2>
+                <button class="close-modal" onclick="closeAbsenceModal()">✕</button>
             </div>
             <form id="absenceForm">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label>Élève</label>
+                        <label>Élève *</label>
                         <input type="text" id="absenceEleve" required>
                     </div>
                     <div class="form-group">
-                        <label>Classe</label>
+                        <label>Classe *</label>
                         <select id="absenceClasse" required>
                             <option value="">Sélectionner</option>
-                            <option value="6e">6e</option>
-                            <option value="5e">5e</option>
-                            <option value="4e">4e</option>
-                            <option value="3e">3e</option>
+                            <option value="6eme">6ème</option>
+                            <option value="5eme">5ème</option>
+                            <option value="4eme">4ème</option>
+                            <option value="3eme">3ème</option>
                             <option value="2nde">2nde</option>
-                            <option value="1re">1re</option>
-                            <option value="Tle">Terminale</option>
+                            <option value="1ere">1ère</option>
+                            <option value="tle">Terminale</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Date</label>
+                        <label>Date *</label>
                         <input type="date" id="absenceDate" required>
                     </div>
                     <div class="form-group">
-                        <label>Heure</label>
+                        <label>Heure *</label>
                         <input type="text" id="absenceHeure" placeholder="07:30 - 09:00" required>
                     </div>
                     <div class="form-group">
-                        <label>Cours</label>
+                        <label>Cours *</label>
                         <input type="text" id="absenceCours" required>
                     </div>
                     <div class="form-group">
-                        <label>Statut</label>
+                        <label>Statut *</label>
                         <select id="absenceStatut" required>
                             <option value="attente">En attente</option>
                             <option value="justifie">Justifié</option>
@@ -174,7 +622,7 @@
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button type="button" class="btn" onclick="closeAbsenceModal()">Annuler</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeAbsenceModal()">Annuler</button>
                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </div>
             </form>
@@ -182,18 +630,8 @@
     </div>
 
     <script>
-        const storageKey = 'lycee_absences';
         let absences = [];
-
-        function loadAbsences() {
-            const saved = localStorage.getItem(storageKey);
-            absences = saved ? JSON.parse(saved) : [];
-            renderAbsences(absences);
-        }
-
-        function saveAbsences() {
-            localStorage.setItem(storageKey, JSON.stringify(absences));
-        }
+        let editingAbsenceId = null;
 
         function formatDate(value) {
             if (!value) return '';
@@ -205,13 +643,68 @@
         function statusLabel(status) {
             if (status === 'justifie') return { text: 'Justifié', className: 'status-justifie' };
             if (status === 'injustifie') return { text: 'Injustifié', className: 'status-injustifie' };
-            return { text: 'En attente', className: 'status-attente' };
+            return { text: 'En attente', className: 'status-en-attente' };
         }
 
-        function renderAbsences(list) {
+        function updateStats() {
+            const total = absences.length;
+            const justifie = absences.filter(a => a.statut === 'justifie').length;
+            const injustifie = absences.filter(a => a.statut === 'injustifie').length;
+            const attente = absences.filter(a => a.statut === 'attente').length;
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statJustifie').textContent = justifie;
+            document.getElementById('statInjustifie').textContent = injustifie;
+            document.getElementById('statAttente').textContent = attente;
+
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+
+            const monthlyAbsences = absences.filter(a => {
+                const date = new Date(a.date);
+                return !Number.isNaN(date.getTime()) && date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+            });
+
+            const yearlyAbsences = absences.filter(a => {
+                const date = new Date(a.date);
+                return !Number.isNaN(date.getTime()) && date.getFullYear() === currentYear;
+            });
+
+            document.getElementById('statTotalMonthlySchool').textContent = monthlyAbsences.length;
+            document.getElementById('statTotalYearSchool').textContent = yearlyAbsences.length;
+
+            const monthlyTotals = {};
+            monthlyAbsences.forEach(a => {
+                monthlyTotals[a.classe] = (monthlyTotals[a.classe] || 0) + 1;
+            });
+
+            const yearlyTotals = {};
+            yearlyAbsences.forEach(a => {
+                yearlyTotals[a.classe] = (yearlyTotals[a.classe] || 0) + 1;
+            });
+
+            const monthlyBody = document.querySelector('#monthlyTotalsTable tbody');
+            monthlyBody.innerHTML = '';
+            Object.keys(monthlyTotals).sort().forEach(classe => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${classe}</td><td>${monthlyTotals[classe]}</td>`;
+                monthlyBody.appendChild(row);
+            });
+
+            const yearlyBody = document.querySelector('#yearlyTotalsTable tbody');
+            yearlyBody.innerHTML = '';
+            Object.keys(yearlyTotals).sort().forEach(classe => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${classe}</td><td>${yearlyTotals[classe]}</td>`;
+                yearlyBody.appendChild(row);
+            });
+        }
+
+        function renderAbsences(list = absences) {
             const tbody = document.getElementById('absencesBody');
             tbody.innerHTML = '';
-            list.forEach(absence => {
+
+            list.forEach((absence, index) => {
                 const status = statusLabel(absence.statut);
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -220,10 +713,18 @@
                     <td>${formatDate(absence.date)}</td>
                     <td>${absence.heure}</td>
                     <td>${absence.cours}</td>
-                    <td><span class="status ${status.className}">${status.text}</span></td>
+                    <td><span class="status-badge ${status.className}">${status.text}</span></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-icon btn-view" title="Voir détails" onclick="viewAbsence(${index})">👁️</button>
+                            <button class="btn-icon btn-justify" title="Modifier" onclick="editAbsence(${index})">✏️</button>
+                            <button class="btn-icon btn-delete" title="Supprimer" onclick="deleteAbsence(${index})">🗑️</button>
+                        </div>
+                    </td>
                 `;
                 tbody.appendChild(row);
             });
+            updateStats();
         }
 
         function filterAbsences() {
@@ -244,6 +745,8 @@
         }
 
         function openAbsenceModal() {
+            editingAbsenceId = null;
+            document.getElementById('absenceModalTitle').textContent = 'Enregistrer une absence';
             document.getElementById('absenceForm').reset();
             document.getElementById('absenceModal').classList.add('active');
         }
@@ -252,21 +755,85 @@
             document.getElementById('absenceModal').classList.remove('active');
         }
 
-        document.getElementById('absenceForm').addEventListener('submit', (event) => {
-            event.preventDefault();
+        function viewAbsence(index) {
+            const absence = absences[index];
+            alert(`Absence:\n\nÉlève: ${absence.eleve}\nClasse: ${absence.classe}\nDate: ${formatDate(absence.date)}\nHeure: ${absence.heure}\nCours: ${absence.cours}\nStatut: ${absence.statut}`);
+        }
+
+        function editAbsence(index) {
+            const absence = absences[index];
+            editingAbsenceId = absence.id;
+            document.getElementById('absenceEleve').value = absence.eleve;
+            document.getElementById('absenceClasse').value = absence.classe;
+            document.getElementById('absenceDate').value = absence.date;
+            document.getElementById('absenceHeure').value = absence.heure;
+            document.getElementById('absenceCours').value = absence.cours;
+            document.getElementById('absenceStatut').value = absence.statut;
+            document.getElementById('absenceModalTitle').textContent = 'Modifier une absence';
+            document.getElementById('absenceModal').classList.add('active');
+        }
+
+        async function deleteAbsence(index) {
+            const absence = absences[index];
+            if (!absence) return;
+            if (confirm('Supprimer cette absence ?')) {
+                try {
+                    const response = await fetch(`/api/absences/${absence.id}`, { method: 'DELETE' });
+                    if (response.ok) {
+                        await loadAbsences();
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors de la suppression');
+                }
+            }
+        }
+
+        async function loadAbsences() {
+            try {
+                const response = await fetch('/api/absences');
+                absences = await response.json();
+                renderAbsences();
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors du chargement des absences');
+            }
+        }
+
+        document.getElementById('absenceForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
             const payload = {
-                eleve: document.getElementById('absenceEleve').value.trim(),
+                eleve: document.getElementById('absenceEleve').value,
                 classe: document.getElementById('absenceClasse').value,
                 date: document.getElementById('absenceDate').value,
-                heure: document.getElementById('absenceHeure').value.trim(),
-                cours: document.getElementById('absenceCours').value.trim(),
+                heure: document.getElementById('absenceHeure').value,
+                cours: document.getElementById('absenceCours').value,
                 statut: document.getElementById('absenceStatut').value
             };
 
-            absences.unshift(payload);
-            saveAbsences();
-            renderAbsences(absences);
-            closeAbsenceModal();
+            try {
+                let response;
+                if (editingAbsenceId) {
+                    response = await fetch(`/api/absences/${editingAbsenceId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                } else {
+                    response = await fetch('/api/absences', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                }
+                if (response.ok) {
+                    await loadAbsences();
+                    closeAbsenceModal();
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors de l\'enregistrement');
+            }
         });
 
         loadAbsences();

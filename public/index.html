@@ -4,69 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lycée Pascal Njèrè IV - Tableau de bord</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f6f7fb;
+            --bg: #f4f6fb;
             --card: #ffffff;
             --text: #111827;
             --muted: #6b7280;
             --border: #e5e7eb;
-            --primary: #4f46e5;
-            --primary-soft: #e0e7ff;
+            --blue: #2563eb;
+            --green: #16a34a;
+            --orange: #f59e0b;
+            --red: #ef4444;
+            --sidebar: #1e3a8a;
+            --sidebar-dark: #1e40af;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+        body { font-family: "Outfit", system-ui, sans-serif; background: var(--bg); color: var(--text); }
         .layout { display: flex; min-height: 100vh; }
         .sidebar {
-            width: 240px;
-            background: var(--card);
-            border-right: 1px solid var(--border);
-            padding: 20px;
+            width: 250px;
+            background: linear-gradient(180deg, var(--sidebar) 0%, var(--sidebar-dark) 100%);
+            color: #e2e8f0;
+            padding: 24px 20px;
         }
-        .brand { margin-bottom: 24px; }
-        .brand h1 { font-size: 18px; margin-bottom: 4px; }
-        .brand p { color: var(--muted); font-size: 13px; }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 26px;
+        }
+        .brand .logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: #f59e0b;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #1f2937;
+            font-weight: 700;
+            font-family: "Sora", sans-serif;
+        }
+        .brand h1 { font-size: 18px; margin-bottom: 2px; color: #ffffff; font-family: "Sora", sans-serif; }
+        .brand p { color: #cbd5f5; font-size: 13px; }
         .nav a {
             display: block;
             padding: 10px 12px;
-            border-radius: 8px;
+            border-radius: 10px;
             text-decoration: none;
-            color: var(--muted);
+            color: #e2e8f0;
             margin-bottom: 6px;
             font-weight: 600;
         }
-        .nav a.active, .nav a:hover { background: var(--primary-soft); color: var(--primary); }
-        .content { flex: 1; padding: 28px 36px; }
-        .header { margin-bottom: 20px; }
-        .header h2 { font-size: 26px; }
+        .nav a.active, .nav a:hover { background: rgba(255, 255, 255, 0.14); color: #ffffff; }
+        .content { flex: 1; padding: 32px 40px; }
+        .header { margin-bottom: 22px; }
+        .header h2 { font-size: 28px; font-family: "Sora", sans-serif; }
         .header p { color: var(--muted); margin-top: 6px; }
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 14px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 26px;
         }
         .card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
+            border-left-width: 6px;
+            border-radius: 14px;
+            padding: 16px 18px;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
         }
+        .card.blue { border-left-color: var(--blue); }
+        .card.green { border-left-color: var(--green); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.red { border-left-color: var(--red); }
+        .card-top { display: flex; align-items: center; gap: 12px; }
+        .card-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+        }
+        .card.blue .card-icon { background: #2563eb; }
+        .card.green .card-icon { background: #16a34a; }
+        .card.orange .card-icon { background: #f59e0b; }
+        .card.red .card-icon { background: #ef4444; }
         .card .label { color: var(--muted); font-size: 12px; }
-        .card .value { font-size: 22px; font-weight: 700; margin-top: 6px; }
+        .card .value { font-size: 22px; font-weight: 700; margin-top: 4px; }
+        .stat-bar { height: 8px; background: #eef2ff; border-radius: 999px; overflow: hidden; margin-top: 12px; }
+        .stat-bar span { display: block; height: 100%; border-radius: 999px; }
+        .card.blue .stat-bar span { background: var(--blue); }
+        .card.green .stat-bar span { background: var(--green); }
+        .card.orange .stat-bar span { background: var(--orange); }
+        .card.red .stat-bar span { background: var(--red); }
         .modules {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
         }
         .module {
-            display: block;
+            display: flex;
+            gap: 12px;
             text-decoration: none;
             color: inherit;
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 16px;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+        }
+        .module-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #e0e7ff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
         }
         .module h3 { font-size: 16px; margin-bottom: 6px; }
         .module p { color: var(--muted); font-size: 13px; }
@@ -80,8 +141,11 @@
     <div class="layout">
         <aside class="sidebar">
             <div class="brand">
-                <h1>Lycée Pascal Njèrè IV</h1>
-                <p>Système de gestion</p>
+                <div class="logo">LP</div>
+                <div>
+                    <h1>Lycée Pascal Njèrè IV</h1>
+                    <p>Système de gestion</p>
+                </div>
             </div>
             <nav class="nav">
                 <a class="active" href="/">Tableau de bord</a>
@@ -101,48 +165,90 @@
             </div>
 
             <section class="stats">
-                <div class="card">
-                    <div class="label">Personnel actif</div>
-                    <div class="value" id="statProf">--</div>
+                <div class="card blue">
+                    <div class="card-top">
+                        <div class="card-icon">👩‍🏫</div>
+                        <div>
+                            <div class="label">Personnel actif</div>
+                            <div class="value" id="statProf">--</div>
+                        </div>
+                    </div>
+                    <div class="stat-bar"><span style="width: 68%"></span></div>
                 </div>
-                <div class="card">
-                    <div class="label">Total élèves</div>
-                    <div class="value" id="statEleves">--</div>
+                <div class="card green">
+                    <div class="card-top">
+                        <div class="card-icon">🎓</div>
+                        <div>
+                            <div class="label">Total élèves</div>
+                            <div class="value" id="statEleves">--</div>
+                        </div>
+                    </div>
+                    <div class="stat-bar"><span style="width: 82%"></span></div>
                 </div>
-                <div class="card">
-                    <div class="label">Élèves insolvables</div>
-                    <div class="value" id="statInsolvables">--</div>
+                <div class="card orange">
+                    <div class="card-top">
+                        <div class="card-icon">⚠️</div>
+                        <div>
+                            <div class="label">Élèves insolvables</div>
+                            <div class="value" id="statInsolvables">--</div>
+                        </div>
+                    </div>
+                    <div class="stat-bar"><span style="width: 34%"></span></div>
                 </div>
-                <div class="card">
-                    <div class="label">Total perçu (APEE)</div>
-                    <div class="value" id="statFinances">--</div>
+                <div class="card red">
+                    <div class="card-top">
+                        <div class="card-icon">💳</div>
+                        <div>
+                            <div class="label">Total perçu (APEE)</div>
+                            <div class="value" id="statFinances">--</div>
+                        </div>
+                    </div>
+                    <div class="stat-bar"><span style="width: 76%"></span></div>
                 </div>
             </section>
 
             <section class="modules">
                 <a class="module" href="/personnel.html">
-                    <h3>Personnel</h3>
-                    <p>Gestion des professeurs et du staff pédagogique.</p>
+                    <div class="module-icon">👥</div>
+                    <div>
+                        <h3>Personnel</h3>
+                        <p>Gestion des professeurs et du staff pédagogique.</p>
+                    </div>
                 </a>
                 <a class="module" href="/eleves.html">
-                    <h3>Élèves</h3>
-                    <p>Inscriptions, suivi et informations scolaires.</p>
+                    <div class="module-icon">📚</div>
+                    <div>
+                        <h3>Élèves</h3>
+                        <p>Inscriptions, suivi et informations scolaires.</p>
+                    </div>
                 </a>
                 <a class="module" href="/emploi-temps.html">
-                    <h3>Emploi du temps</h3>
-                    <p>Planification des cours et salles.</p>
+                    <div class="module-icon">🗓️</div>
+                    <div>
+                        <h3>Emploi du temps</h3>
+                        <p>Planification des cours et salles.</p>
+                    </div>
                 </a>
                 <a class="module" href="/absences.html">
-                    <h3>Absences</h3>
-                    <p>Suivi et justification des absences.</p>
+                    <div class="module-icon">✅</div>
+                    <div>
+                        <h3>Absences</h3>
+                        <p>Suivi et justification des absences.</p>
+                    </div>
                 </a>
                 <a class="module" href="/finance.html">
-                    <h3>Finance (APEE)</h3>
-                    <p>Suivi des paiements et relances.</p>
+                    <div class="module-icon">💼</div>
+                    <div>
+                        <h3>Finance (APEE)</h3>
+                        <p>Suivi des paiements et relances.</p>
+                    </div>
                 </a>
                 <a class="module" href="/bulletins.html">
-                    <h3>Bulletins</h3>
-                    <p>Génération et édition des bulletins.</p>
+                    <div class="module-icon">🧾</div>
+                    <div>
+                        <h3>Bulletins</h3>
+                        <p>Génération et édition des bulletins.</p>
+                    </div>
                 </a>
             </section>
         </main>
@@ -159,10 +265,10 @@
                 document.getElementById('statInsolvables').textContent = stats.eleves_insolvables ?? '0';
                 document.getElementById('statFinances').textContent = `${stats.total_percu ?? 0} FCFA`;
             } catch (error) {
-                document.getElementById('statProf').textContent = '--';
-                document.getElementById('statEleves').textContent = '--';
-                document.getElementById('statInsolvables').textContent = '--';
-                document.getElementById('statFinances').textContent = '--';
+                document.getElementById('statProf').textContent = '';
+                document.getElementById('statEleves').textContent = '';
+                document.getElementById('statInsolvables').textContent = '';
+                document.getElementById('statFinances').textContent = '';
             }
         }
 

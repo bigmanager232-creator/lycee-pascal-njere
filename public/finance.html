@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lycée Pascal Njèrè IV - Finance (APEE)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f6f7fb;
+            --bg: #f4f6fb;
             --card: #ffffff;
             --text: #111827;
             --muted: #6b7280;
             --border: #e5e7eb;
             --primary: #10b981;
             --primary-soft: #d1fae5;
+            --sidebar: #1e3a8a;
+            --sidebar-dark: #1e40af;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+        body { font-family: "Outfit", system-ui, sans-serif; background: var(--bg); color: var(--text); }
         .layout { display: flex; min-height: 100vh; }
-        .sidebar { width: 240px; background: var(--card); border-right: 1px solid var(--border); padding: 20px; }
-        .brand h1 { font-size: 18px; margin-bottom: 4px; }
-        .brand p { color: var(--muted); font-size: 13px; }
-        .nav a { display: block; padding: 10px 12px; border-radius: 8px; text-decoration: none; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
-        .nav a.active, .nav a:hover { background: var(--primary-soft); color: #047857; }
+        .sidebar { width: 250px; background: linear-gradient(180deg, var(--sidebar) 0%, var(--sidebar-dark) 100%); padding: 24px 20px; color: #e2e8f0; }
+        .brand h1 { font-size: 18px; margin-bottom: 4px; color: #ffffff; font-family: "Sora", sans-serif; }
+        .brand p { color: #cbd5f5; font-size: 13px; }
+        .nav a { display: block; padding: 10px 12px; border-radius: 10px; text-decoration: none; color: #e2e8f0; margin-bottom: 6px; font-weight: 600; }
+        .nav a.active, .nav a:hover { background: rgba(255, 255, 255, 0.14); color: #ffffff; }
         .content { flex: 1; padding: 28px 36px; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
         .header h2 { font-size: 24px; }
